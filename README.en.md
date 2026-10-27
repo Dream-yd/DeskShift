@@ -8,6 +8,8 @@ A Windows desktop switcher that uses a separate folder for meetings, recording o
 
 The app supports a switch page, configurable global hotkey and desktop middle-button gesture, tray access, icon-layout snapshots, Chinese and English, light and dark themes, and optional glass and transition effects. An administrator authorization may be required to move and restore public desktop shortcuts. The responsive mode attempts to keep Explorer running; compatibility mode can restart Explorer and close its windows.
 
+Download the self-contained Windows x64 preview from [GitHub Releases](https://github.com/Dream-yd/MeetingDesktop/releases). Extract the entire folder and run `MeetingDesktop.exe`.
+
 To build on Windows with the .NET 10 SDK:
 
 ```powershell

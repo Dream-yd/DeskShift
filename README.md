@@ -27,7 +27,7 @@
 
 ## 安装与构建
 
-面向 Windows x64 的预览包在发布后会作为 Release 附件提供；解压后保留整个文件夹，运行 `MeetingDesktop.exe`。自包含包不需要另装 .NET 运行时。
+从 [GitHub Releases](https://github.com/Dream-yd/MeetingDesktop/releases) 下载 Windows x64 预览包；解压后保留整个文件夹，运行 `MeetingDesktop.exe`。自包含包不需要另装 .NET 运行时。
 
 从源码构建需要 Windows、.NET 10 SDK 和网络可访问的 NuGet 源：
 
