@@ -12,9 +12,11 @@ public sealed class IconTransitionConnectionTests
     {
         // A separate pipe peer reproduces a slow native acquisition without
         // touching Explorer. Subsequent replies have no artificial delay.
-        const string script = "[Console]::WriteLine('ready'); " +
+        // Resolve the sleep method before announcing readiness. PowerShell's
+        // first Start-Sleep can import a module after the reply budget starts.
+        const string script = "[Threading.Thread]::Sleep(1); [Console]::WriteLine('ready'); " +
             "while (($line = [Console]::ReadLine()) -ne $null) { " +
-            "if ($line.StartsWith('begin ')) { Start-Sleep -Milliseconds 150 }; " +
+            "if ($line.StartsWith('begin ')) { [Threading.Thread]::Sleep(150) }; " +
             "[Console]::WriteLine('ok') }";
         var start = new ProcessStartInfo("powershell.exe")
         {
