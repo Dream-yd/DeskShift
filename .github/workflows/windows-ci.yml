@@ -16,4 +16,5 @@ jobs:
           dotnet-version: 10.0.x
       - run: dotnet restore MeetingDesktop.sln
       - run: dotnet build MeetingDesktop.sln -c Release --no-restore
-      - run: dotnet test MeetingDesktop.sln -c Release --no-build --logger trx
+      - run: dotnet test tests/MeetingDesktop.Core.Tests/MeetingDesktop.Core.Tests.csproj -c Release --no-build --logger trx
+      - run: dotnet test tests/MeetingDesktop.App.Tests/MeetingDesktop.App.Tests.csproj -c Release --no-build --logger trx
