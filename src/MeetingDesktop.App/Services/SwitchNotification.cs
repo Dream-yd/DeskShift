@@ -57,7 +57,7 @@ internal sealed class SwitchNotification : IDisposable
             ResizeMode = ResizeMode.NoResize, ShowActivated = false, ShowInTaskbar = false,
             Focusable = false, IsHitTestVisible = false, Topmost = true,
             UseLayoutRounding = true, AllowsTransparency = true,
-            Background = Brushes.Transparent, Content = _card, Title = "Meeting Desktop" };
+            Background = Brushes.Transparent, Content = _card, Title = "DeskShift" };
         Window.Closed += OnClosed;
         _timer.Tick += OnTick;
         ApplyColors();

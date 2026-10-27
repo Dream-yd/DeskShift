@@ -1,10 +1,22 @@
-# Changelog
+# 更新记录
 
-## Unreleased preview
+## 1.0.0 — 2026-10-28
 
-- Desktop folder switching with layout capture, verification and recovery records.
-- Configurable hotkey, desktop gesture, tray behavior, startup option and visual transition.
-- Protected active snapshots, partial restore reporting and public-shortcut conflict handling.
-- Chinese and English localization, light/dark themes and optional liquid-glass skin.
+- 「会议桌面 Meeting Desktop」更名为「幕间 DeskShift」，适用于工作、学习、录屏和演示等桌面场景。
+- 修复返回原桌面时渐显接近硬切的问题。Explorer 繁忙时不再按累计时间跳过大部分过渡；渐显使用 240 毫秒的平滑曲线，并限制单帧推进量。动画由独立助手完成，桌面操作不等待动画播放结束。
+- 淡化目标收窄到图标列表，不再淡化可能绘制壁纸的父窗口，避免静态壁纸随图标一起变暗。Windows 11 虚拟机画面对比已验证这一差异。
+- 图标层接管的应答预算由 75 毫秒调整为 300 毫秒，避免一次正常的 Explorer 绘制让动画助手被误判失效。接管在切换准备阶段开始；隐藏和结束命令仍保留较短的超时保护。
+- 更新中英文应用名称、托盘提示、版本信息和使用说明。保留原可执行文件名、数据目录与旧自启项识别，兼容已有配置、布局和恢复记录。
 
-This is a development preview. See the README for test and compatibility limits.
+验证：本机自动测试 879 项通过，1 项符号链接权限测试跳过；Windows 11 单屏虚拟机三次真实往返及稳定备用状态下结束程序后重启返回，图标位置与基线一致。旧版与新版采用相同自动化测量方法，切换耗时处于相近范围；该测量包含界面轮询，不能代表其他设备的视觉就绪时间。
+
+仍需更多实机验证：动态壁纸、多屏及混合 DPI、切换中途强制中断、默认 UAC 交互。Windows x64 自包含包未签名。正式版编号不表示所有兼容性场景已经覆盖。
+
+升级：先从托盘退出旧版，解压完整发行包后运行 `MeetingDesktop.exe`。数据目录继续使用 `%LOCALAPPDATA%\MeetingDesktop`；若启用了开机自启，请在设置中迁移旧入口。不要删除活动恢复记录。
+
+## 0.0.0-dev.20261027.4 — 开发预览
+
+- 桌面文件夹切换、图标布局保存、验证与恢复记录。
+- 可设置快捷键、桌面手势、托盘行为、自启和切换过渡。
+- 活动快照保护、不完整恢复提示及公共快捷方式重名处理。
+- 中英文、明暗主题与可选液态玻璃皮肤。

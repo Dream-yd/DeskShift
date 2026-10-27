@@ -165,7 +165,8 @@ public sealed class WindowsStartupRegistration
         {
             if (!File.Exists(path)) return false;
             FileVersionInfo version = FileVersionInfo.GetVersionInfo(path);
-            return string.Equals(version.ProductName, "Meeting(Clean)-Desktop", StringComparison.Ordinal) &&
+            return (string.Equals(version.ProductName, "Meeting(Clean)-Desktop", StringComparison.Ordinal) ||
+                string.Equals(version.ProductName, "DeskShift", StringComparison.Ordinal)) &&
                 string.Equals(version.CompanyName, "Meeting(Clean)-Desktop contributors", StringComparison.Ordinal);
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or System.ComponentModel.Win32Exception or

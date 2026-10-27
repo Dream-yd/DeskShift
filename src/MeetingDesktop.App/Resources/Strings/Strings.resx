@@ -19,7 +19,7 @@
   <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
 
   <!-- ============ Application ============ -->
-  <data name="AppTitle" xml:space="preserve"><value>Meeting Desktop</value></data>
+  <data name="AppTitle" xml:space="preserve"><value>DeskShift</value></data>
   <data name="AppTagline" xml:space="preserve"><value>Switch desktops. Save your layout.</value></data>
 
   <!-- ============ Navigation ============ -->
@@ -318,9 +318,9 @@ Continue?</value></data>
 <data name="QuickTrayActive" xml:space="preserve"><value>Tray icon ready</value></data>
 <data name="QuickTrayUnavailable" xml:space="preserve"><value>Tray unavailable; window stays accessible</value></data>
 <data name="QuickMouseUnavailable" xml:space="preserve"><value>Mouse gesture unavailable; use the shortcut or tray</value></data>
-<data name="QuickTrayTip" xml:space="preserve"><value>Meeting Desktop · Double-click to switch; right-click for menu</value></data>
+<data name="QuickTrayTip" xml:space="preserve"><value>DeskShift · Double-click to switch; right-click for menu</value></data>
 <data name="QuickToggle" xml:space="preserve"><value>Switch desktop / review recovery</value></data>
-<data name="QuickOpen" xml:space="preserve"><value>Open Meeting Desktop</value></data>
+<data name="QuickOpen" xml:space="preserve"><value>Open DeskShift</value></data>
 <data name="QuickExit" xml:space="preserve"><value>Exit</value></data>
 <data name="QuickSwitchFailed" xml:space="preserve"><value>The shortcut could not switch the desktop. Check desktop detection and recovery details in this window.</value></data>
 <data name="StartupDataError" xml:space="preserve"><value>The app could not open its data folder and has stopped without switching the desktop. Check the folder permissions or select another folder with --data-dir.&#10;&#10;{0}</value></data>
@@ -335,8 +335,8 @@ Continue?</value></data>
 <data name="SettingsSaveOtherOptions" xml:space="preserve"><value>Save other settings</value></data>
 <data name="QuickTrayDoubleClickOpen" xml:space="preserve"><value>Double-click: open window</value></data>
 <data name="QuickTrayDoubleClickSwitch" xml:space="preserve"><value>Double-click: switch desktop</value></data>
-<data name="QuickTrayTipOpen" xml:space="preserve"><value>Meeting Desktop · Double-click to open; right-click for options</value></data>
-<data name="QuickTrayTipSwitch" xml:space="preserve"><value>Meeting Desktop · Double-click to switch; right-click for options</value></data>
+<data name="QuickTrayTipOpen" xml:space="preserve"><value>DeskShift · Double-click to open; right-click for options</value></data>
+<data name="QuickTrayTipSwitch" xml:space="preserve"><value>DeskShift · Double-click to switch; right-click for options</value></data>
 <data name="SkinClassic" xml:space="preserve"><value>Classic</value></data>
 <data name="SkinLiquid" xml:space="preserve"><value>Liquid glass</value></data>
 <data name="SkinSwitch" xml:space="preserve"><value>Switch interface skin</value></data>
@@ -402,7 +402,7 @@ Continue?</value></data>
     <value>Switch needs attention</value>
   </data>
   <data name="SwitchNotificationReview" xml:space="preserve">
-    <value>Open Meeting Desktop to review the result.</value>
+    <value>Open DeskShift to review the result.</value>
   </data>
   <data name="DailySwitchHomeTitle" xml:space="preserve"><value>Switch desktops</value></data>
   <data name="DailySwitchReturnTitle" xml:space="preserve"><value>Return to your desktop</value></data>

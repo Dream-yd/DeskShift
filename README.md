@@ -1,8 +1,8 @@
-# Meeting Desktop 会议桌面
+# 幕间 DeskShift
 
-一个 Windows 桌面切换工具：为会议、录屏或演示准备独立的桌面文件夹，并尝试保存和恢复原来的图标排列。
+一键切换桌面，保留每个空间的布局。为工作、学习、录屏或演示使用独立的桌面文件夹，返回时按保存的位置恢复图标。
 
-**当前状态：开发预览。** 自动测试覆盖了模拟切换与恢复；在单屏 Windows 11 虚拟机中，已验证多次真实切换、图标位置恢复和部分异常恢复。动态壁纸、多屏、混合缩放、切换中途崩溃及默认 UAC 交互仍需更多实机验收。图标、权限或显示器状态变化时，恢复可能不完整。请先备份重要文件与布局，在可恢复的测试环境中试用。
+**V1.0 正式版。** 原「会议桌面 Meeting Desktop」更名为「幕间 DeskShift」。自动测试覆盖了模拟切换与恢复；单屏 Windows 11 虚拟机已验证真实往返、图标位置恢复和部分异常恢复。动态壁纸、多屏、混合缩放、切换中途崩溃及默认 UAC 交互仍需更多实机验收。图标、权限或显示器状态变化时，恢复可能不完整。首次使用请备份重要文件与布局。
 
 [English](README.en.md) · [使用与恢复说明](docs/USAGE.zh-CN.md) · [开发与测试](docs/DEVELOPMENT.md) · [第三方声明](THIRD-PARTY-NOTICES.md)
 
@@ -27,7 +27,9 @@
 
 ## 安装与构建
 
-从 [GitHub Releases](https://github.com/Dream-yd/MeetingDesktop/releases) 下载 Windows x64 预览包；解压后保留整个文件夹，运行 `MeetingDesktop.exe`。自包含包不需要另装 .NET 运行时。
+从 [GitHub Releases](https://github.com/Dream-yd/DeskShift/releases) 下载 Windows x64 发行包；解压后保留整个文件夹，运行 `MeetingDesktop.exe`。自包含包不需要另装 .NET 运行时。
+
+升级前先退出旧版托盘进程。为兼容已有配置、恢复记录、自启项和辅助进程，V1.0 保留 `MeetingDesktop.exe` 文件名及 `%LOCALAPPDATA%\MeetingDesktop` 数据目录，无需搬迁旧数据。启用了开机自启的用户，可在设置中将旧入口迁移到新版本。发行包未签名。
 
 从源码构建需要 Windows、.NET 10 SDK 和网络可访问的 NuGet 源：
 

@@ -153,7 +153,10 @@ internal sealed class IconTransitionConnection : IDisposable
     internal async Task<bool> SendAsync(string command, string id)
     {
         if (_disposed) return false;
-        using var budget = new CancellationTokenSource(TimeSpan.FromMilliseconds(75));
+        // Acquiring the native layer may cross an Explorer paint. Start it
+        // during workflow preparation and allow that first acknowledgement to
+        // finish; hide/end remain bounded independently for responsive input.
+        using var budget = new CancellationTokenSource(TimeSpan.FromMilliseconds(command == "begin" ? 300 : 75));
         bool entered = false;
         try
         {
@@ -221,7 +224,7 @@ internal sealed class LiveIconTransition : IDisposable
     {
         token.ThrowIfCancellationRequested();
         if (_disposed) return;
-        // Begin already has the connection's 75 ms budget. An in-flight reply
+        // Begin already has the connection's bounded acquisition budget. An in-flight reply
         // must not turn a fast preparation into an unprotected folder change.
         // This waits for acknowledgement, never for the outgoing animation.
         if (_begin is null || !await _begin.WaitAsync(token).ConfigureAwait(false) || _disposed)

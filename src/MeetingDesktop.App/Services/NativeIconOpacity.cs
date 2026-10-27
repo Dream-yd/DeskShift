@@ -4,7 +4,7 @@ using MeetingDesktop.Core;
 
 namespace MeetingDesktop.App.Services;
 
-/// <summary>A temporary style on the icon container; never touches the wallpaper host or window visibility.</summary>
+/// <summary>A temporary style on the icon list; never touches the wallpaper host or window visibility.</summary>
 internal sealed class NativeIconOpacity : IIconOpacityLayer
 {
     private const int Layered = 0x80000;
@@ -37,10 +37,11 @@ internal sealed class NativeIconOpacity : IIconOpacityLayer
             iconsOnly = Class(child) is "SysListView32" or "SysHeader32";
             return iconsOnly;
         }, 0);
-        // Layering the ListView itself turns its transparent background into black.
-        // Its DefView container preserves that transparency. Unknown wallpaper or
-        // organizer children are excluded instead of fading their content too.
-        return iconsOnly ? TryAcquire(container) : null;
+        // DefView can paint the wallpaper itself. Fading that parent exposes a
+        // black desktop underneath. The Windows-compatible application manifest
+        // enables layered child windows, so fade only the icon list and leave
+        // the wallpaper and any other desktop surfaces running normally.
+        return iconsOnly ? TryAcquire(window) : null;
     }
 
     internal static NativeIconOpacity? TryAcquire(nint window)

@@ -5,6 +5,29 @@ namespace MeetingDesktop.App.Tests;
 public sealed class IconTransitionTests
 {
     [Fact]
+    public void BusyExplorerCannotSkipTheFirstVisibleRevealFrames()
+    {
+        var layer = new Layer();
+        using var state = new IconTransitionState(() => layer);
+        state.Begin("return", 0);
+        state.Hide("return");
+        state.End("return", 1000);
+
+        // A native style call or a busy compositor can stall the helper. The
+        // first frame after that stall must still start near transparency.
+        state.Tick(1140);
+        Assert.InRange(layer.Alpha, 1, 32);
+        Assert.True(state.Active);
+        byte first = layer.Alpha;
+        state.Tick(1500);
+        Assert.InRange(layer.Alpha, first + 1, 64);
+        Assert.True(state.Active);
+        for (int now = 1516; now <= 1820; now += 16) state.Tick(now);
+        Assert.Equal(255, layer.Alpha);
+        Assert.False(state.Active);
+    }
+
+    [Fact]
     public void FinishedFadeDoesNotKeepWritingToExplorer()
     {
         var layer = new Layer();
@@ -54,7 +77,7 @@ public sealed class IconTransitionTests
         state.End("one", 1000);
         state.Tick(1080);
         Assert.InRange(layer.Alpha, 1, 254);
-        state.Tick(1200);
+        for (int now = 1096; now <= 1400; now += 16) state.Tick(now);
         Assert.True(layer.Disposed);
     }
 
@@ -66,7 +89,7 @@ public sealed class IconTransitionTests
         {
             state.Begin("one", 0);
             state.End("one", 10);
-            state.Tick(250);
+            for (int now = 26; now <= 266; now += 16) state.Tick(now);
             Assert.True(layer.Disposed);
         }
         layer = new Layer();

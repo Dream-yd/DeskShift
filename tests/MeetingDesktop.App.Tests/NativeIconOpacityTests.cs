@@ -27,7 +27,7 @@ public sealed class NativeIconOpacityTests
         state.Tick(100);
         Assert.True(GetLayeredWindowAttributes(window.Handle, out _, out byte alpha, out _));
         Assert.InRange(alpha, 1, 254);
-        state.Tick(180);
+        for (int now = 116; now <= 420; now += 16) state.Tick(now);
         Assert.False(state.Active);
         Assert.Equal(originalStyle, GetWindowLong(window.Handle, -20));
     });

@@ -29,8 +29,8 @@ public partial class App : Application
             if (!e.Args.Contains("--start-in-tray", StringComparer.OrdinalIgnoreCase) &&
                 !InstanceActivation.TrySignal(InstanceActivation.Name(user, Environment.ProcessPath!)))
             {
-                MessageBox.Show("会议桌面已经在运行。若要使用新版本，请先在右下角托盘图标的菜单中选择“退出”，再打开新版本。\n\nMeeting Desktop is already running. To use this version, exit the running copy from its tray menu first.",
-                    "会议桌面 / Meeting Desktop", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("幕间已经在运行。若要使用新版本，请先在右下角托盘图标的菜单中选择“退出”，再打开新版本。\n\nDeskShift is already running. To use this version, exit the running copy from its tray menu first.",
+                    "幕间 / DeskShift", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             Shutdown();
             return;

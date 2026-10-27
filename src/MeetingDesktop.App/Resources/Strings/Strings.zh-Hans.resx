@@ -17,7 +17,7 @@
   <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
 
   <!-- ============ Application ============ -->
-  <data name="AppTitle" xml:space="preserve"><value>会议桌面</value></data>
+  <data name="AppTitle" xml:space="preserve"><value>幕间 DeskShift</value></data>
   <data name="AppTagline" xml:space="preserve"><value>切换桌面 · 保存布局</value></data>
 
   <!-- ============ Navigation ============ -->
@@ -43,7 +43,7 @@
   <data name="PrepareDescription" xml:space="preserve"><value>把桌面指向另一个文件夹，并隐藏公共桌面上的快捷方式，让屏幕保持干净——无论是做报告、录屏，还是把电脑交给别人用。你自己的文件不会被移动或删除。</value></data>
   <data name="PrepareAction" xml:space="preserve"><value>切换到备用桌面</value></data>
   <data name="PreparePreviewLeaving" xml:space="preserve"><value>你即将离开的桌面</value></data>
-  <data name="PreparePreviewActive" xml:space="preserve"><value>会议桌面当前已启用</value></data>
+  <data name="PreparePreviewActive" xml:space="preserve"><value>备用桌面当前已启用</value></data>
   <data name="PrepareConfirmTitle" xml:space="preserve"><value>确定要切到备用桌面吗？</value></data>
   <data name="PrepareConfirmBody" xml:space="preserve"><value>会先保存你的图标布局。资源管理器将重启，已打开的文件夹窗口会被关闭。
 
@@ -93,7 +93,7 @@
   <data name="SettingsWallpaperUseCurrent" xml:space="preserve"><value>保持当前壁纸</value></data>
   <data name="SettingsWallpaperCurrent" xml:space="preserve"><value>使用你当前的壁纸</value></data>
   <data name="SettingsWallpaperChoose" xml:space="preserve"><value>选择图片…</value></data>
-  <data name="SettingsWallpaperChooseTitle" xml:space="preserve"><value>为会议桌面选一张壁纸</value></data>
+  <data name="SettingsWallpaperChooseTitle" xml:space="preserve"><value>为备用桌面选一张壁纸</value></data>
   <data name="SettingsWallpaperImages" xml:space="preserve"><value>图片</value></data>
   <data name="SettingsWallpaperCopyFailed" xml:space="preserve"><value>这张图片无法复制，因此没有设置。</value></data>
   <data name="SettingsCapturePreview" xml:space="preserve"><value>切换前抓一张桌面快照</value></data>
@@ -102,7 +102,7 @@
   <data name="SettingsPortable" xml:space="preserve"><value>便携模式</value></data>
   <data name="SettingsSaved" xml:space="preserve"><value>设置已保存。</value></data>
   <data name="SettingsSaveFailed" xml:space="preserve"><value>设置无法保存：{0}</value></data>
-  <data name="SettingsCannotChangeWhileSwapped" xml:space="preserve"><value>桌面处于切换状态时不能改会议桌面位置。请先还原。</value></data>
+  <data name="SettingsCannotChangeWhileSwapped" xml:space="preserve"><value>桌面处于切换状态时不能改备用桌面位置。请先还原。</value></data>
 
   <!-- ============ Diagnostics ============ -->
   <data name="DiagnosticsTitle" xml:space="preserve"><value>诊断</value></data>
@@ -195,7 +195,7 @@
   <data name="SettingsSmoothTransitionHint" xml:space="preserve"><value>提示淡入淡出；兼容模式同时使用桌面过渡，免重启模式保持动态壁纸可见。</value></data>
   <data name="SettingsLiveSwitch" xml:space="preserve"><value>响应优先切换（推荐）</value></data>
   <data name="SettingsLiveSwitchHint" xml:space="preserve"><value>通过桌面视图切换，不重启资源管理器。关闭后使用兼容模式，会关闭资源管理器窗口。设置自动保存，从下一次切换开始生效。</value></data>
-  <data name="PrepareConfirmLiveBody" xml:space="preserve"><value>保存图标布局并切换到会议桌面？实验模式会保持资源管理器运行。如果无法确认新桌面已显示，程序会尝试恢复原桌面。</value></data>
+  <data name="PrepareConfirmLiveBody" xml:space="preserve"><value>保存图标布局并切换到备用桌面？实验模式会保持资源管理器运行。如果无法确认新桌面已显示，程序会尝试恢复原桌面。</value></data>
   <data name="ProgressRefreshingDesktop" xml:space="preserve"><value>正在等待目标桌面显示…</value></data>
   <data name="ErrorRestoreRecordKept" xml:space="preserve"><value>恢复尚未完成，恢复记录已保留。请检查桌面后重试恢复。</value></data>
   <data name="RecoveryDetailTitle" xml:space="preserve"><value>恢复结果</value></data>
@@ -205,9 +205,9 @@
   <data name="RecoveryDetailTopologySame" xml:space="preserve"><value>未报告显示器布局变化。</value></data>
   <data name="RecoveryDetailMissing" xml:space="preserve"><value>缺失的图标</value></data>
   <data name="RecoveryDetailMoved" xml:space="preserve"><value>位置偏差的图标（保存坐标 → 实际坐标）</value></data>
-  <data name="RecoveryDetailLeftovers" xml:space="preserve"><value>会议桌面文件夹中剩余项目：{0}。文件保持原样。</value></data>
-  <data name="RecoveryDetailOpenFolder" xml:space="preserve"><value>打开会议桌面文件夹</value></data>
-  <data name="RecoveryDetailFolderUnavailable" xml:space="preserve"><value>无法打开会议桌面文件夹。</value></data>
+  <data name="RecoveryDetailLeftovers" xml:space="preserve"><value>备用桌面文件夹中剩余项目：{0}。文件保持原样。</value></data>
+  <data name="RecoveryDetailOpenFolder" xml:space="preserve"><value>打开备用桌面文件夹</value></data>
+  <data name="RecoveryDetailFolderUnavailable" xml:space="preserve"><value>无法打开备用桌面文件夹。</value></data>
   <data name="DiagnosticExportTitle" xml:space="preserve"><value>导出诊断</value></data>
   <data name="DiagnosticExportFilter" xml:space="preserve"><value>文本报告 (*.txt)|*.txt</value></data>
   <data name="DiagnosticExportSaved" xml:space="preserve"><value>诊断报告已导出。</value></data>
@@ -305,7 +305,7 @@
 <data name="QuickMouseLeftBlank" xml:space="preserve"><value>桌面空白处双击左键</value></data>
 <data name="QuickHotkeyLabel" xml:space="preserve"><value>全局快捷键</value></data>
 <data name="QuickDisabled" xml:space="preserve"><value>关闭</value></data>
-<data name="QuickConfirm" xml:space="preserve"><value>切换到会议桌面前先确认（可选）</value></data>
+<data name="QuickConfirm" xml:space="preserve"><value>切换到备用桌面前先确认（可选）</value></data>
 <data name="QuickCloseToTray" xml:space="preserve"><value>关闭窗口时继续在系统托盘运行</value></data>
 <data name="QuickSafetyHint" xml:space="preserve"><value>每次切换只触发一次，处理中重复触发不会排队。响应优先模式保留资源管理器；需要处理时可打开「恢复与修复」。</value></data>
 <data name="QuickSave" xml:space="preserve"><value>保存快捷设置</value></data>
@@ -316,9 +316,9 @@
 <data name="QuickTrayActive" xml:space="preserve"><value>托盘图标可用</value></data>
 <data name="QuickTrayUnavailable" xml:space="preserve"><value>托盘暂不可用，窗口保持可访问</value></data>
 <data name="QuickMouseUnavailable" xml:space="preserve"><value>鼠标手势不可用，请使用快捷键或托盘</value></data>
-<data name="QuickTrayTip" xml:space="preserve"><value>会议桌面 · 双击切换桌面，右键打开菜单</value></data>
+<data name="QuickTrayTip" xml:space="preserve"><value>幕间 · 双击切换桌面，右键打开菜单</value></data>
 <data name="QuickToggle" xml:space="preserve"><value>切换桌面 / 查看恢复详情</value></data>
-<data name="QuickOpen" xml:space="preserve"><value>打开会议桌面</value></data>
+<data name="QuickOpen" xml:space="preserve"><value>打开幕间</value></data>
 <data name="QuickExit" xml:space="preserve"><value>退出软件</value></data>
 <data name="QuickSwitchFailed" xml:space="preserve"><value>快捷切换未执行，请在窗口中检查桌面识别和恢复详情。</value></data>
 <data name="StartupDataError" xml:space="preserve"><value>无法打开软件数据目录，软件已停止启动，未切换桌面。请检查目录权限，或通过 --data-dir 指定其他目录。&#10;&#10;{0}</value></data>
@@ -333,8 +333,8 @@
 <data name="SettingsSaveOtherOptions" xml:space="preserve"><value>保存其他设置</value></data>
 <data name="QuickTrayDoubleClickOpen" xml:space="preserve"><value>双击：打开主界面</value></data>
 <data name="QuickTrayDoubleClickSwitch" xml:space="preserve"><value>双击：切换桌面</value></data>
-<data name="QuickTrayTipOpen" xml:space="preserve"><value>会议桌面 · 双击打开，右键设置</value></data>
-<data name="QuickTrayTipSwitch" xml:space="preserve"><value>会议桌面 · 双击切换，右键设置</value></data>
+<data name="QuickTrayTipOpen" xml:space="preserve"><value>幕间 · 双击打开，右键设置</value></data>
+<data name="QuickTrayTipSwitch" xml:space="preserve"><value>幕间 · 双击切换，右键设置</value></data>
 <data name="SkinClassic" xml:space="preserve"><value>经典</value></data>
 <data name="SkinLiquid" xml:space="preserve"><value>液态玻璃</value></data>
 <data name="SkinSwitch" xml:space="preserve"><value>切换界面皮肤</value></data>
@@ -400,7 +400,7 @@
     <value>切换需要处理</value>
   </data>
   <data name="SwitchNotificationReview" xml:space="preserve">
-    <value>请打开会议桌面查看结果与恢复选项。</value>
+    <value>请打开幕间查看结果与恢复选项。</value>
   </data>
   <data name="DailySwitchHomeTitle" xml:space="preserve"><value>切换桌面</value></data>
   <data name="DailySwitchReturnTitle" xml:space="preserve"><value>返回原桌面</value></data>

@@ -12,6 +12,7 @@ internal sealed class IconTransitionState(Func<IIconOpacityLayer?> acquire, Func
     private IIconOpacityLayer? _layer;
     private string? _id;
     private long _started, _fadeStarted;
+    private long _revealElapsed;
     private byte _alpha = 255, _revealFrom, _fadeFrom;
     private bool _hidden, _revealing, _restoring;
     internal bool Active => _layer is not null;
@@ -42,9 +43,10 @@ internal sealed class IconTransitionState(Func<IIconOpacityLayer?> acquire, Func
 
     public void End(string id, long now)
     {
-        if (_layer is null || id != _id || _restoring) return;
+        if (_layer is null || id != _id || _restoring || _revealing) return;
         _revealing = true;
         _fadeStarted = now;
+        _revealElapsed = 0;
         _revealFrom = _alpha;
     }
 
@@ -56,9 +58,14 @@ internal sealed class IconTransitionState(Func<IIconOpacityLayer?> acquire, Func
         if (now - _started >= 30000) { Dispose(); return; }
         if (_revealing)
         {
-            double t = Math.Clamp((now - _fadeStarted) / 160d, 0, 1);
+            // Explorer's native calls can stall across several display frames.
+            // Catching up to wall time would reveal nearly opaque icons in one
+            // step. Bound each visible step; the workflow never waits for this.
+            _revealElapsed += Math.Clamp(now - _fadeStarted, 0, 32);
+            _fadeStarted = now;
+            double t = Math.Clamp(_revealElapsed / 240d, 0, 1);
             if (t >= 1) { Dispose(); return; }
-            Apply((byte)(_revealFrom + (255 - _revealFrom) * (1 - Math.Pow(1 - t, 3))));
+            Apply((byte)(_revealFrom + (255 - _revealFrom) * t * t * (3 - 2 * t)));
         }
         else if (!_hidden)
         {
