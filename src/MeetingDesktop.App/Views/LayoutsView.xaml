@@ -1,0 +1,245 @@
+<UserControl x:Class="MeetingDesktop.App.Views.LayoutsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:loc="clr-namespace:MeetingDesktop.App.Localization"
+             xmlns:vm="clr-namespace:MeetingDesktop.App.ViewModels"
+             xmlns:converters="clr-namespace:MeetingDesktop.App.Converters"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=vm:LayoutsViewModel}">
+  <UserControl.Resources>
+    <converters:LayoutSearchNarrowConverter x:Key="LayoutSearchNarrow" />
+    <!-- TextBox applies Padding to PART_ContentHost itself. Keep the surrounding
+         border unpadded so a compact field still has a visible text viewport. -->
+    <Style x:Key="LayoutSearchInput" TargetType="TextBox" BasedOn="{StaticResource TextBox.Themed}">
+      <Setter Property="Padding" Value="12,8" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="TextBox">
+            <Border x:Name="Input" Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="{StaticResource Radius.Small}">
+              <ScrollViewer x:Name="PART_ContentHost" />
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="Input" Property="BorderBrush" Value="{DynamicResource Brush.Text.Secondary}" />
+              </Trigger>
+              <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                <Setter TargetName="Input" Property="BorderBrush" Value="{DynamicResource Brush.Primary}" />
+                <Setter TargetName="Input" Property="BorderThickness" Value="2" />
+              </Trigger>
+              <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="Input" Property="Opacity" Value="0.65" />
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style x:Key="LayoutSearchRow" TargetType="ListBoxItem" BasedOn="{StaticResource ListBoxItem.Themed}">
+      <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+      <Setter Property="AutomationProperties.Name" Value="{Binding DisplayName}" />
+      <Setter Property="AutomationProperties.HelpText" Value="{Binding Summary}" />
+    </Style>
+  </UserControl.Resources>
+  <UserControl.InputBindings>
+    <KeyBinding Key="F" Modifiers="Control" Command="{Binding FocusSearchCommand}"
+                CommandParameter="{Binding ElementName=LayoutSearchBox}" />
+  </UserControl.InputBindings>
+
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <StackPanel Margin="0,0,0,16">
+      <TextBlock Text="{loc:Loc LayoutsTitle}" Style="{StaticResource Text.Title}" />
+      <TextBlock Text="{loc:Loc LayoutsDescription}" Style="{StaticResource Text.Secondary}"
+                 Margin="0,8,0,0" MaxWidth="640" HorizontalAlignment="Left" />
+    </StackPanel>
+
+    <StackPanel Grid.Row="1" Margin="0,0,0,12">
+      <Label Content="{loc:Loc LayoutSearchLabel}" Target="{Binding ElementName=LayoutSearchBox}"
+             Foreground="{DynamicResource Brush.Text.Primary}" FontWeight="SemiBold" Padding="0,0,0,6" />
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="LayoutSearchBox" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                 Style="{StaticResource LayoutSearchInput}" Height="42" VerticalContentAlignment="Center"
+                 AutomationProperties.Name="{loc:Loc LayoutSearchAccessibleName}"
+                 AutomationProperties.HelpText="{loc:Loc LayoutSearchHint}" ToolTip="{loc:Loc LayoutSearchHint}">
+          <TextBox.InputBindings>
+            <KeyBinding Key="Escape" Command="{Binding ClearSearchCommand}" />
+          </TextBox.InputBindings>
+        </TextBox>
+        <Button Grid.Column="1" Content="{loc:Loc LayoutSearchClear}" Command="{Binding ClearSearchCommand}"
+                Style="{StaticResource Button.Ghost}" Margin="8,0,0,0"
+                Visibility="{Binding HasSearchText, Converter={StaticResource BoolToVisibility}}" />
+      </Grid>
+      <TextBlock Text="{loc:Loc LayoutSearchHint}" Style="{StaticResource Text.Caption}" Margin="0,6,0,0" />
+      <TextBlock Text="{Binding ResultsSummary}" Style="{StaticResource Text.Caption}" Margin="0,4,0,0"
+                 AutomationProperties.LiveSetting="Polite" />
+    </StackPanel>
+
+    <!-- The page scrolls at short heights; the history also has a bounded, virtualized viewport. -->
+    <ScrollViewer x:Name="LayoutSearchViewport" Grid.Row="2" VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Disabled" Padding="0,0,4,0">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="3*" />
+          <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <Border Padding="10" VerticalAlignment="Top">
+          <Border.Style>
+            <Style TargetType="Border" BasedOn="{StaticResource Card}">
+              <Style.Triggers>
+                <DataTrigger Binding="{Binding ActualWidth, ElementName=LayoutSearchViewport, Converter={StaticResource LayoutSearchNarrow}}" Value="True">
+                  <Setter Property="Grid.ColumnSpan" Value="2" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding FilteredLayouts.IsEmpty}" Value="True">
+                  <Setter Property="Grid.ColumnSpan" Value="2" />
+                </DataTrigger>
+              </Style.Triggers>
+            </Style>
+          </Border.Style>
+          <Grid>
+            <Grid.Style>
+              <Style TargetType="Grid">
+                <Setter Property="MinHeight" Value="240" />
+                <Style.Triggers>
+                  <DataTrigger Binding="{Binding FilteredLayouts.IsEmpty}" Value="True">
+                    <Setter Property="MinHeight" Value="0" />
+                  </DataTrigger>
+                </Style.Triggers>
+              </Style>
+            </Grid.Style>
+            <ListBox ItemsSource="{Binding FilteredLayouts}" SelectedItem="{Binding Selected, Mode=TwoWay}"
+                     IsSynchronizedWithCurrentItem="False" Style="{StaticResource ListBox.Themed}"
+                     ItemContainerStyle="{StaticResource LayoutSearchRow}" MaxHeight="420"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True"
+                     VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling"
+                     AutomationProperties.Name="{loc:Loc LayoutSearchHistory}">
+              <ListBox.ItemTemplate>
+                <DataTemplate>
+                  <Grid>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="76" />
+                      <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Image Source="{Binding Thumbnail}" Width="64" Height="42" HorizontalAlignment="Left"
+                           VerticalAlignment="Top" Margin="0,2,0,0" ToolTip="{loc:Loc LayoutHistorySchematic}" />
+                    <StackPanel Grid.Column="1">
+                      <TextBlock Text="{Binding DisplayName}" Style="{StaticResource Text.Body}" FontWeight="SemiBold"
+                                 TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" ToolTip="{Binding DisplayName}" />
+                      <WrapPanel Margin="0,3,0,0">
+                        <TextBlock Text="{Binding IconCountText}" Style="{StaticResource Text.Caption}" Margin="0,0,10,2" />
+                        <TextBlock Text="{Binding DisplayCountText}" Style="{StaticResource Text.Caption}" Margin="0,0,10,2" />
+                        <TextBlock Text="{loc:Loc LayoutsAutomaticTag}" Style="{StaticResource Text.Caption}"
+                                   Foreground="{DynamicResource Brush.Accent}" Margin="0,0,0,2"
+                                   Visibility="{Binding IsAutomatic, Converter={StaticResource BoolToVisibility}}" />
+                      </WrapPanel>
+                      <TextBlock Text="{Binding CreatedLocal}" Style="{StaticResource Text.Caption}" />
+                    </StackPanel>
+                  </Grid>
+                </DataTemplate>
+              </ListBox.ItemTemplate>
+            </ListBox>
+
+            <StackPanel Margin="18" HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="400"
+                        Visibility="{Binding ShowEmpty, Converter={StaticResource BoolToVisibility}}">
+              <TextBlock Text="{loc:Loc LayoutsEmpty}" Style="{StaticResource Text.Heading}" TextAlignment="Center" />
+              <TextBlock Text="{loc:Loc LayoutSearchEmptyHint}" Style="{StaticResource Text.Secondary}"
+                         TextAlignment="Center" Margin="0,8,0,0" />
+            </StackPanel>
+            <StackPanel Margin="18" HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="400"
+                        Visibility="{Binding ShowNoMatches, Converter={StaticResource BoolToVisibility}}">
+              <TextBlock Text="{loc:Loc LayoutSearchNoMatches}" Style="{StaticResource Text.Heading}" TextAlignment="Center" />
+              <TextBlock Text="{loc:Loc LayoutSearchNoMatchesHint}" Style="{StaticResource Text.Secondary}"
+                         TextAlignment="Center" Margin="0,8,0,12" />
+              <Button Content="{loc:Loc LayoutSearchClear}" Command="{Binding ClearSearchCommand}"
+                      Style="{StaticResource Button.Secondary}" HorizontalAlignment="Center" />
+            </StackPanel>
+            <TextBlock Text="{loc:Loc LayoutSearchLoading}" Style="{StaticResource Text.Secondary}"
+                       HorizontalAlignment="Center" VerticalAlignment="Center" Margin="18" TextAlignment="Center"
+                       Visibility="{Binding ShowLoading, Converter={StaticResource BoolToVisibility}}" />
+          </Grid>
+        </Border>
+
+        <Border VerticalAlignment="Top">
+          <Border.Style>
+            <Style TargetType="Border" BasedOn="{StaticResource Card}">
+              <Setter Property="Grid.Column" Value="1" />
+              <Setter Property="Margin" Value="16,0,0,0" />
+              <Style.Triggers>
+                <DataTrigger Binding="{Binding ActualWidth, ElementName=LayoutSearchViewport, Converter={StaticResource LayoutSearchNarrow}}" Value="True">
+                  <Setter Property="Grid.Column" Value="0" />
+                  <Setter Property="Grid.Row" Value="1" />
+                  <Setter Property="Grid.ColumnSpan" Value="2" />
+                  <Setter Property="Margin" Value="0,16,0,0" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding FilteredLayouts.IsEmpty}" Value="True">
+                  <Setter Property="Visibility" Value="Collapsed" />
+                </DataTrigger>
+              </Style.Triggers>
+            </Style>
+          </Border.Style>
+          <StackPanel>
+            <TextBlock Text="{loc:Loc LayoutSearchDetails}" Style="{StaticResource Text.Heading}" />
+            <TextBlock Text="{loc:Loc LayoutsActiveSnapshot}" Style="{StaticResource Text.Secondary}" Margin="0,10,0,0"
+                       Visibility="{Binding IsSelectedActiveSnapshot, Converter={StaticResource BoolToVisibility}}" />
+            <TextBlock Text="{loc:Loc LayoutSearchSelectHint}" Style="{StaticResource Text.Secondary}" Margin="0,10,0,0"
+                       Visibility="{Binding HasSelection, Converter={StaticResource InverseBoolToVisibility}}" />
+            <ContentControl Content="{Binding Selected}" Margin="0,12,0,0"
+                            Visibility="{Binding HasSelection, Converter={StaticResource BoolToVisibility}}">
+              <ContentControl.ContentTemplate>
+                <DataTemplate>
+                  <StackPanel>
+                    <TextBlock Text="{Binding DisplayName}" Style="{StaticResource Text.Body}" FontWeight="SemiBold" />
+                    <TextBlock Text="{loc:Loc LayoutSearchUnreadable}" Style="{StaticResource Text.Secondary}" Margin="0,8,0,0"
+                               Visibility="{Binding HasSnapshot, Converter={StaticResource InverseBoolToVisibility}}" />
+                    <StackPanel Visibility="{Binding HasSnapshot, Converter={StaticResource BoolToVisibility}}">
+                      <Image Source="{Binding Thumbnail}" Height="112" MaxWidth="224" Stretch="Uniform"
+                             HorizontalAlignment="Left" Margin="0,12,0,4" ToolTip="{loc:Loc LayoutHistorySchematic}" />
+                      <TextBlock Text="{loc:Loc LayoutHistorySchematic}" Style="{StaticResource Text.Caption}" />
+                      <WrapPanel Margin="0,14,0,0">
+                        <TextBlock Text="{Binding IconCountText}" Style="{StaticResource Text.Body}" Margin="0,0,12,4" />
+                        <TextBlock Text="{Binding DisplayCountText}" Style="{StaticResource Text.Body}" Margin="0,0,0,4" />
+                      </WrapPanel>
+                      <TextBlock Text="{loc:Loc LayoutSearchSavedAt}" Style="{StaticResource Text.Caption}" Margin="0,10,0,4" />
+                      <TextBlock Text="{Binding CreatedDetailed}" Style="{StaticResource Text.Body}" />
+                      <TextBlock Text="{loc:Loc LayoutSearchTopology}" Style="{StaticResource Text.Heading}" Margin="0,18,0,8" />
+                      <TextBlock Text="{Binding TopologyDetails}" Style="{StaticResource Text.Secondary}" />
+                    </StackPanel>
+                  </StackPanel>
+                </DataTemplate>
+              </ContentControl.ContentTemplate>
+            </ContentControl>
+          </StackPanel>
+        </Border>
+      </Grid>
+    </ScrollViewer>
+
+    <WrapPanel Grid.Row="3" Margin="0,12,0,0">
+      <Button Content="{loc:Loc LayoutsSaveCurrent}" Command="{Binding SaveCurrentCommand}"
+              Style="{StaticResource Button.Primary}" Margin="0,0,8,8" />
+      <Button Content="{loc:Loc LayoutsRestoreSelected}" Command="{Binding RestoreSelectedCommand}"
+              Style="{StaticResource Button.Secondary}" Margin="0,0,8,8" />
+      <Button Content="{loc:Loc LayoutsDeleteSelected}" Command="{Binding DeleteSelectedCommand}"
+              Style="{StaticResource Button.Danger}" Margin="0,0,8,8" />
+      <Button Content="{loc:Loc LayoutsRefresh}" Command="{Binding RefreshCommand}"
+              Style="{StaticResource Button.Ghost}" Margin="0,0,8,8" />
+    </WrapPanel>
+  </Grid>
+</UserControl>

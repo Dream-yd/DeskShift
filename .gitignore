@@ -1,0 +1,78 @@
+# ---------------------------------------------------------------
+# Build output
+# ---------------------------------------------------------------
+bin/
+obj/
+[Dd]ebug/
+[Rr]elease/
+artifacts/
+out/
+publish/
+*.user
+*.suo
+*.userprefs
+.vs/
+.idea/
+.vscode/
+*.binlog
+
+# ---------------------------------------------------------------
+# Runtime data written by the app
+#
+# Ignore by DIRECTORY, never by extension. A blanket `*.png` or
+# `*.jpg` rule would also exclude src/**/Assets/app.ico and any
+# screenshot that legitimately belongs in the docs.
+#
+# The leading slash anchors these to the repository root so they
+# only match the app's own data folders, not a folder of the same
+# name somewhere under src/ or tests/.
+# ---------------------------------------------------------------
+/Data/
+/state/
+/layouts/
+/recovery/
+/logs/
+portable.txt
+
+# ---------------------------------------------------------------
+# The app's default data directory is %LOCALAPPDATA%\MeetingDesktop,
+# but a user may point it at a folder inside the working tree while
+# developing. These cover the file kinds the app writes there.
+# ---------------------------------------------------------------
+*.local.json
+*.secrets.json
+.env
+
+# ---------------------------------------------------------------
+# Scratch screenshots
+#
+# A screenshot taken to show the app running is a screenshot of
+# whatever is behind it: someone's real wallpaper, their real file
+# names, the real paths in the panels. Those are personal data, and
+# once a file like that is in a commit it is in every clone forever
+# - `git rm --cached` does not take it back out of the history.
+#
+# Anchored to the repository root and to a leading underscore, so
+# this cannot catch an image that legitimately belongs in docs/.
+# ---------------------------------------------------------------
+/_*.png
+/_*.jpg
+/_*.jpeg
+
+# ---------------------------------------------------------------
+# OS cruft
+# ---------------------------------------------------------------
+Thumbs.db
+desktop.ini
+ehthumbs.db
+$RECYCLE.BIN/
+*.stackdump
+
+# ---------------------------------------------------------------
+# Deliberately NOT ignored
+#
+#   src/MeetingDesktop.App/Assets/app.ico   <- ships with the app
+#   docs/**/*.png                           <- screenshots for the README
+#
+# If you add a broad image rule here, exclude those two paths first.
+# ---------------------------------------------------------------

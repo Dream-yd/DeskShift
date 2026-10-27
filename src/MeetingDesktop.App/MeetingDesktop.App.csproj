@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- TargetFramework and friends come from Directory.Build.props. -->
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>MeetingDesktop.App</RootNamespace>
+    <AssemblyName>MeetingDesktop</AssemblyName>
+    <UseWPF>true</UseWPF>
+    <StartupObject>MeetingDesktop.App.Program</StartupObject>
+    <IsPackable>false</IsPackable>
+
+    <!-- PerMonitorV2 DPI awareness. Without it the icon coordinates this app
+         reads are virtualised to 96 DPI while explorer's are not, and the
+         grid maths is wrong by the scale factor on any scaled display. -->
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+
+    <!-- The executable's icon: what Explorer, the taskbar pin and the file
+         properties dialog show. The window's own title-bar icon is set
+         separately on the Window element - they are not the same thing. -->
+    <ApplicationIcon>Assets\app.ico</ApplicationIcon>
+
+    <!-- Program dispatches helpers before loading any WPF resources. -->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Embedded so Window.Icon can resolve it through a pack URI at runtime.
+         ApplicationIcon alone only brands the .exe file on disk. -->
+    <Resource Include="Assets\app.ico" />
+    <Resource Include="Resources\Shaders\LiquidGlass.ps" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MeetingDesktop.Core\MeetingDesktop.Core.csproj" />
+    <Content Include="../../LICENSE" Link="LICENSE.txt" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="../../THIRD-PARTY-NOTICES.md" Link="THIRD-PARTY-NOTICES.md" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="../../licenses/liquid-glass-react-MIT.txt" Link="licenses/liquid-glass-react-MIT.txt" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

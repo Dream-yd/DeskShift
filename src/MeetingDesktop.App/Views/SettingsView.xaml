@@ -1,0 +1,352 @@
+<UserControl x:Class="MeetingDesktop.App.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:loc="clr-namespace:MeetingDesktop.App.Localization"
+             xmlns:vm="clr-namespace:MeetingDesktop.App.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=vm:SettingsViewModel}">
+
+  <UserControl.Resources>
+    <!-- Shared picker templates update the field and popup with the app theme. -->
+    <Style x:Key="ComboBox.Themed" TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+      <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource Brush.Hairline}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Padding" Value="10,7" />
+      <Setter Property="FontSize" Value="{StaticResource FontSize.Body}" />
+      <Setter Property="Cursor" Value="Hand" />
+    </Style>
+
+    <Style x:Key="ComboBoxItem.Themed" TargetType="ComboBoxItem" BasedOn="{StaticResource {x:Type ComboBoxItem}}">
+      <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" />
+      <Setter Property="Padding" Value="10,7" />
+      <Setter Property="FontSize" Value="{StaticResource FontSize.Body}" />
+    </Style>
+  </UserControl.Resources>
+
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <!-- ============================ Heading ============================ -->
+    <TextBlock Grid.Row="0"
+               Text="{loc:Loc SettingsTitle}"
+               Style="{StaticResource Text.Title}"
+               Margin="0,0,0,18" />
+
+    <ScrollViewer Grid.Row="1"
+                  VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Disabled">
+      <!-- Stretched, so the cards line up with the reference page's, but capped:
+           a form column wider than this reads as a table with one column. -->
+      <StackPanel MaxWidth="760" HorizontalAlignment="Stretch">
+
+        <Border Style="{StaticResource Card}" Margin="0,0,0,14">
+          <StackPanel IsEnabled="{Binding CanEditQuickAccess}">
+            <TextBlock Text="{loc:Loc SettingsStartup}" Style="{StaticResource Text.Heading}" />
+            <CheckBox Content="{loc:Loc SettingsStartupToggle}" IsChecked="{Binding StartWithWindows, Mode=TwoWay}"
+                      AutomationProperties.AutomationId="StartWithWindowsToggle"
+                      Style="{StaticResource CheckBox.Themed}" Margin="0,12,0,0" />
+            <TextBlock Text="{loc:Loc SettingsStartupHint}" Style="{StaticResource Text.Caption}" Margin="22,6,0,0" />
+            <TextBlock Text="{Binding StartupStatusText}" Style="{StaticResource Text.Caption}" Margin="0,10,0,0"
+                       AutomationProperties.LiveSetting="Polite" />
+            <Button Content="{Binding StartupMigrationActionText}" Command="{Binding MigrateStartupCommand}"
+                    Style="{StaticResource Button.Secondary}" Margin="0,10,0,0" HorizontalAlignment="Left"
+                    Visibility="{Binding CanMigrateStartup, Converter={StaticResource BoolToVisibility}}" />
+            <TextBlock Text="{loc:Loc SettingsPermissionHint}" Style="{StaticResource Text.Caption}" Margin="0,10,0,0" />
+          </StackPanel>
+        </Border>
+
+        <Border Style="{StaticResource Card}" Margin="0,0,0,14">
+          <StackPanel IsEnabled="{Binding CanEditQuickAccess}">
+            <TextBlock Text="{loc:Loc QuickSettingsTitle}" Style="{StaticResource Text.Heading}" />
+            <TextBlock Text="{loc:Loc QuickSettingsHint}" Style="{StaticResource Text.Caption}" Margin="0,8,0,14" />
+            <WrapPanel>
+              <StackPanel Width="280" Margin="0,0,16,14">
+                <TextBlock Text="{loc:Loc QuickMouseLabel}" Style="{StaticResource Text.Body}" />
+                <ComboBox SelectedIndex="{Binding SelectedMouseGestureIndex, Mode=TwoWay}" Style="{StaticResource ComboBox.Themed}"
+                          ItemContainerStyle="{StaticResource ComboBoxItem.Themed}" Margin="0,8,0,0"
+                          AutomationProperties.Name="{loc:Loc QuickMouseLabel}">
+                  <ComboBoxItem Content="{loc:Loc QuickDisabled}" />
+                  <ComboBoxItem Content="{loc:Loc QuickMouseMiddle}" />
+                  <ComboBoxItem Content="{loc:Loc QuickMouseLeftBlank}" />
+                </ComboBox>
+              </StackPanel>
+              <StackPanel Width="240" Margin="0,0,0,14">
+                <TextBlock Text="{loc:Loc QuickHotkeyLabel}" Style="{StaticResource Text.Body}" />
+                <ComboBox SelectedIndex="{Binding SelectedQuickHotkeyIndex, Mode=TwoWay}" Style="{StaticResource ComboBox.Themed}"
+                          ItemContainerStyle="{StaticResource ComboBoxItem.Themed}" Margin="0,8,0,0"
+                          AutomationProperties.Name="{loc:Loc QuickHotkeyLabel}">
+                  <ComboBoxItem Content="{loc:Loc QuickDisabled}" />
+                  <ComboBoxItem Content="Ctrl + Alt + M" />
+                  <ComboBoxItem Content="Ctrl + Alt + D" />
+                  <ComboBoxItem Content="Ctrl + Shift + F10" />
+                </ComboBox>
+              </StackPanel>
+            </WrapPanel>
+            <CheckBox Content="{loc:Loc QuickConfirm}" IsChecked="{Binding ConfirmQuickSwitch, Mode=TwoWay}"
+                      Style="{StaticResource CheckBox.Themed}" Margin="0,0,0,8" />
+            <CheckBox Content="{loc:Loc QuickCloseToTray}" IsChecked="{Binding CloseToTray, Mode=TwoWay}"
+                      Style="{StaticResource CheckBox.Themed}" />
+            <CheckBox Content="{loc:Loc SettingsSmoothTransition}" IsChecked="{Binding SmoothDesktopTransition, Mode=TwoWay}"
+                      ToolTip="{loc:Loc SettingsSmoothTransitionHint}"
+                      Style="{StaticResource CheckBox.Themed}" Margin="0,8,0,0" />
+            <CheckBox Content="{loc:Loc SettingsSwitchNotification}" IsChecked="{Binding ShowSwitchNotification, Mode=TwoWay}"
+                      ToolTip="{loc:Loc SettingsSwitchNotificationHint}"
+                      Style="{StaticResource CheckBox.Themed}" Margin="0,8,0,0" />
+            <TextBlock Text="{loc:Loc QuickSafetyHint}" Style="{StaticResource Text.Caption}" Margin="0,10,0,0" />
+            <TextBlock Text="{Binding QuickAccessStatus}" Style="{StaticResource Text.Caption}" Margin="0,10,0,0"
+                       AutomationProperties.LiveSetting="Polite" />
+            <TextBlock Text="{Binding QuickSettingsSaveStatus}" Style="{StaticResource Text.Caption}" Margin="0,8,0,0"
+                       AutomationProperties.LiveSetting="Polite" AutomationProperties.AutomationId="QuickAutoSaveStatus" />
+          </StackPanel>
+        </Border>
+
+        <Border Style="{StaticResource Card}" Margin="0,0,0,14">
+          <StackPanel>
+            <TextBlock Text="{loc:Loc SettingsAppearance}" Style="{StaticResource Text.Heading}" />
+            <TextBlock Text="{loc:Loc SettingsAppearanceHint}" Style="{StaticResource Text.Caption}" Margin="0,8,0,12" />
+            <ComboBox x:Name="AppearancePicker" Style="{StaticResource ComboBox.Themed}"
+                      ItemContainerStyle="{StaticResource ComboBoxItem.Themed}"
+                      SelectedIndex="{Binding SelectedThemeIndex, Mode=TwoWay}"
+                      Width="260" HorizontalAlignment="Left"
+                      AutomationProperties.Name="{loc:Loc SettingsAppearance}">
+              <ComboBoxItem Content="{loc:Loc ThemeSystem}" />
+              <ComboBoxItem Content="{loc:Loc ThemeLight}" />
+              <ComboBoxItem Content="{loc:Loc ThemeDark}" />
+            </ComboBox>
+          </StackPanel>
+        </Border>
+
+        <!-- ============================ Language ============================ -->
+        <Border Style="{StaticResource Card}">
+          <StackPanel>
+            <TextBlock Text="{loc:Loc SettingsLanguage}" Style="{StaticResource Text.Heading}" />
+
+            <!-- Items are declared here rather than bound from a list so that
+                 each one carries its own resource key and follows a language
+                 switch in place. -->
+            <ComboBox Style="{StaticResource ComboBox.Themed}"
+                      ItemContainerStyle="{StaticResource ComboBoxItem.Themed}"
+                      SelectedIndex="{Binding SelectedLanguageIndex, Mode=TwoWay}"
+                      Width="260"
+                      Margin="0,12,0,0"
+                      HorizontalAlignment="Left">
+              <ComboBoxItem Content="{loc:Loc SettingsLanguageAuto}" />
+              <ComboBoxItem Content="{loc:Loc SettingsLanguageEnglish}" />
+              <ComboBoxItem Content="{loc:Loc SettingsLanguageChinese}" />
+            </ComboBox>
+          </StackPanel>
+        </Border>
+
+        <!-- ======================= Meeting desktop ======================= -->
+        <Border Style="{StaticResource Card}" Margin="0,14,0,0">
+          <StackPanel>
+            <TextBlock Text="{loc:Loc SettingsMeetingDesktopPath}"
+                       Style="{StaticResource Text.Heading}" />
+
+            <TextBox Text="{Binding MeetingDesktopPath, UpdateSourceTrigger=PropertyChanged}"
+                     AutomationProperties.Name="{loc:Loc SettingsMeetingDesktopPath}"
+                     AutomationProperties.AutomationId="MeetingDesktopFolderInput"
+                     LostKeyboardFocus="OnMeetingDesktopFolderLostFocus"
+                     Style="{StaticResource TextBox.Themed}"
+                     IsEnabled="{Binding CanEditMeetingDesktopPath}"
+                     Margin="0,12,0,0" />
+
+            <TextBlock Text="{loc:Loc SettingsMeetingDesktopPathHint}"
+                       Style="{StaticResource Text.Caption}"
+                       Margin="0,8,0,0" />
+
+            <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+              <Button Content="{loc:Loc SettingsBrowse}"
+                      Command="{Binding BrowseCommand}"
+                      Style="{StaticResource Button.Secondary}" />
+              <Button Content="{loc:Loc SettingsUseDefault}"
+                      Command="{Binding UseDefaultCommand}"
+                      Style="{StaticResource Button.Ghost}"
+                      Margin="8,0,0,0" />
+              <Button Content="{loc:Loc SettingsApplyFolder}"
+                      Command="{Binding ApplyMeetingDesktopPathCommand}"
+                      Style="{StaticResource Button.Secondary}" Margin="8,0,0,0" />
+            </StackPanel>
+
+            <TextBlock Text="{loc:Loc SettingsEffectivePath}"
+                       Style="{StaticResource Text.Caption}"
+                       Margin="0,14,0,0" />
+            <TextBlock Text="{Binding EffectiveMeetingDesktopPath}"
+                       Style="{StaticResource Text.Mono}"
+                       Margin="0,4,0,0" />
+            <TextBlock Text="{Binding MeetingDesktopSaveStatus}" Style="{StaticResource Text.Caption}"
+                       Margin="0,8,0,0" AutomationProperties.LiveSetting="Polite"
+                       AutomationProperties.AutomationId="MeetingDesktopFolderSaveStatus" />
+
+            <!-- Both findings read here, and the colour is what tells them
+                 apart: a warning is a note the user may accept, a problem is
+                 the reason Save is refusing. -->
+            <Border Margin="0,14,0,0"
+                    CornerRadius="{StaticResource Radius.Small}"
+                    Padding="12,10">
+              <Border.Style>
+                <Style TargetType="Border">
+                  <Setter Property="Visibility" Value="Visible" />
+                  <Setter Property="Background" Value="#33FFC14D" />
+                  <Setter Property="BorderBrush" Value="{DynamicResource Brush.Warning}" />
+                  <Setter Property="BorderThickness" Value="1" />
+                  <Style.Triggers>
+                    <DataTrigger Binding="{Binding ValidationMessage}" Value="">
+                      <Setter Property="Visibility" Value="Collapsed" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding HasValidationProblem}" Value="True">
+                      <Setter Property="Background" Value="#33FF6B6B" />
+                      <Setter Property="BorderBrush" Value="{DynamicResource Brush.Danger}" />
+                    </DataTrigger>
+                  </Style.Triggers>
+                </Style>
+              </Border.Style>
+              <TextBlock Text="{Binding ValidationMessage}"
+                         Style="{StaticResource Text.Body}"
+                         Foreground="{DynamicResource Brush.Text.Strong}" />
+            </Border>
+
+            <!-- Why the box and the buttons above are dead. -->
+            <Border Background="#33FFC14D"
+                    CornerRadius="{StaticResource Radius.Small}"
+                    Padding="12,10"
+                    Margin="0,14,0,0"
+                    Visibility="{Binding CanEditMeetingDesktopPath, Converter={StaticResource InverseBoolToVisibility}}">
+              <TextBlock Text="{loc:Loc SettingsCannotChangeWhileSwapped}"
+                         Style="{StaticResource Text.Body}"
+                         Foreground="{DynamicResource Brush.Text.Strong}" />
+            </Border>
+
+            <Separator Margin="0,18,0,18" Background="{DynamicResource Brush.Hairline}" />
+
+            <TextBlock Text="{loc:Loc DiagnosticsDetectedDesktop}"
+                       Style="{StaticResource Text.Heading}" />
+            <TextBlock Text="{Binding DetectionSummary}"
+                       Style="{StaticResource Text.Mono}"
+                       Margin="0,8,0,0" />
+          </StackPanel>
+        </Border>
+
+        <!-- ============================ Wallpaper ============================ -->
+        <Border Style="{StaticResource Card}" Margin="0,14,0,0">
+          <StackPanel>
+            <TextBlock Text="{loc:Loc SettingsWallpaper}" Style="{StaticResource Text.Heading}" />
+            <TextBlock Text="{loc:Loc SettingsWallpaperHint}"
+                       Style="{StaticResource Text.Caption}"
+                       Margin="0,8,0,0" />
+
+            <Border Background="{DynamicResource Brush.Sunken}"
+                    CornerRadius="{StaticResource Radius.Small}"
+                    Padding="12,9"
+                    Margin="0,12,0,0">
+              <TextBlock Text="{Binding WallpaperDescription}"
+                         Style="{StaticResource Text.Mono}" />
+            </Border>
+
+            <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+              <Button Content="{loc:Loc SettingsWallpaperChoose}"
+                      Command="{Binding ChooseWallpaperCommand}"
+                      Style="{StaticResource Button.Secondary}" />
+              <Button Content="{loc:Loc SettingsWallpaperUseCurrent}"
+                      Command="{Binding UseCurrentWallpaperCommand}"
+                      Style="{StaticResource Button.Ghost}"
+                      Margin="10,0,0,0"
+                      IsEnabled="{Binding HasMeetingWallpaper}" />
+            </StackPanel>
+          </StackPanel>
+        </Border>
+
+        <!-- ============================ Options ============================ -->
+        <Border Style="{StaticResource Card}" Margin="0,14,0,0">
+          <StackPanel IsEnabled="{Binding CanEditQuickAccess}">
+            <TextBlock Text="{loc:Loc SettingsTransitionTitle}" Style="{StaticResource Text.Heading}" />
+            <CheckBox Content="{loc:Loc SettingsLiveSwitch}"
+                      IsChecked="{Binding UseLiveDesktopSwitching, Mode=TwoWay}"
+                      Style="{StaticResource CheckBox.Themed}" Margin="0,16,0,0" />
+            <TextBlock Text="{loc:Loc SettingsLiveSwitchHint}"
+                       Style="{StaticResource Text.Caption}" Margin="22,6,0,0" />
+          </StackPanel>
+        </Border>
+        <Border Style="{StaticResource Card}" Margin="0,14,0,0">
+          <StackPanel>
+            <CheckBox Content="{loc:Loc SettingsCapturePreview}"
+                      IsChecked="{Binding CapturePreview, Mode=TwoWay}"
+                      Style="{StaticResource CheckBox.Themed}"
+                      IsEnabled="{Binding CanEditMeetingDesktopPath}" />
+            <TextBlock Text="{loc:Loc SettingsCapturePreviewHint}"
+                       Style="{StaticResource Text.Caption}"
+                       Margin="22,6,0,0" />
+            <TextBlock Text="{loc:Loc SettingsSnapshotRetention}" Style="{StaticResource Text.Body}" Margin="0,18,0,8" />
+            <ComboBox SelectedIndex="{Binding SelectedSnapshotRetentionIndex, Mode=TwoWay}"
+                      IsEnabled="{Binding CanEditQuickAccess}" HorizontalAlignment="Left" MinWidth="180">
+              <ComboBoxItem Content="{loc:Loc SnapshotRetentionNever}" />
+              <ComboBoxItem Content="{loc:Loc SnapshotRetention7}" />
+              <ComboBoxItem Content="{loc:Loc SnapshotRetention15}" />
+              <ComboBoxItem Content="{loc:Loc SnapshotRetention30}" />
+            </ComboBox>
+            <TextBlock Text="{loc:Loc SettingsSnapshotRetentionHint}" Style="{StaticResource Text.Caption}" Margin="0,8,0,0" />
+          </StackPanel>
+        </Border>
+
+        <Border Style="{StaticResource Card}" Margin="0,14,0,0">
+          <StackPanel>
+            <TextBlock Text="{loc:Loc ProfilesTitle}" Style="{StaticResource Text.Heading}"/>
+            <TextBlock Text="{loc:Loc ProfilesHint}" Style="{StaticResource Text.Caption}" Margin="0,8,0,14"/>
+            <ComboBox ItemsSource="{Binding Profiles}" SelectedItem="{Binding SelectedProfile}" DisplayMemberPath="Name" IsEnabled="{Binding CanEditMeetingDesktopPath}"/>
+            <Button Content="{loc:Loc ProfileApply}" Command="{Binding ApplyProfileCommand}" Style="{StaticResource Button.Secondary}" HorizontalAlignment="Left" Margin="0,12,0,16" IsEnabled="{Binding CanEditMeetingDesktopPath}"/>
+            <TextBox Text="{Binding ProfileName, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBox.Themed}" AutomationProperties.Name="{loc:Loc ProfileName}" IsEnabled="{Binding CanEditMeetingDesktopPath}"/>
+            <Button Content="{loc:Loc ProfileSave}" Command="{Binding SaveProfileCommand}" Style="{StaticResource Button.Secondary}" HorizontalAlignment="Left" Margin="0,12,0,0" IsEnabled="{Binding CanEditMeetingDesktopPath}"/>
+          </StackPanel>
+        </Border>
+        <Border Style="{StaticResource Card}" Margin="0,14,0,0">
+          <StackPanel>
+            <TextBlock Text="{Binding RecoveryExportTitle}" Style="{StaticResource Text.Heading}" />
+            <TextBlock Text="{Binding RecoveryExportHint}" Style="{StaticResource Text.Caption}"
+                       TextWrapping="Wrap" Margin="0,8,0,0" />
+            <Button Content="{Binding RecoveryExportButton}" Command="{Binding RecoveryExportCommand}"
+                    Style="{StaticResource Button.Secondary}" HorizontalAlignment="Left" Margin="0,12,0,0" />
+            <TextBlock Text="{Binding RecoveryExportStatus}" Style="{StaticResource Text.Caption}"
+                       TextWrapping="Wrap" Margin="0,8,0,0" AutomationProperties.LiveSetting="Polite" />
+          </StackPanel>
+        </Border>
+        <!-- ========================== Data folder ========================== -->
+        <Border Style="{StaticResource Card}" Margin="0,14,0,0">
+          <StackPanel>
+            <TextBlock Text="{loc:Loc SettingsDataFolder}" Style="{StaticResource Text.Heading}" />
+
+            <!-- Read-only: where this lives is decided at startup by the command
+                 line, the environment or a portable marker, and none of those is
+                 something a settings page can change under a running process. -->
+            <TextBlock Text="{Binding DataDirectory}"
+                       Style="{StaticResource Text.Mono}"
+                       Margin="0,8,0,0" />
+
+            <Border Style="{StaticResource StatusPill}"
+                    Margin="0,12,0,0"
+                    Visibility="{Binding IsPortable, Converter={StaticResource BoolToVisibility}}">
+              <TextBlock Text="{loc:Loc SettingsPortable}"
+                         FontSize="12"
+                         Foreground="{DynamicResource Brush.Text.OnLight}" />
+            </Border>
+          </StackPanel>
+        </Border>
+      </StackPanel>
+    </ScrollViewer>
+
+    <!-- ============================ Action ============================ -->
+    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,18,0,0">
+      <Button Content="{loc:Loc SettingsSaveOtherOptions}"
+              Command="{Binding SaveCommand}"
+              Style="{StaticResource Button.Primary}"
+              MinWidth="180"
+              Padding="22,11" />
+    </StackPanel>
+  </Grid>
+</UserControl>

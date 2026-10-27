@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9AE0F0EC-8593-4D0E-92A8-C07C9B97C33E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingDesktop.Core", "src\MeetingDesktop.Core\MeetingDesktop.Core.csproj", "{532FA307-5BB7-44BE-A557-16E3D6C36958}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingDesktop.App", "src\MeetingDesktop.App\MeetingDesktop.App.csproj", "{B0C5468C-F7E9-40A9-937B-FEC9E0EA162A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A2C1E5FE-381E-4340-8313-41DA0F5C7159}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingDesktop.Core.Tests", "tests\MeetingDesktop.Core.Tests\MeetingDesktop.Core.Tests.csproj", "{93354FFC-67EA-46FA-82C6-F3D89621BDC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingDesktop.App.Tests", "tests\MeetingDesktop.App.Tests\MeetingDesktop.App.Tests.csproj", "{0DC8D45A-39FB-452F-8B7A-3B7B4F277810}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{532FA307-5BB7-44BE-A557-16E3D6C36958}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{532FA307-5BB7-44BE-A557-16E3D6C36958}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{532FA307-5BB7-44BE-A557-16E3D6C36958}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{532FA307-5BB7-44BE-A557-16E3D6C36958}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0C5468C-F7E9-40A9-937B-FEC9E0EA162A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0C5468C-F7E9-40A9-937B-FEC9E0EA162A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0C5468C-F7E9-40A9-937B-FEC9E0EA162A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0C5468C-F7E9-40A9-937B-FEC9E0EA162A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93354FFC-67EA-46FA-82C6-F3D89621BDC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93354FFC-67EA-46FA-82C6-F3D89621BDC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93354FFC-67EA-46FA-82C6-F3D89621BDC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93354FFC-67EA-46FA-82C6-F3D89621BDC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DC8D45A-39FB-452F-8B7A-3B7B4F277810}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DC8D45A-39FB-452F-8B7A-3B7B4F277810}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DC8D45A-39FB-452F-8B7A-3B7B4F277810}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DC8D45A-39FB-452F-8B7A-3B7B4F277810}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{532FA307-5BB7-44BE-A557-16E3D6C36958} = {9AE0F0EC-8593-4D0E-92A8-C07C9B97C33E}
+		{B0C5468C-F7E9-40A9-937B-FEC9E0EA162A} = {9AE0F0EC-8593-4D0E-92A8-C07C9B97C33E}
+		{93354FFC-67EA-46FA-82C6-F3D89621BDC1} = {A2C1E5FE-381E-4340-8313-41DA0F5C7159}
+		{0DC8D45A-39FB-452F-8B7A-3B7B4F277810} = {A2C1E5FE-381E-4340-8313-41DA0F5C7159}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    Simplified Chinese UI strings.
+
+    The file is named zh-Hans, not zh-CN. .NET's resource fallback chain is
+    zh-CN -> zh-Hans -> zh -> neutral, so a file named for zh-CN would match
+    only that exact culture and miss zh-SG, zh-MO and any zh-Hans-* variant.
+    One file named for the script covers them all. Traditional Chinese falls
+    through to English, which is correct until someone offers a translation.
+
+    Keys must match Strings.resx exactly - a unit test enforces it.
+  -->
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+
+  <!-- ============ Application ============ -->
+  <data name="AppTitle" xml:space="preserve"><value>会议桌面</value></data>
+  <data name="AppTagline" xml:space="preserve"><value>切换桌面 · 保存布局</value></data>
+
+  <!-- ============ Navigation ============ -->
+  <data name="NavPrepare" xml:space="preserve"><value>桌面切换</value></data>
+  <data name="NavRestore" xml:space="preserve"><value>恢复与修复</value></data>
+  <data name="NavLayouts" xml:space="preserve"><value>布局</value></data>
+  <data name="NavSettings" xml:space="preserve"><value>设置</value></data>
+  <data name="NavDiagnostics" xml:space="preserve"><value>诊断</value></data>
+
+  <!-- ============ Session state ============ -->
+  <data name="StateNormal" xml:space="preserve"><value>桌面正常</value></data>
+  <data name="StateSwapped" xml:space="preserve"><value>备用桌面已启用</value></data>
+  <data name="StateAdopted" xml:space="preserve"><value>检测到已切换的桌面，但不是本程序所为</value></data>
+  <data name="StateInconsistent" xml:space="preserve"><value>需要核对桌面</value></data>
+
+  <data name="StateNormalHint" xml:space="preserve"><value>现在显示的是你的真实桌面。点击清屏会把它换成空文件夹。</value></data>
+  <data name="StateSwappedHint" xml:space="preserve"><value>现在往桌面存的文件都会进到备用文件夹。切回来就能回到你自己的桌面，图标位置一并恢复。</value></data>
+  <data name="StateAdoptedHint" xml:space="preserve"><value>这看起来是旧版脚本切换后留下的状态。接管它，还原时才能把东西正确放回。</value></data>
+  <data name="StateInconsistentHint" xml:space="preserve"><value>当前桌面位置与切换记录未能确认。请使用页面上方的处理入口。</value></data>
+
+  <!-- ============ Prepare ============ -->
+  <data name="PrepareTitle" xml:space="preserve"><value>切换到备用桌面</value></data>
+  <data name="PrepareDescription" xml:space="preserve"><value>把桌面指向另一个文件夹，并隐藏公共桌面上的快捷方式，让屏幕保持干净——无论是做报告、录屏，还是把电脑交给别人用。你自己的文件不会被移动或删除。</value></data>
+  <data name="PrepareAction" xml:space="preserve"><value>切换到备用桌面</value></data>
+  <data name="PreparePreviewLeaving" xml:space="preserve"><value>你即将离开的桌面</value></data>
+  <data name="PreparePreviewActive" xml:space="preserve"><value>会议桌面当前已启用</value></data>
+  <data name="PrepareConfirmTitle" xml:space="preserve"><value>确定要切到备用桌面吗？</value></data>
+  <data name="PrepareConfirmBody" xml:space="preserve"><value>会先保存你的图标布局。资源管理器将重启，已打开的文件夹窗口会被关闭。
+
+继续？</value></data>
+
+  <!-- ============ Restore ============ -->
+  <data name="RestoreTitle" xml:space="preserve"><value>恢复与修复</value></data>
+  <data name="RestoreDescription" xml:space="preserve"><value>切换中断或桌面状态异常时，在这里检查恢复记录并修复。日常往返请在「桌面切换」页完成。</value></data>
+  <data name="RestoreAction" xml:space="preserve"><value>还原我的桌面</value></data>
+  <data name="RestorePreviewReturning" xml:space="preserve"><value>你即将回到的桌面</value></data>
+  <data name="RestoreOriginalDesktopHeading" xml:space="preserve"><value>你自己的桌面文件夹</value></data>
+  <data name="RestoreSnapshotHeading" xml:space="preserve"><value>切换前保存的图标布局</value></data>
+  <data name="RestoreNoSnapshot" xml:space="preserve"><value>没有找到布局快照。图标可能会被重排成默认布局。</value></data>
+  <data name="RestoreTopologyChanged" xml:space="preserve"><value>切换期间显示器配置变了。保存的坐标可能不再适用；图标仍会按名字匹配。</value></data>
+
+  <data name="RestoreStrayFiles" xml:space="preserve"><value>备用桌面上还留着 {0} 个文件，没有被删除。</value></data>
+
+  <!-- ============ Layouts ============ -->
+  <data name="LayoutsTitle" xml:space="preserve"><value>图标布局</value></data>
+  <data name="LayoutsDescription" xml:space="preserve"><value>不切换桌面，单独保存和恢复图标排列。图标被别的原因搞乱时也能用。</value></data>
+  <data name="LayoutsSaveCurrent" xml:space="preserve"><value>保存当前布局</value></data>
+  <data name="LayoutsRestoreSelected" xml:space="preserve"><value>恢复选中布局</value></data>
+  <data name="LayoutsDeleteSelected" xml:space="preserve"><value>删除选中</value></data>
+  <data name="LayoutsRefresh" xml:space="preserve"><value>刷新</value></data>
+  <data name="LayoutsEmpty" xml:space="preserve"><value>还没有保存过布局。</value></data>
+  <data name="LayoutsNameTitle" xml:space="preserve"><value>给这个布局起个名字</value></data>
+  <data name="LayoutsNamePrompt" xml:space="preserve"><value>布局名称：</value></data>
+  <data name="LayoutsSaved" xml:space="preserve"><value>已保存 {0} 个图标为「{1}」。</value></data>
+  <data name="LayoutsRestored" xml:space="preserve"><value>已恢复 {1} 个图标中的 {0} 个。</value></data>
+  <data name="LayoutsDeleteConfirm" xml:space="preserve"><value>删除布局「{0}」？</value></data>
+  <data name="LayoutsCounts" xml:space="preserve"><value>{0} 个图标</value></data>
+  <data name="LayoutsAutomaticTag" xml:space="preserve"><value>自动</value></data>
+
+  <!-- ============ Settings ============ -->
+  <data name="SettingsTitle" xml:space="preserve"><value>设置</value></data>
+  <data name="SettingsLanguage" xml:space="preserve"><value>界面语言</value></data>
+  <data name="SettingsLanguageAuto" xml:space="preserve"><value>跟随系统</value></data>
+  <data name="SettingsLanguageEnglish" xml:space="preserve"><value>English</value></data>
+  <data name="SettingsLanguageChinese" xml:space="preserve"><value>简体中文</value></data>
+  <data name="SettingsMeetingDesktopPath" xml:space="preserve"><value>备用桌面文件夹</value></data>
+  <data name="SettingsMeetingDesktopPathHint" xml:space="preserve"><value>备用桌面放在哪。它启用期间，往桌面存的文件都会落到这里。</value></data>
+  <data name="SettingsEffectivePath" xml:space="preserve"><value>当前生效的路径</value></data>
+  <data name="SettingsBrowse" xml:space="preserve"><value>浏览…</value></data>
+  <data name="SettingsUseDefault" xml:space="preserve"><value>使用默认位置</value></data>
+  <data name="SettingsWallpaper" xml:space="preserve"><value>备用桌面的壁纸</value></data>
+  <data name="SettingsWallpaperHint" xml:space="preserve"><value>备用桌面启用期间显示。不设置就保持你现在的壁纸不变。</value></data>
+  <data name="SettingsWallpaperUseCurrent" xml:space="preserve"><value>保持当前壁纸</value></data>
+  <data name="SettingsWallpaperCurrent" xml:space="preserve"><value>使用你当前的壁纸</value></data>
+  <data name="SettingsWallpaperChoose" xml:space="preserve"><value>选择图片…</value></data>
+  <data name="SettingsWallpaperChooseTitle" xml:space="preserve"><value>为会议桌面选一张壁纸</value></data>
+  <data name="SettingsWallpaperImages" xml:space="preserve"><value>图片</value></data>
+  <data name="SettingsWallpaperCopyFailed" xml:space="preserve"><value>这张图片无法复制，因此没有设置。</value></data>
+  <data name="SettingsCapturePreview" xml:space="preserve"><value>切换前抓一张桌面快照</value></data>
+  <data name="SettingsCapturePreviewHint" xml:space="preserve"><value>仅兼容模式拍摄。免重启模式为提速与保持壁纸播放跳过截图，仍保存图标布局用于返回。</value></data>
+  <data name="SettingsDataFolder" xml:space="preserve"><value>数据文件夹</value></data>
+  <data name="SettingsPortable" xml:space="preserve"><value>便携模式</value></data>
+  <data name="SettingsSaved" xml:space="preserve"><value>设置已保存。</value></data>
+  <data name="SettingsSaveFailed" xml:space="preserve"><value>设置无法保存：{0}</value></data>
+  <data name="SettingsCannotChangeWhileSwapped" xml:space="preserve"><value>桌面处于切换状态时不能改会议桌面位置。请先还原。</value></data>
+
+  <!-- ============ Diagnostics ============ -->
+  <data name="DiagnosticsTitle" xml:space="preserve"><value>诊断</value></data>
+  <data name="DiagnosticsDescription" xml:space="preserve"><value>本程序在你机器上检测到了什么、为什么这么判断。反馈问题时请附上这里的内容。</value></data>
+  <data name="DiagnosticsCopy" xml:space="preserve"><value>复制到剪贴板</value></data>
+  <data name="DiagnosticsCopied" xml:space="preserve"><value>已复制。</value></data>
+  <data name="DiagnosticsDetectedDesktop" xml:space="preserve"><value>识别到的桌面文件夹</value></data>
+  <data name="DiagnosticsCandidates" xml:space="preserve"><value>桌面路径的读取来源</value></data>
+  <data name="DiagnosticsSession" xml:space="preserve"><value>会话</value></data>
+  <data name="DiagnosticsWindows" xml:space="preserve"><value>找到的桌面窗口</value></data>
+  <data name="DiagnosticsDataFolder" xml:space="preserve"><value>数据文件夹</value></data>
+  <data name="DiagnosticsPaths" xml:space="preserve"><value>路径</value></data>
+  <data name="DiagnosticsSourceKnownFolder" xml:space="preserve"><value>Shell 已知文件夹</value></data>
+  <data name="DiagnosticsSourceUserShellFolders" xml:space="preserve"><value>User Shell Folders（注册表）</value></data>
+  <data name="DiagnosticsSourceShellFolders" xml:space="preserve"><value>Shell Folders（注册表，已废弃）</value></data>
+  <data name="DiagnosticsSourceUserProfile" xml:space="preserve"><value>用户配置文件默认</value></data>
+  <data name="DiagnosticsExists" xml:space="preserve"><value>存在</value></data>
+  <data name="DiagnosticsMissing" xml:space="preserve"><value>缺失</value></data>
+  <data name="DiagnosticsOneDrive" xml:space="preserve"><value>已被重定向到 OneDrive</value></data>
+  <data name="DiagnosticsInSync" xml:space="preserve"><value>各来源一致</value></data>
+  <data name="DiagnosticsOutOfSync" xml:space="preserve"><value>各来源不一致——不做猜测</value></data>
+
+  <!-- ============ Progress ============ -->
+  <data name="ProgressDetectingDesktopPath" xml:space="preserve"><value>正在查找你的桌面文件夹…</value></data>
+  <data name="ProgressReadingCurrentLayout" xml:space="preserve"><value>正在读取当前图标布局…</value></data>
+  <data name="ProgressCapturingPreview" xml:space="preserve"><value>正在抓取预览…</value></data>
+  <data name="ProgressWritingLayoutSnapshot" xml:space="preserve"><value>正在保存图标布局…</value></data>
+  <data name="ProgressRedirectingDesktop" xml:space="preserve"><value>正在切换桌面…</value></data>
+  <data name="ProgressMovingPublicShortcuts" xml:space="preserve"><value>正在移动公共桌面快捷方式…</value></data>
+  <data name="ProgressRestoringPublicShortcuts" xml:space="preserve"><value>正在放回公共桌面快捷方式…</value></data>
+  <data name="ProgressApplyingWallpaper" xml:space="preserve"><value>正在应用会议壁纸…</value></data>
+  <data name="ProgressRestoringWallpaper" xml:space="preserve"><value>正在恢复你的壁纸…</value></data>
+  <data name="ProgressRestartingExplorer" xml:space="preserve"><value>正在重启资源管理器…</value></data>
+  <data name="ProgressWritingShellBagBlob" xml:space="preserve"><value>正在写回原生布局数据…</value></data>
+  <data name="ProgressApplyingLayout" xml:space="preserve"><value>正在摆回图标…</value></data>
+  <data name="ProgressVerifyingLayout" xml:space="preserve"><value>正在逐个核对…</value></data>
+  <data name="ProgressDone" xml:space="preserve"><value>完成。</value></data>
+
+  <!-- ============ Results ============ -->
+  <data name="ResultPrepareDone" xml:space="preserve"><value>就绪。已保存 {0} 个图标的位置；桌面现指向 {1}。</value></data>
+  <data name="ResultRestoreExact" xml:space="preserve"><value>还原完成。{0} 个图标全部回到原位。</value></data>
+  <data name="ResultRestoreApproximate" xml:space="preserve"><value>已还原，但 {1} 个图标中有 {0} 个不在原位。</value></data>
+  <data name="ResultRestoreNotFound" xml:space="preserve"><value>快照里有 {0} 个图标已不在桌面上，已跳过。</value></data>
+  <data name="ResultParkingDegraded" xml:space="preserve"><value>摆放前未能完成腾挪，部分位置可能有偏移。</value></data>
+
+  <!-- ============ Errors ============ -->
+  <data name="ErrorDesktopViewNotFound" xml:space="preserve"><value>找不到桌面图标列表。请确认资源管理器正在运行，且桌面不处于平板模式等特殊状态。</value></data>
+  <data name="ErrorExplorerNotRunning" xml:space="preserve"><value>资源管理器没有运行，没有桌面可以修改。</value></data>
+  <data name="ErrorAccessDenied" xml:space="preserve"><value>资源管理器以比本程序更高的权限运行。这通常意味着上一次是从提权进程启动的它。请注销后重新登录，或正常重启资源管理器，再试一次。</value></data>
+  <data name="ErrorRemoteAllocationFailed" xml:space="preserve"><value>无法在资源管理器中分配工作内存。请重试；若持续失败，请重启资源管理器。</value></data>
+  <data name="ErrorRemoteMemoryAccessFailed" xml:space="preserve"><value>无法读写资源管理器中的图标数据。请重试；若持续失败，请重启资源管理器。</value></data>
+  <data name="ErrorListViewMessageTimeout" xml:space="preserve"><value>移动图标时资源管理器停止响应。没有做任何改动。</value></data>
+  <data name="ErrorExplorerHigherIntegrity" xml:space="preserve"><value>资源管理器以比本程序更高的权限运行，图标改动会被静默忽略。请注销后重新登录。</value></data>
+  <data name="ErrorRestoreNotPossible" xml:space="preserve"><value>无法还原桌面：没有可用的切换记录，或还原所需的文件夹已丢失。请先查看「诊断」再试。</value></data>
+  <data name="ErrorUnexpected" xml:space="preserve"><value>出错了。</value></data>
+  <data name="ErrorElevationCancelled" xml:space="preserve"><value>管理员授权被取消，没有做任何改动。</value></data>
+  <data name="ErrorNotElevated" xml:space="preserve"><value>移动公共桌面快捷方式需要管理员权限，授权被拒绝。</value></data>
+  <data name="ErrorDetails" xml:space="preserve"><value>详细信息</value></data>
+
+  <!-- ============ Path validation ============ -->
+  <data name="PathIssueNotAbsolute" xml:space="preserve"><value>必须是完整路径，例如 D:\MeetingDesktop\Desktop。</value></data>
+  <data name="PathIssueCannotCreate" xml:space="preserve"><value>无法创建该文件夹。</value></data>
+  <data name="PathIssueNotWritable" xml:space="preserve"><value>该文件夹不可写。</value></data>
+  <data name="PathIssueNotFixedDisk" xml:space="preserve"><value>这是可移动磁盘或网络位置。下次登录时若它不在，你的桌面将指向一个不存在的文件夹。建议改用本地固定磁盘。</value></data>
+  <data name="PathIssueOverlapsRealDesktop" xml:space="preserve"><value>这就是你的真实桌面，或在其内部。请换一个文件夹。</value></data>
+  <data name="PathIssueProtectedLocation" xml:space="preserve"><value>该位置受 Windows 保护。请换一个文件夹。</value></data>
+
+  <!-- ============ Common ============ -->
+  <data name="CommonAllFiles" xml:space="preserve"><value>所有文件</value></data>
+  <data name="CommonClose" xml:space="preserve"><value>关闭</value></data>
+  <data name="CommonCancel" xml:space="preserve"><value>取消</value></data>
+  <data name="CommonOk" xml:space="preserve"><value>确定</value></data>
+  <data name="CommonSave" xml:space="preserve"><value>保存</value></data>
+  <data name="CommonRefresh" xml:space="preserve"><value>刷新</value></data>
+  <data name="CommonWorking" xml:space="preserve"><value>处理中…</value></data>
+  <data name="CommonNoPreview" xml:space="preserve"><value>暂无预览</value></data>
+  <data name="CommonNotAvailable" xml:space="preserve"><value>不可用</value></data>
+  <data name="CommonYes" xml:space="preserve"><value>是</value></data>
+  <data name="CommonNo" xml:space="preserve"><value>否</value></data>
+
+  <!-- ============ Legacy migration ============ -->
+  <data name="LegacyDetectedTitle" xml:space="preserve"><value>检测到旧版安装</value></data>
+  <data name="LegacyDetectedBody" xml:space="preserve"><value>旧版本把数据留在了另一个文件夹。要导入它保存的图标布局和记录的桌面路径吗？</value></data>
+  <data name="LegacyImport" xml:space="preserve"><value>导入</value></data>
+  <data name="LegacySkip" xml:space="preserve"><value>暂不</value></data>
+  <data name="LegacyImported" xml:space="preserve"><value>已从旧版安装导入 {0} 个图标位置。</value></data>
+
+  <data name="SettingsTransitionTitle" xml:space="preserve"><value>桌面切换效果</value></data>
+  <data name="SettingsSmoothTransition" xml:space="preserve"><value>切换提示平滑过渡</value></data>
+  <data name="SettingsSmoothTransitionHint" xml:space="preserve"><value>提示淡入淡出；兼容模式同时使用桌面过渡，免重启模式保持动态壁纸可见。</value></data>
+  <data name="SettingsLiveSwitch" xml:space="preserve"><value>响应优先切换（推荐）</value></data>
+  <data name="SettingsLiveSwitchHint" xml:space="preserve"><value>通过桌面视图切换，不重启资源管理器。关闭后使用兼容模式，会关闭资源管理器窗口。设置自动保存，从下一次切换开始生效。</value></data>
+  <data name="PrepareConfirmLiveBody" xml:space="preserve"><value>保存图标布局并切换到会议桌面？实验模式会保持资源管理器运行。如果无法确认新桌面已显示，程序会尝试恢复原桌面。</value></data>
+  <data name="ProgressRefreshingDesktop" xml:space="preserve"><value>正在等待目标桌面显示…</value></data>
+  <data name="ErrorRestoreRecordKept" xml:space="preserve"><value>恢复尚未完成，恢复记录已保留。请检查桌面后重试恢复。</value></data>
+  <data name="RecoveryDetailTitle" xml:space="preserve"><value>恢复结果</value></data>
+  <data name="RecoveryDetailCounts" xml:space="preserve"><value>计划恢复：{0} · 已放置：{1} · 缺失：{2} · 位置偏差：{3}</value></data>
+  <data name="RecoveryDetailNoLayout" xml:space="preserve"><value>未应用已保存的布局，无法提供图标恢复数量。</value></data>
+  <data name="RecoveryDetailTopologyChanged" xml:space="preserve"><value>显示器布局已变化，请检查图标位置。</value></data>
+  <data name="RecoveryDetailTopologySame" xml:space="preserve"><value>未报告显示器布局变化。</value></data>
+  <data name="RecoveryDetailMissing" xml:space="preserve"><value>缺失的图标</value></data>
+  <data name="RecoveryDetailMoved" xml:space="preserve"><value>位置偏差的图标（保存坐标 → 实际坐标）</value></data>
+  <data name="RecoveryDetailLeftovers" xml:space="preserve"><value>会议桌面文件夹中剩余项目：{0}。文件保持原样。</value></data>
+  <data name="RecoveryDetailOpenFolder" xml:space="preserve"><value>打开会议桌面文件夹</value></data>
+  <data name="RecoveryDetailFolderUnavailable" xml:space="preserve"><value>无法打开会议桌面文件夹。</value></data>
+  <data name="DiagnosticExportTitle" xml:space="preserve"><value>导出诊断</value></data>
+  <data name="DiagnosticExportFilter" xml:space="preserve"><value>文本报告 (*.txt)|*.txt</value></data>
+  <data name="DiagnosticExportSaved" xml:space="preserve"><value>诊断报告已导出。</value></data>
+  <data name="DiagnosticExportFailed" xml:space="preserve"><value>无法导出诊断报告，请选择可写入的文件夹后重试。</value></data>
+  <data name="DiagnosticExportPreview" xml:space="preserve"><value>下方为导出预览。复制和导出均使用此文本，绝不包含截图。</value></data>
+  <data name="DiagnosticExportRedact" xml:space="preserve"><value>隐藏个人路径（推荐）</value></data>
+  <data name="DiagnosticExportAction" xml:space="preserve"><value>导出报告…</value></data>
+  <data name="PrepareModernRoute" xml:space="preserve"><value>切换到下一张桌面</value></data>
+  <data name="PrepareModernOpenFolder" xml:space="preserve"><value>打开文件夹</value></data>
+  <data name="PrepareModernTargetContents" xml:space="preserve"><value>备用桌面里有什么？</value></data>
+  <data name="PrepareModernSimulation" xml:space="preserve"><value>文件夹内容预览，并非切换后的实际截图；公共桌面残留项目仍可能显示。</value></data>
+  <data name="PrepareModernResidual" xml:space="preserve"><value>仍会显示的公共桌面项目：</value></data>
+<data name="ProfilesTitle" xml:space="preserve"><value>桌面配置</value></data>
+<data name="ProfilesHint" xml:space="preserve"><value>为会议、录屏或工作分别保存文件夹和壁纸。应用配置只保存设置，不立即切换桌面。</value></data>
+<data name="ProfileName" xml:space="preserve"><value>新配置名称</value></data>
+<data name="ProfileSave" xml:space="preserve"><value>保存为新配置</value></data>
+<data name="ProfileApply" xml:space="preserve"><value>应用所选配置</value></data>
+<data name="ProfileDuplicate" xml:space="preserve"><value>该名称已存在，请使用新名称以保留两个版本。</value></data>
+  <data name="RecoveryDetailLegacySelect" xml:space="preserve"><value>选择旧脚本恢复记录…</value></data>
+  <data name="RecoveryDetailLegacyHint" xml:space="preserve"><value>使用过旧脚本？选择 original_desktop_path.txt 以启用恢复。无法恢复原始图标布局。</value></data>
+  <data name="RecoveryDetailLegacyImported" xml:space="preserve"><value>旧脚本恢复记录已导入。请先检查原始文件夹，再执行恢复；记录不包含原始布局。</value></data>
+  <data name="RecoveryDetailLegacyInvalid" xml:space="preserve"><value>导入失败。请选择有效记录：原始文件夹须为已存在的绝对路径，且不同于当前桌面。现有恢复记录不会被覆盖。</value></data>
+<data name="LayoutHistorySchematic" xml:space="preserve"><value>图标布局示意图（非桌面截图）</value></data>
+<data name="RecoveryDetailLegacyConfirm" xml:space="preserve"><value>确认导入以下原桌面路径？旧记录没有原始图标布局，只能恢复文件夹。</value></data>
+<data name="RecoveryDetailConflicts" xml:space="preserve"><value>快捷方式重名：两份文件均已保留</value></data>
+<data name="PrepareModernPrimary" xml:space="preserve"><value>主屏</value></data>
+<data name="PrepareModernDisplayChanged" xml:space="preserve"><value>所选显示器已断开，预览已切换到主屏。</value></data>
+<data name="RecoveryDetailArchive" xml:space="preserve"><value>复制材料到归档文件夹…</value></data>
+<data name="RecoveryDetailArchiveDone" xml:space="preserve"><value>归档复制完成，原文件仍保留在备用桌面：</value></data>
+<data name="RecoveryDetailArchiveFailed" xml:space="preserve"><value>归档未能完成。原文件未改动，目标位置可能保留部分副本。</value></data>
+  <!-- Layout search and snapshot details -->
+  <data name="LayoutSearchLabel" xml:space="preserve"><value>搜索布局(_S)</value></data>
+  <data name="LayoutSearchAccessibleName" xml:space="preserve"><value>搜索已保存的布局与历史</value></data>
+  <data name="LayoutSearchHint" xml:space="preserve"><value>名称、日期（YYYY-MM-DD）或屏幕分辨率 · Ctrl+F 搜索，Esc 清除</value></data>
+  <data name="LayoutSearchClear" xml:space="preserve"><value>清除搜索</value></data>
+  <data name="LayoutSearchResults" xml:space="preserve"><value>共 {1} 个布局，显示 {0} 个</value></data>
+  <data name="LayoutSearchHistory" xml:space="preserve"><value>已保存的布局与历史</value></data>
+  <data name="LayoutSearchEmptyHint" xml:space="preserve"><value>保存当前图标排列后，即可在此查找和恢复。自动快照也会显示在这里。</value></data>
+  <data name="LayoutSearchNoMatches" xml:space="preserve"><value>没有匹配的布局</value></data>
+  <data name="LayoutSearchNoMatchesHint" xml:space="preserve"><value>换个名称、日期或屏幕分辨率试试，或清除搜索以查看所有布局。</value></data>
+  <data name="LayoutSearchLoading" xml:space="preserve"><value>正在加载已保存的布局…</value></data>
+  <data name="LayoutSearchDetails" xml:space="preserve"><value>快照详情</value></data>
+  <data name="LayoutSearchSelectHint" xml:space="preserve"><value>选择一个布局，查看保存时间和显示器排列。</value></data>
+  <data name="LayoutSearchUnreadable" xml:space="preserve"><value>无法读取此快照，暂不能恢复。仍可删除这条记录。</value></data>
+  <data name="LayoutSearchSavedAt" xml:space="preserve"><value>保存时间 · 本地时间</value></data>
+  <data name="LayoutSearchTopology" xml:space="preserve"><value>保存时的显示器排列</value></data>
+  <data name="LayoutSearchDisplayCount" xml:space="preserve"><value>{0} 个显示器</value></data>
+  <data name="LayoutSearchLocalTime" xml:space="preserve"><value>{0}（UTC{1}）</value></data>
+  <data name="LayoutSearchNoTopology" xml:space="preserve"><value>未记录显示器信息。</value></data>
+  <data name="LayoutSearchPrimary" xml:space="preserve"><value>主显示器</value></data>
+  <data name="LayoutSearchMonitorDetails" xml:space="preserve"><value>显示器 {0} · {1}{2}&#10;{3} × {4} 像素 · 位置（{5}, {6}）</value></data>
+<data name="PreflightTitle" xml:space="preserve"><value>切换前检查</value></data>
+<data name="PreflightContents" xml:space="preserve"><value>目标桌面有 {0} 个文件、{1} 个文件夹；顶层文件约 {2} MB；磁盘可用 {3} GB。</value></data>
+<data name="PreflightDynamicWallpaper" xml:space="preserve"><value>检测到动态壁纸。建议使用响应优先模式，并将备用壁纸设为「使用当前壁纸」；切换不会铺设静态遮罩。</value></data>
+<data name="RecoveryExportTitle" xml:space="preserve"><value>安全备份包</value></data>
+<data name="RecoveryExportButton" xml:space="preserve"><value>导出安全备份包</value></data>
+<data name="RecoveryExportHint" xml:space="preserve"><value>选择 ZIP 文件，保存当前图标布局与显示器拓扑、桌面路径原始值、壁纸状态及可读取的图片、公共桌面快捷方式和 SHA-256 校验清单。原始文件不会被移动或修改。这是用于手动恢复的备份，不是自动整机备份，尚不支持导入 ZIP。</value></data>
+<data name="RecoveryExportDialogTitle" xml:space="preserve"><value>导出安全备份包 — 选择 ZIP 保存位置</value></data>
+<data name="RecoveryExportZipFilter" xml:space="preserve"><value>ZIP 备份包 (*.zip)|*.zip</value></data>
+<data name="RecoveryExportRunning" xml:space="preserve"><value>正在创建安全备份包…</value></data>
+<data name="RecoveryExportSucceeded" xml:space="preserve"><value>安全备份包已保存：{0}</value></data>
+<data name="RecoveryExportPartial" xml:space="preserve"><value>安全备份包已保存，有 {0} 项警告：{1}。手动恢复前请查看 metadata.json。</value></data>
+<data name="RecoveryExportFailed" xml:space="preserve"><value>安全备份包未能保存：{0}</value></data>
+<data name="PreflightWallpaperBackupUnavailable" xml:space="preserve"><value>原壁纸图片未能备份，请保留图片源文件；若源文件失效，背景恢复可能失败，软件会保留恢复记录。</value></data>
+<data name="SettingsAppearance" xml:space="preserve"><value>外观</value></data>
+<data name="SettingsAppearanceHint" xml:space="preserve"><value>即时生效并自动保存。「跟随系统」会随 Windows 应用颜色模式自动切换。</value></data>
+<data name="ThemeSystem" xml:space="preserve"><value>跟随系统</value></data>
+<data name="ThemeLight" xml:space="preserve"><value>浅色 · 日间</value></data>
+<data name="ThemeDark" xml:space="preserve"><value>深色 · 夜间</value></data>
+<data name="ThemeSwitchToLight" xml:space="preserve"><value>切换到日间模式</value></data>
+<data name="ThemeSwitchToDark" xml:space="preserve"><value>切换到夜间模式</value></data>
+<data name="ErrorDesktopViewVerification" xml:space="preserve"><value>未能确认实际桌面视图。若从终端或其他软件启动，请关闭本窗口，改为从资源管理器双击软件启动，再重试。</value></data>
+<data name="DiagnosticsLaunchHint" xml:space="preserve"><value>隔离注册表可能读回新桌面路径，而资源管理器仍使用原路径。仅路径读回不能证明切换成功。切换桌面时请从资源管理器直接启动软件；本报告不能保证启动环境不存在注册表隔离。</value></data>
+<data name="StateOldRecord" xml:space="preserve"><value>旧记录待确认</value></data>
+<data name="StateOldRecordHint" xml:space="preserve"><value>桌面路径已回到原位置，仍有旧恢复记录。请使用页面上方的处理入口。</value></data>
+<data name="RecoveryReviewTitle" xml:space="preserve"><value>开始新的切换前，请先检查上次记录</value></data>
+<data name="RecoveryAlreadyHomeTitle" xml:space="preserve"><value>桌面路径已回到原位置，仍留有旧恢复记录</value></data>
+<data name="RecoveryAlreadyHomeMessage" xml:space="preserve"><value>旧记录保存于 {0}，包含 {1} 个图标。若你已手动整理好桌面，可保留当前桌面并归档旧记录；选择还原则会尝试使用那份旧排列。</value></data>
+<data name="RecoveryAlreadyHomePendingAssetsMessage" xml:space="preserve"><value>旧记录保存于 {0}，包含 {1} 个图标，并记载了壁纸变更。请先查看恢复内容，确认壁纸和公共快捷方式已恢复；暂不能仅归档记录。</value></data>
+<data name="RecoveryPendingMessage" xml:space="preserve"><value>软件还保留着上次切换的恢复记录，因此暂停新的切换。打开「桌面恢复」查看原桌面文件夹与保存的排列，再决定是否还原。</value></data>
+<data name="RecoveryUnreadableMessage" xml:space="preserve"><value>找到了一份无法读取的恢复记录，软件暂时不能开始新的切换。请查看诊断中的记录位置；记录仍被保留。</value></data>
+<data name="RecoveryUnknownMessage" xml:space="preserve"><value>尚未确认 Windows 当前使用哪个桌面文件夹。请查看诊断中的路径信息；没有可用恢复记录时不能要求你直接还原。</value></data>
+<data name="RecoveryReviewAction" xml:space="preserve"><value>查看桌面恢复</value></data>
+<data name="RecoveryDiagnosticsAction" xml:space="preserve"><value>查看诊断</value></data>
+<data name="RecoveryArchiveAction" xml:space="preserve"><value>保留当前桌面，归档旧记录</value></data>
+<data name="RecoveryArchiveConfirm" xml:space="preserve"><value>保留当前桌面并归档旧记录？&#10;&#10;软件会先核对实际桌面并保存当前图标排列，再将旧记录归档到恢复目录。不会应用旧排列、修改桌面路径或壁纸，也不会移动桌面文件。&#10;&#10;若仍有公共快捷方式或壁纸待恢复，软件会停止归档并保留原记录。</value></data>
+<data name="RecoveryArchiveSucceeded" xml:space="preserve"><value>已保存当前 {0} 个图标的排列并归档旧记录，可以重新切换桌面。归档位置：{1}</value></data>
+<data name="RecoveryArchiveViewUnverified" xml:space="preserve"><value>未能确认实际桌面已回到原文件夹，旧记录仍被保留。请查看诊断，或从资源管理器正常启动后重试。</value></data>
+<data name="RecoveryArchiveFailed" xml:space="preserve"><value>旧记录未能归档。请检查桌面路径、公共快捷方式或壁纸是否仍需恢复，以及恢复目录是否可写。</value></data>
+<data name="LayoutsRestorePartial" xml:space="preserve"><value>已放置 {0}/{1} 个图标；{2} 个位置有偏差，{3} 个未找到。</value></data>
+<data name="QuickSettingsTitle" xml:space="preserve"><value>快捷切换桌面</value></data>
+<data name="QuickSettingsHint" xml:space="preserve"><value>可用桌面鼠标手势或全局快捷键切换。托盘双击的动作可在右键菜单中选择；软件需保持运行。</value></data>
+<data name="QuickMouseLabel" xml:space="preserve"><value>桌面鼠标手势</value></data>
+<data name="QuickMouseMiddle" xml:space="preserve"><value>桌面双击中键（图标上也可触发）</value></data>
+<data name="QuickMouseLeftBlank" xml:space="preserve"><value>桌面空白处双击左键</value></data>
+<data name="QuickHotkeyLabel" xml:space="preserve"><value>全局快捷键</value></data>
+<data name="QuickDisabled" xml:space="preserve"><value>关闭</value></data>
+<data name="QuickConfirm" xml:space="preserve"><value>切换到会议桌面前先确认（可选）</value></data>
+<data name="QuickCloseToTray" xml:space="preserve"><value>关闭窗口时继续在系统托盘运行</value></data>
+<data name="QuickSafetyHint" xml:space="preserve"><value>每次切换只触发一次，处理中重复触发不会排队。响应优先模式保留资源管理器；需要处理时可打开「恢复与修复」。</value></data>
+<data name="QuickSave" xml:space="preserve"><value>保存快捷设置</value></data>
+<data name="QuickSettingsSaved" xml:space="preserve"><value>快捷设置已保存，请查看下方快捷键状态。</value></data>
+<data name="QuickHotkeyActive" xml:space="preserve"><value>快捷键已启用</value></data>
+<data name="QuickHotkeyConflict" xml:space="preserve"><value>快捷键被占用或注册失败，请更换组合（修改后自动保存）</value></data>
+<data name="QuickHotkeyDisabled" xml:space="preserve"><value>快捷键已关闭</value></data>
+<data name="QuickTrayActive" xml:space="preserve"><value>托盘图标可用</value></data>
+<data name="QuickTrayUnavailable" xml:space="preserve"><value>托盘暂不可用，窗口保持可访问</value></data>
+<data name="QuickMouseUnavailable" xml:space="preserve"><value>鼠标手势不可用，请使用快捷键或托盘</value></data>
+<data name="QuickTrayTip" xml:space="preserve"><value>会议桌面 · 双击切换桌面，右键打开菜单</value></data>
+<data name="QuickToggle" xml:space="preserve"><value>切换桌面 / 查看恢复详情</value></data>
+<data name="QuickOpen" xml:space="preserve"><value>打开会议桌面</value></data>
+<data name="QuickExit" xml:space="preserve"><value>退出软件</value></data>
+<data name="QuickSwitchFailed" xml:space="preserve"><value>快捷切换未执行，请在窗口中检查桌面识别和恢复详情。</value></data>
+<data name="StartupDataError" xml:space="preserve"><value>无法打开软件数据目录，软件已停止启动，未切换桌面。请检查目录权限，或通过 --data-dir 指定其他目录。&#10;&#10;{0}</value></data>
+<data name="QuickAutoSaveHint" xml:space="preserve"><value>修改后自动保存，并立即生效。</value></data>
+<data name="QuickAutoSaved" xml:space="preserve"><value>快捷设置已自动保存，请查看上方快捷键是否可用。</value></data>
+<data name="QuickAutoSaveFailed" xml:space="preserve"><value>自动保存失败，仍使用原来的设置。{0}</value></data>
+<data name="QuickAutoSaveBusy" xml:space="preserve"><value>操作进行中，仍使用原来的设置。</value></data>
+<data name="SettingsApplyFolder" xml:space="preserve"><value>应用目录</value></data>
+<data name="SettingsFolderReady" xml:space="preserve"><value>备用目录配置已生效，首页已同步。选择目录不会立即切换 Windows 桌面。</value></data>
+<data name="SettingsFolderPending" xml:space="preserve"><value>尚未保存。输入完成或离开设置时会自动保存有效路径，也可点击“应用目录”。</value></data>
+<data name="SettingsFolderSaveFailed" xml:space="preserve"><value>目录未保存，仍使用之前的目录。{0}</value></data>
+<data name="SettingsSaveOtherOptions" xml:space="preserve"><value>保存其他设置</value></data>
+<data name="QuickTrayDoubleClickOpen" xml:space="preserve"><value>双击：打开主界面</value></data>
+<data name="QuickTrayDoubleClickSwitch" xml:space="preserve"><value>双击：切换桌面</value></data>
+<data name="QuickTrayTipOpen" xml:space="preserve"><value>会议桌面 · 双击打开，右键设置</value></data>
+<data name="QuickTrayTipSwitch" xml:space="preserve"><value>会议桌面 · 双击切换，右键设置</value></data>
+<data name="SkinClassic" xml:space="preserve"><value>经典</value></data>
+<data name="SkinLiquid" xml:space="preserve"><value>液态玻璃</value></data>
+<data name="SkinSwitch" xml:space="preserve"><value>切换界面皮肤</value></data>
+<data name="SkinHint" xml:space="preserve"><value>左侧为经典皮肤，右侧为桌面背景液态玻璃。切换后自动保存。</value></data>
+<data name="PermissionRevoke" xml:space="preserve"><value>撤销授权</value></data>
+<data name="PermissionGrant" xml:space="preserve"><value>提前授权</value></data>
+<data name="PermissionGranting" xml:space="preserve"><value>正在申请授权…</value></data>
+<data name="PermissionReady" xml:space="preserve"><value>切换权限已就绪</value></data>
+<data name="PermissionMissing" xml:space="preserve"><value>尚未授权切换</value></data>
+<data name="PermissionNeededBeforeSwitch" xml:space="preserve"><value>请先打开软件，点击顶部“提前授权”。切换时不会临时弹出权限窗口。</value></data>
+<data name="PermissionDeclined" xml:space="preserve"><value>已取消授权</value></data>
+<data name="PermissionFailed" xml:space="preserve"><value>授权未完成，请重试</value></data>
+<data name="StartupEnabled" xml:space="preserve"><value>已为当前位置启用开机自启</value></data>
+<data name="StartupDisabled" xml:space="preserve"><value>开机自启已关闭</value></data>
+<data name="StartupRegistrationMismatch" xml:space="preserve"><value>Windows 启动项与当前位置不符。可在下方更新识别到的旧版本；无法识别的启动项会保留。</value></data>
+<data name="StartupUnavailable" xml:space="preserve"><value>无法读取 Windows 启动项</value></data>
+<data name="StartupSaveFailed" xml:space="preserve"><value>开机自启设置未保存。{0}</value></data>
+<data name="SwitchDuration" xml:space="preserve"><value>上次切换流程：{0} 秒</value></data>
+<data name="SettingsStartup" xml:space="preserve"><value>启动与权限</value></data>
+<data name="SettingsStartupToggle" xml:space="preserve"><value>开机时自动启动</value></data>
+<data name="SettingsStartupHint" xml:space="preserve"><value>默认关闭。开启后登录 Windows 时在托盘启动。移动软件位置后请重新开启此选项。</value></data>
+<data name="SettingsPermissionHint" xml:space="preserve"><value>切换前点击顶部“提前授权”，状态变为“切换权限已就绪”后即可使用。本次授权随软件退出失效；重新启动后需要再次授权，切换过程中不会申请提权。</value></data>
+  <data name="WindowMinimize" xml:space="preserve"><value>最小化窗口</value></data>
+  <data name="WindowMaximizeRestore" xml:space="preserve"><value>最大化／还原窗口</value></data>
+  <data name="WindowClose" xml:space="preserve"><value>关闭窗口</value></data>
+  <data name="ErrorDesktopViewRolledBack" xml:space="preserve"><value>桌面没有跟随目标文件夹变化，已停止切换并撤销本次更改。可在下方改用兼容模式；软件不会自动重启资源管理器。</value></data>
+  <data name="ErrorDesktopViewRecoveryPending" xml:space="preserve"><value>尚未确认实际桌面，仍有待恢复记录。请先查看恢复状态，再尝试切换。</value></data>
+  <data name="CompatibilityFallbackWarning" xml:space="preserve"><value>兼容模式会在下次切换时重新加载资源管理器，已打开的文件管理器窗口可能关闭。点击这里只保存模式，不会立即切换或重启。</value></data>
+  <data name="CompatibilityFallbackAction" xml:space="preserve"><value>改用兼容模式</value></data>
+  <data name="CompatibilitySelectedAfterFailure" xml:space="preserve"><value>已保存兼容模式。下次切换会重新加载资源管理器，已打开的文件管理器窗口可能关闭。</value></data>
+  <data name="SwitchFailureReviewRecovery" xml:space="preserve"><value>查看恢复状态</value></data>
+  <data name="SettingsSwitchNotification" xml:space="preserve">
+    <value>显示玻璃切换提示</value>
+  </data>
+  <data name="SettingsSwitchNotificationHint" xml:space="preserve">
+    <value>用实时毛玻璃小窗显示进度与结果，不抢焦点、不阻挡点击。</value>
+  </data>
+  <data name="SettingsSnapshotRetention" xml:space="preserve">
+    <value>自动布局快照保留</value>
+  </data>
+  <data name="SnapshotRetentionNever" xml:space="preserve">
+    <value>不自动清理</value>
+  </data>
+  <data name="SnapshotRetention7" xml:space="preserve">
+    <value>7 天</value>
+  </data>
+  <data name="SnapshotRetention15" xml:space="preserve">
+    <value>15 天</value>
+  </data>
+  <data name="SnapshotRetention30" xml:space="preserve">
+    <value>30 天</value>
+  </data>
+  <data name="SettingsSnapshotRetentionHint" xml:space="preserve">
+    <value>修改后自动保存。图标或显示器布局有变化才新建快照；切换成功后清理过期自动快照，保留手动布局、正在使用的恢复记录，以及每个桌面和显示器组合的最近一份布局。</value>
+  </data>
+  <data name="SwitchNotificationWorking" xml:space="preserve">
+    <value>正在切换桌面</value>
+  </data>
+  <data name="SwitchNotificationDone" xml:space="preserve">
+    <value>桌面已切换</value>
+  </data>
+  <data name="SwitchNotificationFailed" xml:space="preserve">
+    <value>切换需要处理</value>
+  </data>
+  <data name="SwitchNotificationReview" xml:space="preserve">
+    <value>请打开会议桌面查看结果与恢复选项。</value>
+  </data>
+  <data name="DailySwitchHomeTitle" xml:space="preserve"><value>切换桌面</value></data>
+  <data name="DailySwitchReturnTitle" xml:space="preserve"><value>返回原桌面</value></data>
+  <data name="DailySwitchReturnAction" xml:space="preserve"><value>返回原桌面</value></data>
+  <data name="DailySwitchHomeDescription" xml:space="preserve"><value>在这里往返原桌面与备用桌面，文件保留在各自文件夹中。文件统计和预览会在后台加载，不必等预览完成再切换。</value></data>
+  <data name="DailySwitchReturnDescription" xml:space="preserve"><value>返回原桌面，并恢复切换前的图标布局。备用桌面的文件会保留，之后可以再次切换。</value></data>
+  <data name="SwitchFlowHint" xml:space="preserve"><value>点击一次即可，也可使用已设置的快捷键或桌面手势。完成后更新状态；异常时进入「恢复与修复」。</value></data>
+  <data name="TimingTitle" xml:space="preserve"><value>切换耗时</value></data>
+  <data name="TimingEmpty" xml:space="preserve"><value>本次启动后尚无切换记录。完成一次切换后刷新诊断。</value></data>
+  <data name="TimingScope" xml:space="preserve"><value>仅保存本次运行最近 20 次；单位毫秒。桌面就绪为已核验并开始淡入的时刻，收尾仍可能继续；统计不包含失败样本。</value></data>
+  <data name="TimingSummary" xml:space="preserve"><value>{0}：成功 {1} 次，中位 {2} ms，最慢 {3} ms</value></data>
+  <data name="TimingRun" xml:space="preserve"><value>{0} · {1}：总耗时 {2} ms，桌面就绪 {3} ms</value></data>
+  <data name="TimingPrepare" xml:space="preserve"><value>切换到备用桌面</value></data>
+  <data name="TimingReturn" xml:space="preserve"><value>返回原桌面</value></data>
+  <data name="TimingSucceeded" xml:space="preserve"><value>完成</value></data>
+  <data name="TimingFailed" xml:space="preserve"><value>未完成</value></data>
+  <data name="TimingLatestStages" xml:space="preserve"><value>最近一次的阶段用时（从阶段报告到下一阶段）：</value></data>
+  <data name="TimingStarting" xml:space="preserve"><value>准备与验证</value></data>
+  <data name="TimingFinishing" xml:space="preserve"><value>收尾与界面更新</value></data>
+  <data name="RestoreInventoryUnavailable" xml:space="preserve"><value>暂时无法清点备用桌面的文件；文件未被移动，可打开文件夹检查。</value></data>
+  <data name="ProgressFinishing" xml:space="preserve"><value>桌面已就绪，正在收尾…</value></data>
+  <data name="LayoutsDeleteSessionReferenced" xml:space="preserve"><value>此布局是当前会话恢复所必需的，无法删除。</value></data>
+  <data name="LayoutsDeleteSessionUnreadable" xml:space="preserve"><value>无法读取或锁定恢复记录。为保护恢复数据，已阻止删除布局。</value></data>
+  <data name="ErrorShortcutRestoreUncertain" xml:space="preserve"><value>公共桌面快捷方式的恢复结果无法确认，恢复记录已保留。请在诊断页面核对公共桌面和备份文件夹后再处理。</value></data>
+  <data name="LayoutsActiveSnapshot" xml:space="preserve"><value>当前恢复正在使用此布局，已保护，无法删除。</value></data>
+  <data name="StartupMigrate" xml:space="preserve"><value>将开机自启更新为当前版本</value></data>
+  <data name="StartupRemovePrevious" xml:space="preserve"><value>关闭旧版本残留的开机自启</value></data>
+  <data name="ResultRestoreUnmapped" xml:space="preserve"><value>快捷方式冲突后，有 {0} 个图标无法安全确认对应关系，未恢复其位置；恢复记录已保留。</value></data>
+  <data name="RecoveryDetailUnmapped" xml:space="preserve"><value>无法确认对应关系的图标</value></data>
+</root>

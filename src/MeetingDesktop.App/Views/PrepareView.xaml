@@ -1,0 +1,71 @@
+<UserControl x:Class="MeetingDesktop.App.Views.PrepareView"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:loc="clr-namespace:MeetingDesktop.App.Localization">
+ <Grid><Grid.RowDefinitions><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+ <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+ <StackPanel Margin="0,0,8,20">
+  <TextBlock Text="{Binding DirectionLabel}" Style="{StaticResource Text.Title}" />
+  <TextBlock Text="{Binding SwitchDescription}" Style="{StaticResource Text.Secondary}" Margin="0,10,0,26" MaxWidth="680" HorizontalAlignment="Left" />
+  <Border Style="{StaticResource Card}" Margin="0,0,0,20">
+   <StackPanel>
+    <TextBlock Text="{loc:Loc PrepareModernRoute}" Style="{StaticResource Text.Heading}" Margin="0,0,0,18" />
+    <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="48"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+     <StackPanel><TextBlock Text="{loc:Loc DiagnosticsDetectedDesktop}" Style="{StaticResource Text.Caption}"/>
+      <TextBlock Text="{Binding DetectedDesktopPath}" Style="{StaticResource Text.Body}" Margin="0,8,0,10" TextWrapping="Wrap"/>
+      <Button Content="{loc:Loc PrepareModernOpenFolder}" Command="{Binding OpenCurrentFolderCommand}" Style="{StaticResource Button.Ghost}" HorizontalAlignment="Left"/></StackPanel>
+     <TextBlock Grid.Column="1" Text="→" FontSize="26" Foreground="{DynamicResource Brush.Primary}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+     <StackPanel Grid.Column="2"><TextBlock Text="{Binding TargetLabel}" Style="{StaticResource Text.Caption}"/>
+      <TextBlock Text="{Binding TargetDesktopPath}" Style="{StaticResource Text.Body}" Margin="0,8,0,10" TextWrapping="Wrap"/>
+      <Button Content="{loc:Loc PrepareModernOpenFolder}" Command="{Binding OpenTargetFolderCommand}" Style="{StaticResource Button.Ghost}" HorizontalAlignment="Left"/></StackPanel>
+    </Grid>
+    <TextBlock Text="{Binding DetectionNote}" Style="{StaticResource Text.Caption}" Margin="0,16,0,0" />
+   </StackPanel>
+  </Border>
+    <TextBlock Text="{Binding PublicResidualSummary}" Style="{StaticResource Text.Secondary}" Margin="0,10,0,0" TextWrapping="Wrap"/>
+  <Border Style="{StaticResource Card}" Margin="0,0,0,20">
+   <StackPanel>
+    <DockPanel Margin="0,0,0,16"><Button DockPanel.Dock="Right" Content="{loc:Loc CommonRefresh}" Command="{Binding RefreshPreviewCommand}" Style="{StaticResource Button.Ghost}"/>
+     <TextBlock Text="{Binding PreviewCaption}" Style="{StaticResource Text.Heading}" VerticalAlignment="Center"/></DockPanel>
+    <ComboBox ItemsSource="{Binding Monitors}" SelectedItem="{Binding SelectedMonitor}" Margin="0,0,0,14" MaxWidth="440" HorizontalAlignment="Left" MinWidth="260">
+     <ComboBox.ItemTemplate><DataTemplate><StackPanel Orientation="Horizontal"><TextBlock><Run Text="{Binding DeviceName}"/><Run Text=" · "/><Run Text="{Binding Width}"/><Run Text=" × "/><Run Text="{Binding Height}"/></TextBlock><TextBlock Text="{loc:Loc PrepareModernPrimary}" Margin="8,0,0,0" Visibility="{Binding IsPrimary, Converter={StaticResource BoolToVisibility}}"/></StackPanel></DataTemplate></ComboBox.ItemTemplate>
+    </ComboBox>
+    <TextBlock Text="{Binding PreviewMonitorNotice}" Style="{StaticResource Text.Caption}" Margin="0,0,0,8"/>
+    <Border CornerRadius="12" Background="{DynamicResource Brush.Sunken}" ClipToBounds="True">
+     <Grid MinHeight="180" MaxHeight="340"><Image Source="{Binding PreviewImage}" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality"/>
+      <TextBlock Text="{loc:Loc CommonNoPreview}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource Text.Caption}" Visibility="{Binding HasPreview, Converter={StaticResource InverseBoolToVisibility}}"/></Grid>
+    </Border>
+   </StackPanel>
+  </Border>
+  <Border Style="{StaticResource Card}" Margin="0,0,0,20">
+   <StackPanel><TextBlock Text="{loc:Loc PreflightTitle}" Style="{StaticResource Text.Heading}"/>
+    <TextBlock Text="{Binding ReadinessSummary}" Style="{StaticResource Text.Secondary}" TextWrapping="Wrap" Margin="0,10,0,0"/>
+    <TextBlock Text="{Binding ReadinessWarning}" Style="{StaticResource Text.Caption}" TextWrapping="Wrap" Margin="0,8,0,0"/>
+   </StackPanel>
+  </Border>
+  <Expander Header="{loc:Loc PrepareModernTargetContents}" Margin="0,0,0,20" Foreground="{DynamicResource Brush.Text.Primary}">
+   <StackPanel Margin="0,12,0,0"><TextBlock Text="{loc:Loc PrepareModernSimulation}" Style="{StaticResource Text.Caption}" Margin="0,0,0,10"/>
+    <Image Source="{Binding TargetPreview}" Stretch="Uniform" MaxHeight="280" Margin="0,0,0,12"/>
+    <ItemsControl ItemsSource="{Binding TargetFiles}"><ItemsControl.ItemTemplate><DataTemplate><TextBlock Text="{Binding}" Style="{StaticResource Text.Body}" Margin="0,4"/></DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
+
+   </StackPanel>
+  </Expander>
+  <Border Background="#16D92D20" CornerRadius="12" Padding="16" Margin="0,0,0,16" Visibility="{Binding HasError, Converter={StaticResource BoolToVisibility}}">
+   <StackPanel><TextBlock Text="{Binding ErrorMessage}" Style="{StaticResource Text.Body}" TextWrapping="Wrap"/>
+    <StackPanel Margin="0,12,0,0" Visibility="{Binding ShowCompatibilityFallback, Converter={StaticResource BoolToVisibility}}">
+     <TextBlock Text="{loc:Loc CompatibilityFallbackWarning}" Style="{StaticResource Text.Caption}" TextWrapping="Wrap"/>
+     <Button Content="{loc:Loc CompatibilityFallbackAction}" Command="{Binding UseCompatibilityCommand}" Style="{StaticResource Button.Ghost}" HorizontalAlignment="Left" Margin="0,10,0,0"/>
+    </StackPanel>
+    <Button Content="{loc:Loc SwitchFailureReviewRecovery}" Command="{Binding ReviewSwitchRecoveryCommand}" Style="{StaticResource Button.Ghost}" HorizontalAlignment="Left" Margin="0,12,0,0" Visibility="{Binding ShowSwitchRecovery, Converter={StaticResource BoolToVisibility}}"/>
+    <Expander Header="{loc:Loc ErrorDetails}" Foreground="{DynamicResource Brush.Text.Primary}" Margin="0,10,0,0"><TextBox Text="{Binding ErrorDetails, Mode=OneWay}" IsReadOnly="True" TextWrapping="Wrap" Style="{StaticResource TextBox.Themed}"/></Expander></StackPanel>
+  </Border>
+
+ </StackPanel></ScrollViewer>
+ <Border Grid.Row="1" Padding="0,16,0,0">
+  <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+   <Button Content="{Binding SwitchActionLabel}" Command="{Binding SwitchCommand}" Style="{StaticResource Button.Primary}" HorizontalAlignment="Left" MinWidth="190" Padding="26,14"/>
+   <TextBlock Grid.Column="1" Text="{loc:Loc SwitchFlowHint}" Style="{StaticResource Text.Caption}" TextWrapping="Wrap" VerticalAlignment="Center" Margin="20,0,0,0" MaxWidth="480" HorizontalAlignment="Left"/>
+  </Grid>
+ </Border>
+ </Grid>
+</UserControl>

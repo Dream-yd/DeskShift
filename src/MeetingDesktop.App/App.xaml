@@ -1,0 +1,55 @@
+<Application x:Class="MeetingDesktop.App.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:MeetingDesktop.App.Converters"
+             xmlns:vm="clr-namespace:MeetingDesktop.App.ViewModels"
+             xmlns:views="clr-namespace:MeetingDesktop.App.Views">
+  <!--
+    No StartupUri: App.OnStartup creates the window, after it has resolved the
+    language, loaded settings, detected the desktop and worked out the session
+    state. Starting the window first would mean it briefly renders in the wrong
+    language and with no idea whether the desktop is swapped.
+  -->
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <!-- Palette first: Controls.xaml resolves its brushes from it. -->
+        <ResourceDictionary Source="Resources/Theme/Palette.xaml" />
+        <ResourceDictionary Source="Resources/Theme/Controls.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+
+      <!-- The framework already ships this one; no need to write our own. -->
+      <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+
+      <converters:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibility" />
+
+      <!--
+        Implicit templates: view model type -> view.
+
+        MainWindow's content area is a plain ContentControl bound to
+        MainViewModel.CurrentView, so without these WPF falls back to calling
+        ToString() on the view model and the page renders as its type name.
+        That failure is silent - no binding error, just a window with a type
+        name in it.
+
+        Being keyless, these apply automatically to any ContentControl whose
+        content is of the matching type, so navigation needs no lookup code.
+      -->
+      <DataTemplate DataType="{x:Type vm:PrepareViewModel}">
+        <views:PrepareView />
+      </DataTemplate>
+      <DataTemplate DataType="{x:Type vm:RestoreViewModel}">
+        <views:RestoreView />
+      </DataTemplate>
+      <DataTemplate DataType="{x:Type vm:LayoutsViewModel}">
+        <views:LayoutsView />
+      </DataTemplate>
+      <DataTemplate DataType="{x:Type vm:SettingsViewModel}">
+        <views:SettingsView />
+      </DataTemplate>
+      <DataTemplate DataType="{x:Type vm:DiagnosticsViewModel}">
+        <views:DiagnosticsView />
+      </DataTemplate>
+    </ResourceDictionary>
+  </Application.Resources>
+</Application>

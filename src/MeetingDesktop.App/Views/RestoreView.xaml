@@ -1,0 +1,153 @@
+<UserControl x:Class="MeetingDesktop.App.Views.RestoreView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:loc="clr-namespace:MeetingDesktop.App.Localization"
+             xmlns:vm="clr-namespace:MeetingDesktop.App.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=vm:RestoreViewModel}">
+
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <!-- ============================ Heading ============================ -->
+    <StackPanel Grid.Row="0" Margin="0,0,0,18">
+      <TextBlock Text="{Binding PageTitle}" Style="{StaticResource Text.Title}" />
+      <TextBlock Text="{Binding PageDescription}"
+                 Style="{StaticResource Text.Secondary}"
+                 Margin="0,8,0,0"
+                 MaxWidth="640"
+                 HorizontalAlignment="Left" />
+    </StackPanel>
+
+    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+    <StackPanel>
+    <Grid x:Name="RestoreColumns">
+      <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="18" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+
+      <!-- ====================== What is coming back ====================== -->
+      <Border Grid.Column="0" Style="{StaticResource Card}" VerticalAlignment="Top">
+        <StackPanel>
+          <!-- Where their own desktop went. While the swap is active every
+               other panel on this page is showing the alternate desktop, so
+               this is the only place the user's own folder still appears - and
+               a user who cannot see that it was written down has no reason to
+               believe the button brings it back. -->
+          <TextBlock Text="{loc:Loc RestoreOriginalDesktopHeading}"
+                     Style="{StaticResource Text.Caption}"
+                     Visibility="{Binding HasOriginalDesktopPath, Converter={StaticResource BoolToVisibility}}" />
+          <TextBlock Text="{Binding OriginalDesktopPath}"
+                     Style="{StaticResource Text.Body}"
+                     FontSize="16"
+                     TextWrapping="Wrap"
+                     Margin="0,2,0,0"
+                     Visibility="{Binding HasOriginalDesktopPath, Converter={StaticResource BoolToVisibility}}" />
+
+          <TextBlock Text="{loc:Loc RestoreSnapshotHeading}"
+                     Style="{StaticResource Text.Heading}"
+                     Margin="0,16,0,0" />
+          <TextBlock Text="{Binding SnapshotSummary}"
+                     Style="{StaticResource Text.Body}"
+                     FontSize="16"
+                     Margin="0,8,0,0" />
+
+          <!-- Loud on purpose. Without a snapshot the icons come back in
+               Explorer's own arrangement, which is the one outcome a presenter
+               cannot fix by hand in front of an audience. -->
+          <Border Background="#33FFC14D"
+                  CornerRadius="{StaticResource Radius.Small}"
+                  Padding="12,10"
+                  Margin="0,14,0,0"
+                  Visibility="{Binding HasSnapshot, Converter={StaticResource InverseBoolToVisibility}}">
+            <TextBlock Text="{loc:Loc RestoreNoSnapshot}"
+                       Style="{StaticResource Text.Body}"
+                       Foreground="{DynamicResource Brush.Text.Strong}" />
+          </Border>
+        </StackPanel>
+      </Border>
+
+      <!-- ========================== Preview ========================== -->
+      <Border x:Name="RestorePreviewCard" Grid.Column="2" Style="{StaticResource Card}" Padding="14">
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+          </Grid.RowDefinitions>
+
+          <TextBlock Grid.Row="0"
+                     Text="{Binding PreviewCaption}"
+                     Style="{StaticResource Text.Heading}"
+                     Margin="2,0,0,10" />
+
+          <!-- PrintWindow capture of the desktop window, so the icons are shown
+               as the desktop itself drew them and overlapping windows are not. -->
+          <Border Grid.Row="1"
+                  Background="{DynamicResource Brush.Sunken}"
+                  CornerRadius="{StaticResource Radius.Small}"
+                  MinHeight="220">
+            <Grid>
+              <Image Source="{Binding PreviewImage}"
+                     Stretch="Uniform"
+                     Margin="6"
+                     SnapsToDevicePixels="True"
+                     RenderOptions.BitmapScalingMode="HighQuality" />
+              <TextBlock Text="{loc:Loc CommonNoPreview}"
+                         Style="{StaticResource Text.Caption}"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center"
+                         Visibility="{Binding HasPreview, Converter={StaticResource InverseBoolToVisibility}}" />
+            </Grid>
+          </Border>
+        </Grid>
+      </Border>
+    </Grid>
+    <Border Style="{StaticResource Card}" Margin="0,18,0,0" Visibility="{Binding HasRecoveryResult, Converter={StaticResource BoolToVisibility}}">
+      <StackPanel>
+        <TextBlock Text="{loc:Loc RecoveryDetailTitle}" Style="{StaticResource Text.Heading}" />
+        <TextBlock Text="{Binding RecoverySummary}" TextWrapping="Wrap" Margin="0,8,0,0" />
+        <TextBlock Text="{Binding RecoveryTopology}" TextWrapping="Wrap" Margin="0,8,0,0" />
+        <TextBlock Text="{loc:Loc RecoveryDetailMissing}" Style="{StaticResource Text.Caption}" Margin="0,12,0,0" />
+        <ItemsControl ItemsSource="{Binding MissingIcons}" />
+        <StackPanel Visibility="{Binding HasUnmappedIcons, Converter={StaticResource BoolToVisibility}}">
+          <TextBlock Text="{loc:Loc RecoveryDetailUnmapped}" Style="{StaticResource Text.Caption}" Margin="0,12,0,0" />
+          <ItemsControl ItemsSource="{Binding UnmappedIcons}" />
+        </StackPanel>
+        <TextBlock Text="{loc:Loc RecoveryDetailMoved}" Style="{StaticResource Text.Caption}" Margin="0,12,0,0" />
+        <ItemsControl ItemsSource="{Binding MovedIcons}" />
+        <TextBlock Text="{Binding LeftoverSummary}" Style="{StaticResource Text.Caption}" Margin="0,12,0,0" />
+        <ItemsControl ItemsSource="{Binding LeftoverFiles}" />
+        <Button Content="{loc:Loc RecoveryDetailOpenFolder}" Command="{Binding OpenMeetingFolderCommand}" Style="{StaticResource Button.Ghost}" HorizontalAlignment="Left" Margin="0,12,0,0" />
+        <Button Content="{loc:Loc RecoveryDetailArchive}" Command="{Binding ArchiveMeetingFolderCommand}" Style="{StaticResource Button.Secondary}" HorizontalAlignment="Left" Margin="0,10,0,0"/>
+      </StackPanel>
+    </Border>
+    <Border Style="{StaticResource Card}" Margin="0,16,0,0" Visibility="{Binding HasShortcutConflicts, Converter={StaticResource BoolToVisibility}}">
+      <StackPanel><TextBlock Text="{loc:Loc RecoveryDetailConflicts}" Style="{StaticResource Text.Heading}"/><ItemsControl ItemsSource="{Binding ShortcutConflicts}" Margin="0,12,0,0"/></StackPanel>
+    </Border>
+    </StackPanel>
+    </ScrollViewer>
+
+    <!-- ============================ Action ============================ -->
+    <WrapPanel Grid.Row="2" Orientation="Horizontal" Margin="0,18,0,0">
+      <Button Content="{loc:Loc NavPrepare}" Command="{Binding ReturnToSwitchPageCommand}" Style="{StaticResource Button.Ghost}" Margin="0,0,16,0" />
+      <StackPanel Margin="0,0,16,0" Visibility="{Binding CanAdoptLegacy, Converter={StaticResource BoolToVisibility}}">
+        <TextBlock Text="{loc:Loc RecoveryDetailLegacyHint}" TextWrapping="Wrap" MaxWidth="440" Margin="0,0,0,8" />
+        <Button Content="{loc:Loc RecoveryDetailLegacySelect}" Command="{Binding AdoptLegacyCommand}" Style="{StaticResource Button.Ghost}" HorizontalAlignment="Left" />
+      </StackPanel>
+      <Button Content="{loc:Loc RestoreAction}"
+              Command="{Binding RestoreCommand}"
+              Style="{StaticResource Button.Primary}"
+              MinWidth="180"
+              Padding="22,11" />
+    </WrapPanel>
+  </Grid>
+</UserControl>

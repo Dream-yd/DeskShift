@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    TargetFramework / Nullable / ImplicitUsings / InvariantGlobalization all
+    come from Directory.Build.props at the repository root. Do not set them
+    here; two sources of truth for the TFM is how a project ends up building
+    against the wrong framework in CI only.
+
+    This project is deliberately WPF-free. It talks to the Windows shell via
+    P/Invoke and to the registry via Microsoft.Win32.Registry, and returns
+    plain data (strings, records, raw pixel buffers). Anything that needs a
+    Window, a Brush, or a BitmapSource belongs in MeetingDesktop.App.
+  -->
+
+  <PropertyGroup>
+    <RootNamespace>MeetingDesktop.Core</RootNamespace>
+    <IsPackable>false</IsPackable>
+
+    <!--
+      Deliberately no SupportedOSPlatformVersion. The TFM is net8.0-windows,
+      which implies TargetPlatformVersion 7.0, and declaring a higher
+      SupportedOSPlatformVersion is an error (NETSDK1135). Targeting
+      net8.0-windows10.0.17763.0 would fix that, but it also drags in the
+      Windows SDK / CsWinRT projections, and this project only needs plain
+      P/Invoke - so the analyser would gain nothing and the build would get
+      slower. The real minimum (Windows 10 1809) is documented in the README.
+    -->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- The interop internals are not part of the public surface, but the
+         pure algorithms (pitch derivation, slot maths) are worth testing
+         directly rather than through the window handles. -->
+    <InternalsVisibleTo Include="MeetingDesktop.Core.Tests" />
+    <InternalsVisibleTo Include="MeetingDesktop" />
+  </ItemGroup>
+
+</Project>

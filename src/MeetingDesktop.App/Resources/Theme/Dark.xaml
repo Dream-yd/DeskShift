@@ -1,0 +1,34 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <SolidColorBrush x:Key="Brush.CanvasTint" Color="#E6101724" />
+  <SolidColorBrush x:Key="Brush.Window" Color="#FF101724" />
+  <SolidColorBrush x:Key="Brush.Panel" Color="#E0151E2E" />
+  <SolidColorBrush x:Key="Brush.Card" Color="#F01D293B" />
+  <SolidColorBrush x:Key="Brush.CardHover" Color="#FF28374D" />
+  <SolidColorBrush x:Key="Brush.CardSelected" Color="#FF263E60" />
+  <SolidColorBrush x:Key="Brush.Sunken" Color="#FF141F30" />
+  <SolidColorBrush x:Key="Brush.Hairline" Color="#FF4F6583" />
+  <SolidColorBrush x:Key="Brush.Text.Primary" Color="#FFE4ECF6" />
+  <SolidColorBrush x:Key="Brush.Text.Strong" Color="#FFF4F7FC" />
+  <SolidColorBrush x:Key="Brush.Text.Secondary" Color="#FFB9C8DC" />
+  <SolidColorBrush x:Key="Brush.Text.Muted" Color="#FFABBBD0" />
+  <!-- State badges deliberately retain their light fills and dark text. -->
+  <SolidColorBrush x:Key="Brush.Text.OnLight" Color="#FF10214F" />
+  <SolidColorBrush x:Key="Brush.Input" Color="#FF141F30" />
+  <SolidColorBrush x:Key="Brush.SelectionText" Color="#FFB5D0FF" />
+  <SolidColorBrush x:Key="Brush.OnPrimary" Color="White" />
+  <SolidColorBrush x:Key="Brush.Primary" Color="#FF2963E9" />
+  <SolidColorBrush x:Key="Brush.PrimaryHover" Color="#FF2967DF" />
+  <SolidColorBrush x:Key="Brush.PrimaryPressed" Color="#FF2052CC" />
+  <SolidColorBrush x:Key="Brush.PrimaryDisabled" Color="#FF394E70" />
+  <SolidColorBrush x:Key="Brush.Accent" Color="#FF9ABEFF" />
+  <SolidColorBrush x:Key="Brush.AccentDim" Color="#FFB5D0FF" />
+  <SolidColorBrush x:Key="Brush.Success" Color="#FF77D9A8" />
+  <SolidColorBrush x:Key="Brush.Warning" Color="#FFFFCF83" />
+  <SolidColorBrush x:Key="Brush.Danger" Color="#FFFF9AA8" />
+  <SolidColorBrush x:Key="Brush.DangerSurface" Color="#FF432A37" />
+  <LinearGradientBrush x:Key="Brush.WindowGradient" StartPoint="0,0" EndPoint="1,1">
+    <GradientStop Color="#FF101724" Offset="0" />
+    <GradientStop Color="#FF172236" Offset="1" />
+  </LinearGradientBrush>
+</ResourceDictionary>

@@ -1,0 +1,242 @@
+<Window x:Class="MeetingDesktop.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:loc="clr-namespace:MeetingDesktop.App.Localization"
+        xmlns:vm="clr-namespace:MeetingDesktop.App.ViewModels"
+        xmlns:views="clr-namespace:MeetingDesktop.App.Views"
+        xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+        xmlns:commands="clr-namespace:System.Windows;assembly=PresentationFramework"
+        xmlns:controls="clr-namespace:MeetingDesktop.App.Controls"
+        mc:Ignorable="d"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
+        Title="{loc:Loc AppTitle}"
+        Icon="pack://application:,,,/MeetingDesktop;component/Assets/app.ico"
+        Height="760" Width="1080"
+        MinHeight="600" MinWidth="760"
+        WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource Brush.WindowGradient}"
+        Foreground="{DynamicResource Brush.Text.Primary}"
+        FontFamily="Segoe UI Variable Text, Segoe UI, Microsoft YaHei UI"
+        FontSize="14"
+        TextOptions.TextFormattingMode="Display"
+        UseLayoutRounding="True">
+
+  <Window.CommandBindings>
+    <CommandBinding Command="{x:Static commands:SystemCommands.MinimizeWindowCommand}" Executed="OnMinimizeWindow" />
+    <CommandBinding Command="{x:Static commands:SystemCommands.MaximizeWindowCommand}" Executed="OnMaximizeWindow" />
+    <CommandBinding Command="{x:Static commands:SystemCommands.CloseWindowCommand}" Executed="OnCloseWindow" />
+  </Window.CommandBindings>
+  <Grid x:Name="ShellRoot" Background="{DynamicResource Brush.CanvasTint}">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition x:Name="SidebarColumn" Width="224" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <Grid x:Name="DesktopScene" Grid.RowSpan="4" Grid.ColumnSpan="2" Opacity="0" IsHitTestVisible="False">
+      <Rectangle Fill="{DynamicResource Brush.DesktopBackdrop}" />
+      <Rectangle Fill="{DynamicResource Brush.DesktopVeil}" />
+    </Grid>
+
+    <DockPanel x:Name="GlassCaption" Grid.Row="0" Grid.ColumnSpan="2" Height="36" Visibility="Collapsed" LastChildFill="True">
+      <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" shell:WindowChrome.IsHitTestVisibleInChrome="True" Margin="0,3,8,3">
+        <Button Content="&#xE921;" FontFamily="Segoe MDL2 Assets" Width="40" Padding="0" Style="{StaticResource Button.Ghost}"
+                Command="{x:Static commands:SystemCommands.MinimizeWindowCommand}" ToolTip="{loc:Loc WindowMinimize}"
+                AutomationProperties.Name="{loc:Loc WindowMinimize}" />
+        <Button Content="&#xE922;" FontFamily="Segoe MDL2 Assets" Width="40" Padding="0" Style="{StaticResource Button.Ghost}"
+                Command="{x:Static commands:SystemCommands.MaximizeWindowCommand}" ToolTip="{loc:Loc WindowMaximizeRestore}"
+                AutomationProperties.Name="{loc:Loc WindowMaximizeRestore}" />
+        <Button Content="&#xE8BB;" FontFamily="Segoe MDL2 Assets" Width="40" Padding="0" Style="{StaticResource Button.Ghost}"
+                Command="{x:Static commands:SystemCommands.CloseWindowCommand}" ToolTip="{loc:Loc WindowClose}"
+                AutomationProperties.Name="{loc:Loc WindowClose}" />
+      </StackPanel>
+      <TextBlock Text="{Binding Title, RelativeSource={RelativeSource AncestorType=Window}}" Margin="20,0,12,0"
+                 VerticalAlignment="Center" Style="{StaticResource Text.Caption}" IsHitTestVisible="False" />
+    </DockPanel>
+
+    <Border Grid.Row="1" Grid.ColumnSpan="2" Background="{DynamicResource Brush.Panel}"
+            BorderBrush="{DynamicResource Brush.Hairline}" BorderThickness="0,0,0,1" Padding="20,10">
+      <DockPanel LastChildFill="True">
+        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
+          <TextBlock Text="{loc:Loc SkinClassic}" Style="{StaticResource Text.Caption}" VerticalAlignment="Center" Margin="0,0,10,0"/>
+          <controls:SkinToggle x:Name="SkinSwitch" IsChecked="{Binding IsLiquidGlass, Mode=OneWay}"
+                    Checked="OnSkinSelectionChanged" Unchecked="OnSkinSelectionChanged"
+                    ToolTip="{loc:Loc SkinHint}" AutomationProperties.Name="{loc:Loc SkinSwitch}" />
+          <TextBlock Text="{loc:Loc SkinLiquid}" Style="{StaticResource Text.Caption}" VerticalAlignment="Center" Margin="10,0,0,0" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,16,0">
+          <Ellipse Width="7" Height="7" Fill="{Binding PermissionBrush}" Margin="0,0,9,0" />
+          <TextBlock Text="{Binding PermissionStatusText}" Style="{StaticResource Text.Caption}" MaxWidth="235"
+                     ToolTip="{Binding PermissionStatusText}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"
+                     AutomationProperties.AutomationId="SessionPermissionStatus" AutomationProperties.LiveSetting="Polite" />
+          <Button Content="{Binding PermissionActionText}" Command="{Binding AuthorizationCommand}" Style="{StaticResource Button.Secondary}"
+                  ToolTip="{loc:Loc SettingsPermissionHint}"
+                  Margin="12,0,0,0" Padding="12,7" AutomationProperties.AutomationId="SessionPermissionButton" />
+        </StackPanel>
+      </DockPanel>
+    </Border>
+
+    <!-- ============================ Sidebar ============================ -->
+    <Border Grid.Row="2" Grid.Column="0" Background="{DynamicResource Brush.Panel}"
+            BorderBrush="{DynamicResource Brush.Hairline}" BorderThickness="0,0,1,0">
+      <Grid Margin="18,28,18,24">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="*" />
+          <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="10,0,10,30">
+          <DockPanel>
+            <Button DockPanel.Dock="Right" Padding="6" Width="32" Height="32" Margin="8,0,0,0"
+                    VerticalAlignment="Top" Content="{Binding ThemeToggleGlyph}" FontFamily="Segoe UI Symbol" FontSize="18"
+                    ToolTip="{Binding ThemeToggleLabel}" AutomationProperties.Name="{Binding ThemeToggleLabel}"
+                    Command="{Binding ThemeToggleCommand}" Style="{StaticResource Button.Ghost}" />
+            <TextBlock Text="{loc:Loc AppTitle}" Style="{StaticResource Text.Title}" FontSize="21" />
+          </DockPanel>
+          <TextBlock Text="{loc:Loc AppTagline}"
+                     Style="{StaticResource Text.Caption}"
+                     Margin="0,6,0,0" />
+        </StackPanel>
+
+        <!-- IsChecked is one-way on purpose. A two-way binding lets WPF push
+             values into the view model while it builds the visual tree, which
+             is how the app ended up opening on whichever page the radio group
+             happened to settle on. Navigation is a click, so it is a command. -->
+        <StackPanel Grid.Row="1">
+          <RadioButton Style="{StaticResource Button.Nav}"
+                       GroupName="Nav"
+                       Content="{loc:Loc NavPrepare}"
+                       IsChecked="{Binding IsPrepareSelected, Mode=OneWay}"
+                       Command="{Binding NavigateCommand}"
+                       CommandParameter="Prepare" />
+          <RadioButton Style="{StaticResource Button.Nav}"
+                       GroupName="Nav"
+                       Content="{loc:Loc NavRestore}"
+                       IsChecked="{Binding IsRestoreSelected, Mode=OneWay}"
+                       Command="{Binding NavigateCommand}"
+                       CommandParameter="Restore" />
+          <RadioButton Style="{StaticResource Button.Nav}"
+                       GroupName="Nav"
+                       Content="{loc:Loc NavLayouts}"
+                       IsChecked="{Binding IsLayoutsSelected, Mode=OneWay}"
+                       Command="{Binding NavigateCommand}"
+                       CommandParameter="Layouts" />
+          <RadioButton Style="{StaticResource Button.Nav}"
+                       GroupName="Nav"
+                       Content="{loc:Loc NavSettings}"
+                       IsChecked="{Binding IsSettingsSelected, Mode=OneWay}"
+                       Command="{Binding NavigateCommand}"
+                       CommandParameter="Settings" />
+          <RadioButton Style="{StaticResource Button.Nav}"
+                       GroupName="Nav"
+                       Content="{loc:Loc NavDiagnostics}"
+                       IsChecked="{Binding IsDiagnosticsSelected, Mode=OneWay}"
+                       Command="{Binding NavigateCommand}"
+                       CommandParameter="Diagnostics" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Margin="6,0,6,0">
+          <!-- Language switch, deliberately out here rather than buried in
+               Settings. The moment someone needs it is the moment they are
+               staring at a screen they cannot read, and nobody goes looking
+               through a settings page written in a language they do not know.
+
+               Endonyms - "中文" and "English" - not translated labels. A
+               language picker that says "Chinese" is useless to the person
+               who needs it. -->
+          <Border Background="{DynamicResource Brush.Sunken}"
+                  CornerRadius="12"
+                  Padding="4"
+                  Margin="0,0,0,14">
+            <UniformGrid Columns="2">
+              <RadioButton GroupName="LanguageSwitch"
+                           Style="{StaticResource Button.Language}"
+                           Content="中文"
+                           IsChecked="{Binding IsChineseUi, Mode=TwoWay}" />
+              <RadioButton GroupName="LanguageSwitch"
+                           Style="{StaticResource Button.Language}"
+                           Content="English"
+                           IsChecked="{Binding IsEnglishUi, Mode=TwoWay}" />
+            </UniformGrid>
+          </Border>
+
+          <!-- Session state, always visible: which of the two operations makes
+               sense depends entirely on it. -->
+          <Border Style="{StaticResource StatusPill}"
+                  ToolTip="{Binding SessionStateHint}"
+                  Background="{Binding SessionStateBrush}">
+            <TextBlock Text="{Binding SessionStateText}"
+                       TextTrimming="CharacterEllipsis"
+                       FontSize="12"
+                       FontWeight="SemiBold"
+                       Foreground="{DynamicResource Brush.Text.OnLight}" />
+          </Border>
+          <TextBlock x:Name="SessionHint" Text="{Binding SessionStateHint}"
+                     Style="{StaticResource Text.Caption}"
+                     Margin="2,8,2,0" />
+        </StackPanel>
+      </Grid>
+    </Border>
+
+    <!-- ============================ Content ============================ -->
+    <Grid Grid.Row="2" Grid.Column="1" Margin="32,24,32,20">
+      <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+      <Border Grid.Row="0" Style="{StaticResource Card.Sunken}" Padding="16" Margin="0,0,0,18"
+              Visibility="{Binding HasRecoveryNotice, Converter={StaticResource BoolToVisibility}}">
+        <StackPanel>
+          <TextBlock Text="{Binding RecoveryNoticeTitle}" Style="{StaticResource Text.Heading}" />
+          <TextBlock Text="{Binding RecoveryNoticeMessage}" Style="{StaticResource Text.Body}" Margin="0,8,0,0" />
+          <WrapPanel Margin="0,12,0,0">
+            <Button Content="{Binding RecoveryActionLabel}" Command="{Binding ReviewRecoveryCommand}"
+                    Style="{StaticResource Button.Secondary}" Margin="0,0,10,8" AutomationProperties.AutomationId="ReviewRecoveryButton" />
+            <Button Content="{loc:Loc RecoveryArchiveAction}" Command="{Binding ArchiveRecoveryCommand}"
+                    Style="{StaticResource Button.Ghost}" Margin="0,0,0,8" AutomationProperties.AutomationId="ArchiveRecoveryButton"
+                    Visibility="{Binding ShowArchiveRecovery, Converter={StaticResource BoolToVisibility}}" />
+          </WrapPanel>
+        </StackPanel>
+      </Border>
+      <ContentControl Grid.Row="1" Content="{Binding CurrentView}" />
+    </Grid>
+
+    <!-- ============================ Status bar ============================ -->
+    <Border Grid.Row="3" Grid.ColumnSpan="2"
+            Background="{DynamicResource Brush.Card}"
+            BorderBrush="{DynamicResource Brush.Hairline}"
+            BorderThickness="0,1,0,0"
+            Padding="24,12">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Column="0"
+                   Text="{Binding StatusText}"
+                   ToolTip="{Binding StatusText}"
+                   Style="{StaticResource Text.Secondary}"
+                   VerticalAlignment="Center"
+                   TextTrimming="CharacterEllipsis" />
+        <TextBlock Grid.Column="1" Text="{Binding LastSwitchDurationText}" Style="{StaticResource Text.Caption}"
+                   VerticalAlignment="Center" Margin="16,0,0,0"
+                   Visibility="{Binding IsBusy, Converter={StaticResource InverseBoolToVisibility}}" />
+
+        <ProgressBar Grid.Column="1"
+                     Width="180"
+                     Margin="16,0,0,0"
+                     VerticalAlignment="Center"
+                     Style="{StaticResource Progress.Thin}"
+                     IsIndeterminate="True"
+                     Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibility}}" />
+      </Grid>
+    </Border>
+  </Grid>
+</Window>

@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    Neutral-language (English) UI strings.
+
+    Keys must stay in lockstep with Strings.zh-Hans.resx. A unit test asserts
+    the two files expose an identical key set, because a missing key renders as
+    "!Key!" in the UI and the moment you notice is the moment you are standing
+    in front of a projector.
+
+    Naming: <Area><Thing>, e.g. PrepareAction. Progress.* mirrors the
+    ProgressKey enum, Error.* mirrors InteropFailureKind, PathIssue.* mirrors
+    the PathIssue enum. Adding a case to one of those enums without adding the
+    matching key here will fail that test.
+  -->
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+
+  <!-- ============ Application ============ -->
+  <data name="AppTitle" xml:space="preserve"><value>Meeting Desktop</value></data>
+  <data name="AppTagline" xml:space="preserve"><value>Switch desktops. Save your layout.</value></data>
+
+  <!-- ============ Navigation ============ -->
+  <data name="NavPrepare" xml:space="preserve"><value>Switch desktops</value></data>
+  <data name="NavRestore" xml:space="preserve"><value>Recovery &amp; repair</value></data>
+  <data name="NavLayouts" xml:space="preserve"><value>Layouts</value></data>
+  <data name="NavSettings" xml:space="preserve"><value>Settings</value></data>
+  <data name="NavDiagnostics" xml:space="preserve"><value>Diagnostics</value></data>
+
+  <!-- ============ Session state ============ -->
+  <data name="StateNormal" xml:space="preserve"><value>Desktop is normal</value></data>
+  <data name="StateSwapped" xml:space="preserve"><value>Alternate desktop is active</value></data>
+  <data name="StateAdopted" xml:space="preserve"><value>A swapped desktop was found that this app did not create</value></data>
+  <data name="StateInconsistent" xml:space="preserve"><value>Desktop state is inconsistent - look before continuing</value></data>
+
+  <data name="StateNormalHint" xml:space="preserve"><value>Your real desktop is showing. Prepare will swap it for an empty folder.</value></data>
+  <data name="StateSwappedHint" xml:space="preserve"><value>Anything saved to the desktop now goes to the alternate folder. Switch back to return to your own desktop, icons included.</value></data>
+  <data name="StateAdoptedHint" xml:space="preserve"><value>This looks like a swap left behind by the older scripts. Adopt it to take over, so restore can put things back correctly.</value></data>
+  <data name="StateInconsistentHint" xml:space="preserve"><value>A path this app depends on is missing or does not match its records. Check Diagnostics before changing anything.</value></data>
+
+  <!-- ============ Prepare ============ -->
+  <data name="PrepareTitle" xml:space="preserve"><value>Switch to the alternate desktop</value></data>
+  <data name="PrepareDescription" xml:space="preserve"><value>Points the desktop at a separate folder and hides the public desktop shortcuts, so the screen is clear for whatever the alternate desktop is for - a presentation, a recording, or handing the machine to someone else. Your own files are not moved or deleted.</value></data>
+  <data name="PrepareAction" xml:space="preserve"><value>Switch to alternate desktop</value></data>
+  <data name="PreparePreviewLeaving" xml:space="preserve"><value>The desktop you are about to leave</value></data>
+  <data name="PreparePreviewActive" xml:space="preserve"><value>The meeting desktop is already active</value></data>
+  <data name="PrepareConfirmTitle" xml:space="preserve"><value>Switch to the alternate desktop?</value></data>
+  <data name="PrepareConfirmBody" xml:space="preserve"><value>Your icon layout will be saved first. Explorer will restart, so any open File Explorer windows will close.
+
+Continue?</value></data>
+
+  <!-- ============ Restore ============ -->
+  <data name="RestoreTitle" xml:space="preserve"><value>Recovery &amp; repair</value></data>
+  <data name="RestoreDescription" xml:space="preserve"><value>Use this page when a switch was interrupted or the desktop state is unclear. Review the saved recovery record before restoring. For everyday switching, use the Switch desktops page.</value></data>
+  <data name="RestoreAction" xml:space="preserve"><value>Restore my desktop</value></data>
+  <data name="RestorePreviewReturning" xml:space="preserve"><value>The desktop you are returning to</value></data>
+  <data name="RestoreOriginalDesktopHeading" xml:space="preserve"><value>Your own desktop folder</value></data>
+  <data name="RestoreSnapshotHeading" xml:space="preserve"><value>Icon layout saved before the swap</value></data>
+  <data name="RestoreNoSnapshot" xml:space="preserve"><value>No layout snapshot was found. Icons may be re-flowed into a default arrangement.</value></data>
+  <data name="RestoreTopologyChanged" xml:space="preserve"><value>The monitor arrangement changed while the desktop was switched. Saved positions may not apply; icons will still be matched by name.</value></data>
+  <data name="RestoreStrayFiles" xml:space="preserve"><value>{0} file(s) were left on the alternate desktop. They have not been deleted.</value></data>
+
+  <!-- ============ Layouts ============ -->
+  <data name="LayoutsTitle" xml:space="preserve"><value>Icon layouts</value></data>
+  <data name="LayoutsDescription" xml:space="preserve"><value>Save and restore icon arrangements on their own, without swapping the desktop. Useful when Windows rearranges your icons for an unrelated reason.</value></data>
+  <data name="LayoutsSaveCurrent" xml:space="preserve"><value>Save current layout</value></data>
+  <data name="LayoutsRestoreSelected" xml:space="preserve"><value>Restore selected</value></data>
+  <data name="LayoutsDeleteSelected" xml:space="preserve"><value>Delete selected</value></data>
+  <data name="LayoutsRefresh" xml:space="preserve"><value>Refresh</value></data>
+  <data name="LayoutsEmpty" xml:space="preserve"><value>No saved layouts yet.</value></data>
+  <data name="LayoutsNameTitle" xml:space="preserve"><value>Name this layout</value></data>
+  <data name="LayoutsNamePrompt" xml:space="preserve"><value>A name for this layout:</value></data>
+  <data name="LayoutsSaved" xml:space="preserve"><value>Saved {0} icons as "{1}".</value></data>
+  <data name="LayoutsRestored" xml:space="preserve"><value>Restored {0} of {1} icons.</value></data>
+  <data name="LayoutsDeleteConfirm" xml:space="preserve"><value>Delete the layout "{0}"?</value></data>
+  <data name="LayoutsCounts" xml:space="preserve"><value>{0} icons</value></data>
+  <data name="LayoutsAutomaticTag" xml:space="preserve"><value>automatic</value></data>
+
+  <!-- ============ Settings ============ -->
+  <data name="SettingsTitle" xml:space="preserve"><value>Settings</value></data>
+  <data name="SettingsLanguage" xml:space="preserve"><value>Language</value></data>
+  <data name="SettingsLanguageAuto" xml:space="preserve"><value>Follow Windows</value></data>
+  <data name="SettingsLanguageEnglish" xml:space="preserve"><value>English</value></data>
+  <data name="SettingsLanguageChinese" xml:space="preserve"><value>Chinese (Simplified)</value></data>
+  <data name="SettingsMeetingDesktopPath" xml:space="preserve"><value>Alternate desktop folder</value></data>
+  <data name="SettingsMeetingDesktopPathHint" xml:space="preserve"><value>Where the alternate desktop lives. Anything saved to the desktop while it is active lands here.</value></data>
+  <data name="SettingsEffectivePath" xml:space="preserve"><value>In effect now</value></data>
+  <data name="SettingsBrowse" xml:space="preserve"><value>Browse…</value></data>
+  <data name="SettingsUseDefault" xml:space="preserve"><value>Use default</value></data>
+  <data name="SettingsWallpaper" xml:space="preserve"><value>Wallpaper on the alternate desktop</value></data>
+  <data name="SettingsWallpaperHint" xml:space="preserve"><value>Shown while the alternate desktop is active. Leave it unset to keep whatever wallpaper you already have.</value></data>
+  <data name="SettingsWallpaperUseCurrent" xml:space="preserve"><value>Keep my current wallpaper</value></data>
+  <data name="SettingsWallpaperCurrent" xml:space="preserve"><value>Using your current wallpaper</value></data>
+  <data name="SettingsWallpaperChoose" xml:space="preserve"><value>Choose an image…</value></data>
+  <data name="SettingsWallpaperChooseTitle" xml:space="preserve"><value>Choose a wallpaper for the meeting desktop</value></data>
+  <data name="SettingsWallpaperImages" xml:space="preserve"><value>Images</value></data>
+  <data name="SettingsWallpaperCopyFailed" xml:space="preserve"><value>That image could not be copied, so it was not set.</value></data>
+  <data name="SettingsCapturePreview" xml:space="preserve"><value>Capture a preview of the desktop before swapping</value></data>
+  <data name="SettingsCapturePreviewHint" xml:space="preserve"><value>Used in compatibility mode only. Responsive mode skips screenshot capture for speed and uninterrupted wallpaper; icon layout recovery remains enabled.</value></data>
+  <data name="SettingsDataFolder" xml:space="preserve"><value>Data folder</value></data>
+  <data name="SettingsPortable" xml:space="preserve"><value>Portable mode</value></data>
+  <data name="SettingsSaved" xml:space="preserve"><value>Settings saved.</value></data>
+  <data name="SettingsSaveFailed" xml:space="preserve"><value>Settings could not be saved: {0}</value></data>
+  <data name="SettingsCannotChangeWhileSwapped" xml:space="preserve"><value>The meeting desktop folder cannot be changed while the desktop is swapped. Restore first.</value></data>
+
+  <!-- ============ Diagnostics ============ -->
+  <data name="DiagnosticsTitle" xml:space="preserve"><value>Diagnostics</value></data>
+  <data name="DiagnosticsDescription" xml:space="preserve"><value>What this app detected about your machine, and why. Include this when reporting a problem.</value></data>
+  <data name="DiagnosticsCopy" xml:space="preserve"><value>Copy to clipboard</value></data>
+  <data name="DiagnosticsCopied" xml:space="preserve"><value>Copied.</value></data>
+  <data name="DiagnosticsDetectedDesktop" xml:space="preserve"><value>Detected desktop folder</value></data>
+  <data name="DiagnosticsCandidates" xml:space="preserve"><value>Where the desktop path was read from</value></data>
+  <data name="DiagnosticsSession" xml:space="preserve"><value>Session</value></data>
+  <data name="DiagnosticsWindows" xml:space="preserve"><value>Desktop windows found</value></data>
+  <data name="DiagnosticsDataFolder" xml:space="preserve"><value>Data folder</value></data>
+  <data name="DiagnosticsPaths" xml:space="preserve"><value>Paths</value></data>
+  <data name="DiagnosticsSourceKnownFolder" xml:space="preserve"><value>Shell known folder</value></data>
+  <data name="DiagnosticsSourceUserShellFolders" xml:space="preserve"><value>User Shell Folders (registry)</value></data>
+  <data name="DiagnosticsSourceShellFolders" xml:space="preserve"><value>Shell Folders (registry, legacy)</value></data>
+  <data name="DiagnosticsSourceUserProfile" xml:space="preserve"><value>Profile default</value></data>
+  <data name="DiagnosticsExists" xml:space="preserve"><value>exists</value></data>
+  <data name="DiagnosticsMissing" xml:space="preserve"><value>missing</value></data>
+  <data name="DiagnosticsOneDrive" xml:space="preserve"><value>Redirected into OneDrive</value></data>
+  <data name="DiagnosticsInSync" xml:space="preserve"><value>All sources agree</value></data>
+  <data name="DiagnosticsOutOfSync" xml:space="preserve"><value>Sources disagree - not guessing</value></data>
+
+  <!-- ============ Progress ============ -->
+  <data name="ProgressDetectingDesktopPath" xml:space="preserve"><value>Finding your desktop folder…</value></data>
+  <data name="ProgressReadingCurrentLayout" xml:space="preserve"><value>Reading the current icon layout…</value></data>
+  <data name="ProgressCapturingPreview" xml:space="preserve"><value>Capturing a preview…</value></data>
+  <data name="ProgressWritingLayoutSnapshot" xml:space="preserve"><value>Saving the icon layout…</value></data>
+  <data name="ProgressRedirectingDesktop" xml:space="preserve"><value>Redirecting the desktop…</value></data>
+  <data name="ProgressMovingPublicShortcuts" xml:space="preserve"><value>Moving the public desktop shortcuts…</value></data>
+  <data name="ProgressRestoringPublicShortcuts" xml:space="preserve"><value>Putting the public desktop shortcuts back…</value></data>
+  <data name="ProgressApplyingWallpaper" xml:space="preserve"><value>Applying the meeting wallpaper…</value></data>
+  <data name="ProgressRestoringWallpaper" xml:space="preserve"><value>Putting your wallpaper back…</value></data>
+  <data name="ProgressRestartingExplorer" xml:space="preserve"><value>Restarting Explorer…</value></data>
+  <data name="ProgressWritingShellBagBlob" xml:space="preserve"><value>Writing the native layout back…</value></data>
+  <data name="ProgressApplyingLayout" xml:space="preserve"><value>Putting the icons back…</value></data>
+  <data name="ProgressVerifyingLayout" xml:space="preserve"><value>Checking every icon…</value></data>
+  <data name="ProgressDone" xml:space="preserve"><value>Done.</value></data>
+
+  <!-- ============ Results ============ -->
+  <data name="ResultPrepareDone" xml:space="preserve"><value>Ready. {0} icon positions saved; the desktop now points at {1}.</value></data>
+  <data name="ResultRestoreExact" xml:space="preserve"><value>Restored. All {0} icons are back exactly where they were.</value></data>
+  <data name="ResultRestoreApproximate" xml:space="preserve"><value>Restored, but {0} of {1} icons are not where they were.</value></data>
+  <data name="ResultRestoreNotFound" xml:space="preserve"><value>{0} icon(s) from the snapshot are no longer on the desktop and were skipped.</value></data>
+  <data name="ResultParkingDegraded" xml:space="preserve"><value>Could not stage the icons before moving them; some positions may have shifted.</value></data>
+
+  <!-- ============ Errors ============ -->
+  <data name="ErrorDesktopViewNotFound" xml:space="preserve"><value>Could not find the desktop icon list. Make sure Explorer is running and the desktop is not in tablet mode.</value></data>
+  <data name="ErrorExplorerNotRunning" xml:space="preserve"><value>Explorer is not running, so there is no desktop to change.</value></data>
+  <data name="ErrorAccessDenied" xml:space="preserve"><value>Explorer is running at a higher privilege level than this app. This normally means a previous run restarted Explorer from an elevated process. Sign out and back in, or restart Explorer normally, then try again.</value></data>
+  <data name="ErrorRemoteAllocationFailed" xml:space="preserve"><value>Could not allocate working memory in Explorer. Try again; if it keeps failing, restart Explorer.</value></data>
+  <data name="ErrorRemoteMemoryAccessFailed" xml:space="preserve"><value>Could not read or write icon data in Explorer. Try again; if it keeps failing, restart Explorer.</value></data>
+  <data name="ErrorListViewMessageTimeout" xml:space="preserve"><value>Explorer stopped responding while the icons were being moved. Nothing was changed.</value></data>
+  <data name="ErrorExplorerHigherIntegrity" xml:space="preserve"><value>Explorer is running with higher privileges than this app, so icon changes would be silently ignored. Sign out and back in.</value></data>
+  <data name="ErrorRestoreNotPossible" xml:space="preserve"><value>This desktop cannot be restored: there is no usable record of a swap, or a folder the restore needs is missing. Check Diagnostics before trying again.</value></data>
+  <data name="ErrorShortcutRestoreUncertain" xml:space="preserve"><value>The restoration of public desktop shortcuts could not be confirmed. The recovery record has been retained. Check the public desktop and backup folder on the Diagnostics page before proceeding.</value></data>
+  <data name="ErrorUnexpected" xml:space="preserve"><value>Something went wrong.</value></data>
+  <data name="ErrorElevationCancelled" xml:space="preserve"><value>The administrator prompt was cancelled, so nothing was changed.</value></data>
+  <data name="ErrorNotElevated" xml:space="preserve"><value>Administrator rights are needed to move the public desktop shortcuts, and the prompt was declined.</value></data>
+  <data name="ErrorDetails" xml:space="preserve"><value>Details</value></data>
+
+  <!-- ============ Path validation ============ -->
+  <data name="PathIssueNotAbsolute" xml:space="preserve"><value>The path must be a full path, such as D:\MeetingDesktop\Desktop.</value></data>
+  <data name="PathIssueCannotCreate" xml:space="preserve"><value>The folder could not be created.</value></data>
+  <data name="PathIssueNotWritable" xml:space="preserve"><value>The folder could not be written to.</value></data>
+  <data name="PathIssueNotFixedDisk" xml:space="preserve"><value>This is a removable or network drive. If it is not available next time you sign in, your desktop will point at a folder that does not exist. A local fixed disk is safer.</value></data>
+  <data name="PathIssueOverlapsRealDesktop" xml:space="preserve"><value>This is your real desktop, or inside it. Choose a different folder.</value></data>
+  <data name="PathIssueProtectedLocation" xml:space="preserve"><value>This location is protected by Windows. Choose a different folder.</value></data>
+
+  <!-- ============ Common ============ -->
+  <data name="CommonAllFiles" xml:space="preserve"><value>All files</value></data>
+  <data name="CommonClose" xml:space="preserve"><value>Close</value></data>
+  <data name="CommonCancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="CommonOk" xml:space="preserve"><value>OK</value></data>
+  <data name="CommonSave" xml:space="preserve"><value>Save</value></data>
+  <data name="CommonRefresh" xml:space="preserve"><value>Refresh</value></data>
+  <data name="CommonWorking" xml:space="preserve"><value>Working…</value></data>
+  <data name="CommonNoPreview" xml:space="preserve"><value>No preview available</value></data>
+  <data name="CommonNotAvailable" xml:space="preserve"><value>Not available</value></data>
+  <data name="CommonYes" xml:space="preserve"><value>Yes</value></data>
+  <data name="CommonNo" xml:space="preserve"><value>No</value></data>
+
+  <!-- ============ Legacy migration ============ -->
+  <data name="LegacyDetectedTitle" xml:space="preserve"><value>An older installation was found</value></data>
+  <data name="LegacyDetectedBody" xml:space="preserve"><value>A previous version of this tool left its data in another folder. Import its saved icon layout and recorded desktop path?</value></data>
+  <data name="LegacyImport" xml:space="preserve"><value>Import</value></data>
+  <data name="LegacySkip" xml:space="preserve"><value>Not now</value></data>
+  <data name="LegacyImported" xml:space="preserve"><value>Imported {0} icon positions from the previous installation.</value></data>
+
+  <data name="SettingsTransitionTitle" xml:space="preserve"><value>Desktop transition</value></data>
+  <data name="SettingsSmoothTransition" xml:space="preserve"><value>Animate switching feedback</value></data>
+  <data name="SettingsSmoothTransitionHint" xml:space="preserve"><value>Fade the notification in and out. Compatibility mode also fades the desktop; responsive mode leaves the live wallpaper visible.</value></data>
+  <data name="SettingsLiveSwitch" xml:space="preserve"><value>Responsive switching (recommended)</value></data>
+  <data name="SettingsLiveSwitchHint" xml:space="preserve"><value>Uses the live desktop view without restarting Explorer. Turn off only for compatibility mode, which closes Explorer windows. Changes apply to the next session; the setting saves automatically.</value></data>
+  <data name="PrepareConfirmLiveBody" xml:space="preserve"><value>Save your icon layout and switch to the meeting desktop? This experimental mode keeps Explorer running. If the target view cannot be confirmed, the app will attempt to restore your desktop.</value></data>
+  <data name="ProgressRefreshingDesktop" xml:space="preserve"><value>Waiting for the target desktop…</value></data>
+  <data name="ErrorRestoreRecordKept" xml:space="preserve"><value>Restore did not finish. The recovery record was kept; check the desktop and retry.</value></data>
+  <data name="RecoveryDetailTitle" xml:space="preserve"><value>Recovery result</value></data>
+  <data name="RecoveryDetailCounts" xml:space="preserve"><value>Requested: {0} · Placed: {1} · Missing: {2} · Off target: {3}</value></data>
+  <data name="RecoveryDetailNoLayout" xml:space="preserve"><value>No saved layout was applied; icon counts are unavailable.</value></data>
+  <data name="RecoveryDetailTopologyChanged" xml:space="preserve"><value>Display arrangement changed; review icon positions.</value></data>
+  <data name="RecoveryDetailTopologySame" xml:space="preserve"><value>No display arrangement change was reported.</value></data>
+  <data name="RecoveryDetailMissing" xml:space="preserve"><value>Missing icons</value></data>
+  <data name="RecoveryDetailMoved" xml:space="preserve"><value>Off-target icons (saved → actual coordinates)</value></data>
+  <data name="RecoveryDetailLeftovers" xml:space="preserve"><value>Items left in the meeting folder: {0}. Files remain untouched.</value></data>
+  <data name="RecoveryDetailOpenFolder" xml:space="preserve"><value>Open meeting folder</value></data>
+  <data name="RecoveryDetailFolderUnavailable" xml:space="preserve"><value>The meeting folder could not be opened.</value></data>
+  <data name="DiagnosticExportTitle" xml:space="preserve"><value>Export diagnostics</value></data>
+  <data name="DiagnosticExportFilter" xml:space="preserve"><value>Text report (*.txt)|*.txt</value></data>
+  <data name="DiagnosticExportSaved" xml:space="preserve"><value>Diagnostics report exported.</value></data>
+  <data name="DiagnosticExportFailed" xml:space="preserve"><value>Diagnostics could not be exported. Choose a writable folder and retry.</value></data>
+  <data name="DiagnosticExportPreview" xml:space="preserve"><value>Export preview below. Copy and export use exactly this text. Screenshots are never included.</value></data>
+  <data name="DiagnosticExportRedact" xml:space="preserve"><value>Redact personal paths (recommended)</value></data>
+  <data name="DiagnosticExportAction" xml:space="preserve"><value>Export report…</value></data>
+  <data name="PrepareModernRoute" xml:space="preserve"><value>Your next desktop</value></data>
+  <data name="PrepareModernOpenFolder" xml:space="preserve"><value>Open folder</value></data>
+  <data name="PrepareModernTargetContents" xml:space="preserve"><value>What is in the alternate desktop?</value></data>
+  <data name="PrepareModernSimulation" xml:space="preserve"><value>Folder content preview, not a screenshot of the switched desktop. Public residual items may remain visible.</value></data>
+  <data name="PrepareModernResidual" xml:space="preserve"><value>Public items that remain visible:</value></data>
+<data name="ProfilesTitle" xml:space="preserve"><value>Desktop profiles</value></data>
+<data name="ProfilesHint" xml:space="preserve"><value>Save a folder and wallpaper for meetings, recording or work. Applying a profile saves settings; it does not switch your desktop.</value></data>
+<data name="ProfileName" xml:space="preserve"><value>New profile name</value></data>
+<data name="ProfileSave" xml:space="preserve"><value>Save as a new profile</value></data>
+<data name="ProfileApply" xml:space="preserve"><value>Use this profile</value></data>
+<data name="ProfileDuplicate" xml:space="preserve"><value>This name already exists. Choose a new name to keep both versions.</value></data>
+  <data name="RecoveryDetailLegacySelect" xml:space="preserve"><value>Select legacy recovery record…</value></data>
+  <data name="RecoveryDetailLegacyHint" xml:space="preserve"><value>Used the old script? Select original_desktop_path.txt to enable recovery. No original icon layout is available.</value></data>
+  <data name="RecoveryDetailLegacyImported" xml:space="preserve"><value>Legacy recovery record imported. Review the original folder before restoring; no original layout was recorded.</value></data>
+  <data name="RecoveryDetailLegacyInvalid" xml:space="preserve"><value>Import failed. Select a valid record naming an existing absolute original folder different from the current desktop. Existing records are never replaced.</value></data>
+<data name="LayoutHistorySchematic" xml:space="preserve"><value>Icon layout diagram (not a desktop screenshot)</value></data>
+<data name="RecoveryDetailLegacyConfirm" xml:space="preserve"><value>Import this original desktop folder? No original icon layout is available; the app will restore the folder only.</value></data>
+<data name="RecoveryDetailConflicts" xml:space="preserve"><value>Shortcut name conflicts — both copies preserved</value></data>
+<data name="PrepareModernPrimary" xml:space="preserve"><value>Primary</value></data>
+<data name="PrepareModernDisplayChanged" xml:space="preserve"><value>The selected display disconnected. Showing the primary display instead.</value></data>
+<data name="RecoveryDetailArchive" xml:space="preserve"><value>Copy materials to an archive…</value></data>
+<data name="RecoveryDetailArchiveDone" xml:space="preserve"><value>Archive copied. Originals remain in the meeting folder:</value></data>
+<data name="RecoveryDetailArchiveFailed" xml:space="preserve"><value>Archive could not finish. Original files are untouched; a partial archive may remain.</value></data>
+  <!-- Layout search and snapshot details -->
+  <data name="LayoutSearchLabel" xml:space="preserve"><value>_Search layouts</value></data>
+  <data name="LayoutSearchAccessibleName" xml:space="preserve"><value>Search saved layouts and history</value></data>
+  <data name="LayoutSearchHint" xml:space="preserve"><value>Name, date (YYYY-MM-DD), or display resolution · Ctrl+F to search, Escape to clear</value></data>
+  <data name="LayoutSearchClear" xml:space="preserve"><value>Clear search</value></data>
+  <data name="LayoutSearchResults" xml:space="preserve"><value>{0} of {1} saved layouts</value></data>
+  <data name="LayoutSearchHistory" xml:space="preserve"><value>Saved layouts and history</value></data>
+  <data name="LayoutSearchEmptyHint" xml:space="preserve"><value>Save your current arrangement to find and restore it here later. Automatic snapshots also appear here.</value></data>
+  <data name="LayoutSearchNoMatches" xml:space="preserve"><value>No matching layouts</value></data>
+  <data name="LayoutSearchNoMatchesHint" xml:space="preserve"><value>Try another name, date, or display resolution, or clear the search to see all saved layouts.</value></data>
+  <data name="LayoutSearchLoading" xml:space="preserve"><value>Loading saved layouts…</value></data>
+  <data name="LayoutSearchDetails" xml:space="preserve"><value>Snapshot details</value></data>
+  <data name="LayoutSearchSelectHint" xml:space="preserve"><value>Select a layout to inspect its saved time and display arrangement.</value></data>
+  <data name="LayoutSearchUnreadable" xml:space="preserve"><value>This snapshot cannot be read. Restore is unavailable; you can still delete this entry.</value></data>
+  <data name="LayoutSearchSavedAt" xml:space="preserve"><value>Saved at · local time</value></data>
+  <data name="LayoutSearchTopology" xml:space="preserve"><value>Saved display arrangement</value></data>
+  <data name="LayoutSearchDisplayCount" xml:space="preserve"><value>{0} displays</value></data>
+  <data name="LayoutSearchLocalTime" xml:space="preserve"><value>{0} (UTC{1})</value></data>
+  <data name="LayoutSearchNoTopology" xml:space="preserve"><value>No display information was recorded.</value></data>
+  <data name="LayoutSearchPrimary" xml:space="preserve"><value>Primary</value></data>
+  <data name="LayoutSearchMonitorDetails" xml:space="preserve"><value>Display {0} · {1}{2}&#10;{3} × {4} px · position ({5}, {6})</value></data>
+<data name="PreflightTitle" xml:space="preserve"><value>Before you switch</value></data>
+<data name="PreflightContents" xml:space="preserve"><value>Target desktop: {0} files, {1} folders; top-level files about {2} MB; disk free {3} GB.</value></data>
+<data name="PreflightDynamicWallpaper" xml:space="preserve"><value>Dynamic wallpaper detected. Responsive mode avoids restarting Explorer and covering the wallpaper with a still image. Leave the alternate wallpaper unset if you want to keep the current scene.</value></data>
+<data name="RecoveryExportTitle" xml:space="preserve"><value>Safety backup</value></data>
+<data name="RecoveryExportButton" xml:space="preserve"><value>Export safety backup</value></data>
+<data name="RecoveryExportHint" xml:space="preserve"><value>Choose a ZIP for the current layout and displays, raw desktop paths, wallpaper state and readable image, and public desktop shortcuts with SHA-256 hashes. Original files remain untouched. This is a backup for manual recovery, not an automatic full-machine backup. ZIP import is not available yet.</value></data>
+<data name="RecoveryExportDialogTitle" xml:space="preserve"><value>Export safety backup — choose ZIP location</value></data>
+<data name="RecoveryExportZipFilter" xml:space="preserve"><value>ZIP backup (*.zip)|*.zip</value></data>
+<data name="RecoveryExportRunning" xml:space="preserve"><value>Creating safety backup…</value></data>
+<data name="RecoveryExportSucceeded" xml:space="preserve"><value>Safety backup saved: {0}</value></data>
+<data name="RecoveryExportPartial" xml:space="preserve"><value>Safety backup saved with {0} warning(s): {1}. Review metadata.json before manual recovery.</value></data>
+<data name="RecoveryExportFailed" xml:space="preserve"><value>Safety backup was not saved: {0}</value></data>
+<data name="PreflightWallpaperBackupUnavailable" xml:space="preserve"><value>The original wallpaper image could not be copied. Keep its source available; if it disappears, background restoration may fail and the recovery record will be kept.</value></data>
+<data name="SettingsAppearance" xml:space="preserve"><value>Appearance</value></data>
+<data name="SettingsAppearanceHint" xml:space="preserve"><value>Changes apply immediately and are saved automatically. Follow system uses the Windows app color mode.</value></data>
+<data name="ThemeSystem" xml:space="preserve"><value>Follow system</value></data>
+<data name="ThemeLight" xml:space="preserve"><value>Light</value></data>
+<data name="ThemeDark" xml:space="preserve"><value>Dark</value></data>
+<data name="ThemeSwitchToLight" xml:space="preserve"><value>Switch to light mode</value></data>
+<data name="ThemeSwitchToDark" xml:space="preserve"><value>Switch to dark mode</value></data>
+<data name="ErrorDesktopViewVerification" xml:space="preserve"><value>The active desktop view could not be verified. If you launched from a terminal or another app, close this window and double-click the program in File Explorer, then retry.</value></data>
+<data name="DiagnosticsLaunchHint" xml:space="preserve"><value>A redirected registry can read back a new desktop path while Explorer still uses the original one. Registry readback alone does not prove a switch. For desktop switching, launch the program directly from File Explorer; this report cannot certify that registry isolation is absent.</value></data>
+<data name="StateOldRecord" xml:space="preserve"><value>Review old record</value></data>
+<data name="StateOldRecordHint" xml:space="preserve"><value>The desktop path is back at its original location, but a recovery record remains. Use the actions above the page.</value></data>
+<data name="RecoveryReviewTitle" xml:space="preserve"><value>Review the previous switch before starting another</value></data>
+<data name="RecoveryAlreadyHomeTitle" xml:space="preserve"><value>The desktop path is back, but an old recovery record remains</value></data>
+<data name="RecoveryAlreadyHomeMessage" xml:space="preserve"><value>The record from {0} contains {1} icons. If you have already arranged your desktop, keep the current desktop and archive the record. Restore will attempt to apply that older arrangement.</value></data>
+<data name="RecoveryAlreadyHomePendingAssetsMessage" xml:space="preserve"><value>The record from {0} contains {1} icons and a wallpaper change. Review recovery first to confirm the wallpaper and public shortcuts are restored; archiving alone is unavailable.</value></data>
+<data name="RecoveryPendingMessage" xml:space="preserve"><value>A recovery record from the previous switch remains, so a new switch is paused. Open desktop recovery to review the original folder and saved layout before choosing Restore.</value></data>
+<data name="RecoveryUnreadableMessage" xml:space="preserve"><value>A recovery record was found but cannot be read. A new switch is paused. See Diagnostics for its location; the record has been kept.</value></data>
+<data name="RecoveryUnknownMessage" xml:space="preserve"><value>The desktop folder currently used by Windows could not be confirmed. Review the paths in Diagnostics. Without a usable recovery record, Restore is not an available next step.</value></data>
+<data name="RecoveryReviewAction" xml:space="preserve"><value>Review desktop recovery</value></data>
+<data name="RecoveryDiagnosticsAction" xml:space="preserve"><value>View diagnostics</value></data>
+<data name="RecoveryArchiveAction" xml:space="preserve"><value>Keep current desktop and archive old record</value></data>
+<data name="RecoveryArchiveConfirm" xml:space="preserve"><value>Keep the current desktop and archive the old record?&#10;&#10;The app will verify the active desktop and save its current icon positions, then archive the old record in the recovery folder. It will not apply the old layout, change the desktop path or wallpaper, or move desktop files.&#10;&#10;If public shortcuts or wallpaper still need recovery, archiving stops and the original record is kept.</value></data>
+<data name="RecoveryArchiveSucceeded" xml:space="preserve"><value>Saved the current {0} icon positions and archived the old record. You can start another switch. Archive: {1}</value></data>
+<data name="RecoveryArchiveViewUnverified" xml:space="preserve"><value>The active desktop could not be verified at its original folder. The record was kept. See Diagnostics or launch directly from File Explorer and retry.</value></data>
+<data name="RecoveryArchiveFailed" xml:space="preserve"><value>The old record could not be archived. Check the desktop path, pending public shortcuts or wallpaper recovery, and access to the recovery folder.</value></data>
+<data name="LayoutsRestorePartial" xml:space="preserve"><value>Placed {0} of {1} icons; {2} positions differ and {3} icons were not found.</value></data>
+<data name="QuickSettingsTitle" xml:space="preserve"><value>Quick desktop switching</value></data>
+<data name="QuickSettingsHint" xml:space="preserve"><value>Use a desktop mouse gesture or global shortcut. Choose the tray double-click action in its right-click menu. The app must remain running.</value></data>
+<data name="QuickMouseLabel" xml:space="preserve"><value>Desktop mouse gesture</value></data>
+<data name="QuickMouseMiddle" xml:space="preserve"><value>Double-click middle button on desktop</value></data>
+<data name="QuickMouseLeftBlank" xml:space="preserve"><value>Double-click left button on blank desktop</value></data>
+<data name="QuickHotkeyLabel" xml:space="preserve"><value>Global shortcut</value></data>
+<data name="QuickDisabled" xml:space="preserve"><value>Off</value></data>
+<data name="QuickConfirm" xml:space="preserve"><value>Confirm before switching to the meeting desktop (optional)</value></data>
+<data name="QuickCloseToTray" xml:space="preserve"><value>Keep running in the tray when the window is closed</value></data>
+<data name="QuickSafetyHint" xml:space="preserve"><value>Use one shortcut or gesture per switch; repeated triggers are ignored while busy. Responsive mode keeps Explorer running. If the result needs attention, open Recovery &amp; repair.</value></data>
+<data name="QuickSave" xml:space="preserve"><value>Save quick access</value></data>
+<data name="QuickSettingsSaved" xml:space="preserve"><value>Quick access saved. Check the shortcut status below.</value></data>
+<data name="QuickHotkeyActive" xml:space="preserve"><value>Shortcut active</value></data>
+<data name="QuickHotkeyConflict" xml:space="preserve"><value>Shortcut unavailable or in use; choose another combination (saved automatically)</value></data>
+<data name="QuickHotkeyDisabled" xml:space="preserve"><value>Shortcut off</value></data>
+<data name="QuickTrayActive" xml:space="preserve"><value>Tray icon ready</value></data>
+<data name="QuickTrayUnavailable" xml:space="preserve"><value>Tray unavailable; window stays accessible</value></data>
+<data name="QuickMouseUnavailable" xml:space="preserve"><value>Mouse gesture unavailable; use the shortcut or tray</value></data>
+<data name="QuickTrayTip" xml:space="preserve"><value>Meeting Desktop · Double-click to switch; right-click for menu</value></data>
+<data name="QuickToggle" xml:space="preserve"><value>Switch desktop / review recovery</value></data>
+<data name="QuickOpen" xml:space="preserve"><value>Open Meeting Desktop</value></data>
+<data name="QuickExit" xml:space="preserve"><value>Exit</value></data>
+<data name="QuickSwitchFailed" xml:space="preserve"><value>The shortcut could not switch the desktop. Check desktop detection and recovery details in this window.</value></data>
+<data name="StartupDataError" xml:space="preserve"><value>The app could not open its data folder and has stopped without switching the desktop. Check the folder permissions or select another folder with --data-dir.&#10;&#10;{0}</value></data>
+<data name="QuickAutoSaveHint" xml:space="preserve"><value>Changes save automatically and apply immediately.</value></data>
+<data name="QuickAutoSaved" xml:space="preserve"><value>Quick access saved automatically. Check the shortcut availability above.</value></data>
+<data name="QuickAutoSaveFailed" xml:space="preserve"><value>Could not save; the previous choices remain active. {0}</value></data>
+<data name="QuickAutoSaveBusy" xml:space="preserve"><value>An operation is running. Your previous choices remain active.</value></data>
+<data name="SettingsApplyFolder" xml:space="preserve"><value>Apply folder</value></data>
+<data name="SettingsFolderReady" xml:space="preserve"><value>The folder setting is active and shown on the home page. Choosing a folder does not switch the Windows desktop.</value></data>
+<data name="SettingsFolderPending" xml:space="preserve"><value>Not saved yet. A valid path saves when you finish editing or leave Settings; you can also apply it now.</value></data>
+<data name="SettingsFolderSaveFailed" xml:space="preserve"><value>Folder was not saved; the previous folder remains active. {0}</value></data>
+<data name="SettingsSaveOtherOptions" xml:space="preserve"><value>Save other settings</value></data>
+<data name="QuickTrayDoubleClickOpen" xml:space="preserve"><value>Double-click: open window</value></data>
+<data name="QuickTrayDoubleClickSwitch" xml:space="preserve"><value>Double-click: switch desktop</value></data>
+<data name="QuickTrayTipOpen" xml:space="preserve"><value>Meeting Desktop · Double-click to open; right-click for options</value></data>
+<data name="QuickTrayTipSwitch" xml:space="preserve"><value>Meeting Desktop · Double-click to switch; right-click for options</value></data>
+<data name="SkinClassic" xml:space="preserve"><value>Classic</value></data>
+<data name="SkinLiquid" xml:space="preserve"><value>Liquid glass</value></data>
+<data name="SkinSwitch" xml:space="preserve"><value>Switch interface skin</value></data>
+<data name="SkinHint" xml:space="preserve"><value>Classic on the left, desktop-backed liquid glass on the right. Saves automatically.</value></data>
+<data name="PermissionRevoke" xml:space="preserve"><value>Revoke</value></data>
+<data name="PermissionGrant" xml:space="preserve"><value>Authorize</value></data>
+<data name="PermissionGranting" xml:space="preserve"><value>Requesting permission…</value></data>
+<data name="PermissionReady" xml:space="preserve"><value>Switch permission ready</value></data>
+<data name="PermissionMissing" xml:space="preserve"><value>Switch permission needed</value></data>
+<data name="PermissionNeededBeforeSwitch" xml:space="preserve"><value>Open the window and authorize first. Switching will not open a permission prompt.</value></data>
+<data name="PermissionDeclined" xml:space="preserve"><value>Authorization cancelled</value></data>
+<data name="PermissionFailed" xml:space="preserve"><value>Authorization failed; please retry</value></data>
+<data name="StartupEnabled" xml:space="preserve"><value>Windows startup enabled for this location</value></data>
+<data name="StartupDisabled" xml:space="preserve"><value>Windows startup is off</value></data>
+<data name="StartupRegistrationMismatch" xml:space="preserve"><value>The Windows startup entry points elsewhere. Recognised older versions can be updated below; unrecognised entries are preserved.</value></data>
+<data name="StartupUnavailable" xml:space="preserve"><value>Cannot read the Windows startup entry</value></data>
+<data name="StartupSaveFailed" xml:space="preserve"><value>Startup preference was not saved. {0}</value></data>
+<data name="SwitchDuration" xml:space="preserve"><value>Last switch workflow: {0} s</value></data>
+<data name="SettingsStartup" xml:space="preserve"><value>Startup &amp; permissions</value></data>
+<data name="SettingsStartupToggle" xml:space="preserve"><value>Start with Windows</value></data>
+<data name="SettingsStartupHint" xml:space="preserve"><value>Off by default. Starts quietly in the tray. Moving the executable requires updating this option.</value></data>
+<data name="SettingsPermissionHint" xml:space="preserve"><value>Use Authorize in the top bar before switching. This grant lasts for this running session; switching never requests elevation. Restarting the app requires a new grant.</value></data>
+  <data name="WindowMinimize" xml:space="preserve"><value>Minimize</value></data>
+  <data name="WindowMaximizeRestore" xml:space="preserve"><value>Maximize / Restore</value></data>
+  <data name="WindowClose" xml:space="preserve"><value>Close</value></data>
+  <data name="ErrorDesktopViewRolledBack" xml:space="preserve"><value>The desktop did not follow the new folder, so the switch was stopped and its changes rolled back. You can select Compatibility mode below; no automatic restart will occur.</value></data>
+  <data name="ErrorDesktopViewRecoveryPending" xml:space="preserve"><value>The desktop could not be verified and recovery is still pending. Review the recovery record before trying another switch.</value></data>
+  <data name="CompatibilityFallbackWarning" xml:space="preserve"><value>Compatibility mode reloads Explorer during your next switch. Open File Explorer windows may close. Selecting this mode only saves the preference; it does not switch or restart anything now.</value></data>
+  <data name="CompatibilityFallbackAction" xml:space="preserve"><value>Select Compatibility mode</value></data>
+  <data name="CompatibilitySelectedAfterFailure" xml:space="preserve"><value>Compatibility mode saved. Your next switch will reload Explorer; open File Explorer windows may close.</value></data>
+  <data name="SwitchFailureReviewRecovery" xml:space="preserve"><value>Review recovery status</value></data>
+  <data name="SettingsSwitchNotification" xml:space="preserve">
+    <value>Show glass switching notification</value>
+  </data>
+  <data name="SettingsSwitchNotificationHint" xml:space="preserve">
+    <value>A small live glass notification shows progress without taking focus or blocking clicks.</value>
+  </data>
+  <data name="SettingsSnapshotRetention" xml:space="preserve">
+    <value>Automatic layout history</value>
+  </data>
+  <data name="SnapshotRetentionNever" xml:space="preserve">
+    <value>Keep all history</value>
+  </data>
+  <data name="SnapshotRetention7" xml:space="preserve">
+    <value>7 days</value>
+  </data>
+  <data name="SnapshotRetention15" xml:space="preserve">
+    <value>15 days</value>
+  </data>
+  <data name="SnapshotRetention30" xml:space="preserve">
+    <value>30 days</value>
+  </data>
+  <data name="SettingsSnapshotRetentionHint" xml:space="preserve">
+    <value>Saved automatically. New snapshots are created only when icons or displays change. After a successful switch, remove expired automatic history; keep manual layouts, active recovery and the latest layout for each desktop and display arrangement.</value>
+  </data>
+  <data name="SwitchNotificationWorking" xml:space="preserve">
+    <value>Switching desktop</value>
+  </data>
+  <data name="SwitchNotificationDone" xml:space="preserve">
+    <value>Desktop switched</value>
+  </data>
+  <data name="SwitchNotificationFailed" xml:space="preserve">
+    <value>Switch needs attention</value>
+  </data>
+  <data name="SwitchNotificationReview" xml:space="preserve">
+    <value>Open Meeting Desktop to review the result.</value>
+  </data>
+  <data name="DailySwitchHomeTitle" xml:space="preserve"><value>Switch desktops</value></data>
+  <data name="DailySwitchReturnTitle" xml:space="preserve"><value>Return to your desktop</value></data>
+  <data name="DailySwitchReturnAction" xml:space="preserve"><value>Return to original desktop</value></data>
+  <data name="DailySwitchHomeDescription" xml:space="preserve"><value>Switch between your original and alternate desktops here. Files stay in their own folders; folder previews load in the background.</value></data>
+  <data name="DailySwitchReturnDescription" xml:space="preserve"><value>Return to your original desktop with its saved icon layout. Files on the alternate desktop stay there for your next switch.</value></data>
+  <data name="SwitchFlowHint" xml:space="preserve"><value>Trigger once, then wait for the result. You can also use your configured shortcut or desktop gesture.</value></data>
+  <data name="TimingTitle" xml:space="preserve"><value>Switch timings</value></data>
+  <data name="TimingEmpty" xml:space="preserve"><value>No switches recorded since startup. Refresh diagnostics after switching.</value></data>
+  <data name="TimingScope" xml:space="preserve"><value>Last 20 attempts in this run only, in milliseconds. Desktop ready means verified and starting to reveal; finishing work may continue. Statistics exclude failed attempts.</value></data>
+  <data name="TimingSummary" xml:space="preserve"><value>{0}: {1} completed, median {2} ms, slowest {3} ms</value></data>
+  <data name="TimingRun" xml:space="preserve"><value>{0} · {1}: total {2} ms, desktop ready {3} ms</value></data>
+  <data name="TimingPrepare" xml:space="preserve"><value>To alternate desktop</value></data>
+  <data name="TimingReturn" xml:space="preserve"><value>Return to original</value></data>
+  <data name="TimingSucceeded" xml:space="preserve"><value>Completed</value></data>
+  <data name="TimingFailed" xml:space="preserve"><value>Incomplete</value></data>
+  <data name="TimingLatestStages" xml:space="preserve"><value>Latest attempt stages (from each report to the next):</value></data>
+  <data name="TimingStarting" xml:space="preserve"><value>Preparation and validation</value></data>
+  <data name="TimingFinishing" xml:space="preserve"><value>Finishing work and UI updates</value></data>
+  <data name="RestoreInventoryUnavailable" xml:space="preserve"><value>Files on the alternate desktop could not be counted. No files were moved; open the folder to check.</value></data>
+  <data name="ProgressFinishing" xml:space="preserve"><value>Desktop ready, finishing up…</value></data>
+  <data name="LayoutsDeleteSessionReferenced" xml:space="preserve"><value>This layout is needed to recover the current session and cannot be deleted.</value></data>
+  <data name="LayoutsDeleteSessionUnreadable" xml:space="preserve"><value>The recovery record cannot be read or locked. Layout deletion is blocked to protect recovery.</value></data>
+  <data name="LayoutsActiveSnapshot" xml:space="preserve"><value>Used by the current recovery; this layout is protected from deletion.</value></data>
+  <data name="StartupMigrate" xml:space="preserve"><value>Update startup to this version</value></data>
+  <data name="StartupRemovePrevious" xml:space="preserve"><value>Remove the previous version's startup entry</value></data>
+  <data name="ResultRestoreUnmapped" xml:space="preserve"><value>{0} icon(s) could not be matched safely after a shortcut conflict; their positions were not restored and the recovery record was kept.</value></data>
+  <data name="RecoveryDetailUnmapped" xml:space="preserve"><value>Icons whose identities could not be verified</value></data>
+</root>

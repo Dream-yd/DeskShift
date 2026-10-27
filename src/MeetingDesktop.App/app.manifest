@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<assembly manifestVersion="1.0" xmlns="urn:schemas-microsoft-com:asm.v1">
+
+  <assemblyIdentity version="1.0.0.0" name="MeetingDesktop.App" />
+
+  <!--
+    NO requireAdministrator. The app runs at medium integrity and relaunches
+    itself elevated for exactly one operation - moving the public desktop
+    shortcuts. See docs/elevation.md; the short version is that an elevated
+    process which restarts explorer leaves explorer at high integrity, and
+    the listview messages this app depends on are above WM_USER, so UIPI then
+    drops them silently.
+  -->
+
+  <trustInfo xmlns="urn:schemas-microsoft-com:asm.v2">
+    <security>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+
+  <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
+    <application>
+      <!-- Windows 10 and 11. Without these the OS applies compatibility
+           shims that change how paths and version APIs behave. -->
+      <supportedOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}" />
+    </application>
+  </compatibility>
+
+  <application xmlns="urn:schemas-microsoft-com:asm.v3">
+    <windowsSettings>
+      <!--
+        PerMonitorV2 is a correctness requirement, not a display preference.
+
+        LVM_GETITEMPOSITION returns coordinates in explorer's physical pixel
+        space. In a DPI-unaware process, values read from the registry and
+        from GetSystemMetrics are virtualised to 96 DPI while the listview
+        positions are not, so the two disagree by the scale factor on any
+        scaled display - and the app then computes a grid that is wrong by
+        exactly that ratio.
+
+        PerMonitorV2 also means moving the window between monitors of
+        different DPI re-scales it correctly.
+      -->
+      <dpiAwareness xmlns="http://schemas.microsoft.com/SMI/2016/WindowsSettings">PerMonitorV2</dpiAwareness>
+      <dpiAware xmlns="http://schemas.microsoft.com/SMI/2005/WindowsSettings">true/pm</dpiAware>
+
+      <!-- Paths under a deep user profile can exceed MAX_PATH. -->
+      <longPathAware xmlns="http://schemas.microsoft.com/SMI/2016/WindowsSettings">true</longPathAware>
+    </windowsSettings>
+  </application>
+
+</assembly>

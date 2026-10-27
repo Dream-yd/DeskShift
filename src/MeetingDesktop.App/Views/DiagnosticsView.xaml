@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="MeetingDesktop.App.Views.DiagnosticsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:loc="clr-namespace:MeetingDesktop.App.Localization"
+             xmlns:vm="clr-namespace:MeetingDesktop.App.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=vm:DiagnosticsViewModel}">
+
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <!-- ============================ Heading ============================ -->
+    <StackPanel Grid.Row="0" Margin="0,0,0,18">
+      <TextBlock Text="{loc:Loc DiagnosticsTitle}" Style="{StaticResource Text.Title}" />
+      <TextBlock Text="{loc:Loc DiagnosticsDescription}"
+                 Style="{StaticResource Text.Secondary}"
+                 Margin="0,8,0,0"
+                 MaxWidth="640"
+                 HorizontalAlignment="Left" />
+      <TextBlock Text="{loc:Loc DiagnosticExportPreview}" Style="{StaticResource Text.Secondary}" Margin="0,10,0,0" TextWrapping="Wrap" />
+      <CheckBox Content="{loc:Loc DiagnosticExportRedact}" IsChecked="{Binding RedactPaths}" Margin="0,10,0,0" />
+    </StackPanel>
+
+    <!-- ============================ Report ============================
+         A TextBlock cannot be selected in WPF and the whole point of this
+         page is picking text out of it, so the report is a read-only TextBox.
+         Its font mirrors Text.Mono by hand: a Style cannot be BasedOn a style
+         declared for a different TargetType. -->
+    <Border Grid.Row="1"
+            Style="{StaticResource Card.Sunken}"
+            Padding="0"
+            MinHeight="220">
+      <TextBox Style="{StaticResource TextBox.Themed}"
+               Text="{Binding ReportText, Mode=OneWay}"
+               IsReadOnly="True"
+               IsReadOnlyCaretVisible="True"
+               AcceptsReturn="True"
+               TextWrapping="NoWrap"
+               Background="Transparent"
+               BorderThickness="0"
+               Padding="16,14"
+               FontFamily="Cascadia Mono, Consolas, Courier New"
+               FontSize="12"
+               Foreground="{DynamicResource Brush.Text.Secondary}"
+               VerticalScrollBarVisibility="Auto"
+               HorizontalScrollBarVisibility="Auto" />
+    </Border>
+
+    <!-- ============================ Actions ============================ -->
+    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,18,0,0">
+      <Button Content="{loc:Loc DiagnosticExportAction}"
+              Command="{Binding ExportCommand}"
+              Style="{StaticResource Button.Ghost}" MinWidth="120" Margin="0,0,10,0" />
+      <Button Content="{loc:Loc CommonRefresh}"
+              Command="{Binding RefreshCommand}"
+              Style="{StaticResource Button.Ghost}"
+              MinWidth="120" />
+      <Button Content="{loc:Loc DiagnosticsCopy}"
+              Command="{Binding CopyCommand}"
+              Style="{StaticResource Button.Primary}"
+              MinWidth="180"
+              Padding="22,11"
+              Margin="10,0,0,0" />
+    </StackPanel>
+  </Grid>
+</UserControl>

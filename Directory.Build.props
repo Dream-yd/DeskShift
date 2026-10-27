@@ -1,0 +1,33 @@
+<Project>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <LangVersion>12.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <NeutralLanguage>en</NeutralLanguage>
+
+    <!--
+      InvariantGlobalization must stay false. Setting it true is a common
+      size optimisation and it silently breaks zh-Hans resource lookup.
+    -->
+    <InvariantGlobalization>false</InvariantGlobalization>
+
+    <!-- Chinese + English satellite resources are the only ones we ship. -->
+    <SatelliteResourceLanguages>en;zh-Hans</SatelliteResourceLanguages>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Overridden by CI from the git tag: -p:Version=${tag#v} -->
+    <Version Condition="'$(Version)' == ''">0.0.0-dev</Version>
+    <InformationalVersion>$(Version)</InformationalVersion>
+    <Product>Meeting(Clean)-Desktop</Product>
+    <Description>Swap the Windows desktop to an empty folder for presentations, without losing the icon layout.</Description>
+    <Authors>Meeting(Clean)-Desktop contributors</Authors>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+</Project>

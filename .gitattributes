@@ -1,0 +1,24 @@
+* text=auto eol=lf
+
+# Windows-only source. CRLF keeps Visual Studio and the WPF XAML
+# designer from rewriting the files on every save.
+*.sln       text eol=crlf
+*.csproj    text eol=crlf
+*.props     text eol=crlf
+*.targets   text eol=crlf
+*.xaml      text eol=crlf
+*.manifest  text eol=crlf
+*.resx      text eol=crlf
+
+# Binary assets - never normalise
+*.ico  binary
+*.png  binary
+*.jpg  binary
+*.gif  binary
+*.pdf  binary
+*.zip  binary
+
+# ---------------------------------------------------------------
+# Windows locale-dependent files (UTF-16LE)
+# ---------------------------------------------------------------
+*.reg  binary
