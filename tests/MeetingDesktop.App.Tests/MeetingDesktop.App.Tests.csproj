@@ -11,4 +11,7 @@
     <Using Include="Xunit" />
     <ProjectReference Include="..\..\src\MeetingDesktop.App\MeetingDesktop.App.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
 </Project>
